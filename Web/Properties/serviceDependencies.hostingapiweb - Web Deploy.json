@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "appInsights1": {
+      "ignored": "true",
+      "type": "appInsights"
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.Web/sites/hostingapiweb/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsSqlServer_1355A3840C",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/schoolme-db-server/databases/schoolme-db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:SqlServer",
+      "dynamicId": null
+    },
+    "redis1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.Web/sites/hostingapiweb/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsRedis_8C588CDB2D",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Cache/redis/cacheredisapi",
+      "type": "redis.azure",
+      "connectionId": "ConnectionStrings:Redis",
+      "dynamicId": null
+    },
+    "signalr1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.Web/sites/hostingapiweb/providers/Microsoft.ServiceLinker/linkers/AzureSignalRConnectionString_80DB787A05",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.SignalRService/SignalR/notificacionesystem",
+      "type": "signalr.azure",
+      "connectionId": "Azure:SignalR:ConnectionString",
+      "dynamicId": null
+    }
+  }
+}

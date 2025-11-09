@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>eae95105-3c46-4357-acb7-e74daf090f56</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+
+
+	<!-- 1) Pide a .NET incluir info de compilación en el .deps.json -->
+	<PreserveCompilationContext>true</PreserveCompilationContext>
+
+	<!-- 2) Copia las ref assemblies al publish para que Roslyn/ RazorLight pueda usarlas -->
+	<CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>
+
+	<!-- 3) Evita optimizaciones que rompen compilación en runtime -->
+	<PublishTrimmed>false</PublishTrimmed>
+	<PublishSingleFile>false</PublishSingleFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.13.2" />
+    <PackageReference Include="DotNetEnv" Version="3.1.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.23.0" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.30.2" />
+    <PackageReference Include="Microsoft.Azure.StackExchangeRedis" Version="3.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Glgobal\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+</Project>

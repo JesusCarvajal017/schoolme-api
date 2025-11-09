@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Implements\CQRS\**" />
+    <Compile Remove="Implements\Security\**" />
+    <EmbeddedResource Remove="Implements\CQRS\**" />
+    <EmbeddedResource Remove="Implements\Security\**" />
+    <None Remove="Implements\CQRS\**" />
+    <None Remove="Implements\Security\**" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\Entity\Entity.csproj" />
+    <ProjectReference Include="..\Utilities\Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

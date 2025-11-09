@@ -1,0 +1,71 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: schoolme_db_dev
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${PG_DBNAME:?PG_DBNAME requerido}
+    ports:
+      - "${PG_PUBLIC_PORT:?PG_PUBLIC_PORT requerido}:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ${PG_DBNAME} || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: schoolme_redis_dev
+    command: >
+      sh -lc '
+        exec redis-server
+          --bind 0.0.0.0
+          --appendonly yes
+      '
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -p 6379 ping | grep -q PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  api:
+    env_file:
+     - ../../Vards/.env-dev
+    build:
+      context: ../../
+      dockerfile: ./Web/Dockerfile
+    container_name: schoolme_api_dev
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: "${ASPNETCORE_ENVIRONMENT:-Production}"
+      ASPNETCORE_URLS: "http://+:7000"
+
+      # PostgreSQL (interna)
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=${PG_DBNAME};Username=postgres;Password=${POSTGRES_PASSWORD}"
+      ConnectionStrings__PgAdmin: "Host=db;Port=5432;Database=${PG_DBNAME};Username=postgres;Password=${POSTGRES_PASSWORD}"
+
+      # ✅ Redis (interna): SIEMPRE redis:6379 entre contenedores
+      ConnectionStrings__Redis: "redis:6379,abortConnect=false,connectRetry=5,connectTimeout=15000,syncTimeout=15000,keepAlive=60"
+
+      AZURE_STORAGE_CONNECTION: "${AZURE_STORAGE_CONNECTION}"
+      Cors__AllowedOrigins: "${CORS_ALLOWED_ORIGINS}"
+    ports:
+      - "${API_PORT:?API_PORT requerido}:7000"
+    restart: unless-stopped
+
+volumes:
+  pg_data:
+  redis_data:
