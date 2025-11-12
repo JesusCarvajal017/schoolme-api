@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     /// <inheritdoc />
-    public partial class dbSchoolMeposgrest : Migration
+    public partial class schoolmedb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -1158,7 +1158,8 @@ namespace Entity.Migrations.Postgres
                     { 23, null, null, "Asignación de roles a usuarios", "Asignación Roles", 5, "asignacionRoles", 1, null },
                     { 24, null, null, "Asignación de módulos a roles", "Asignación Módulos", 6, "asiganacionModulos", 1, null },
                     { 25, null, null, "Asignación de permisos a roles", "Asignación de Permisos", 7, "asignacionPermisos", 1, null },
-                    { 26, null, null, "Gestión de usuarios", "Usuarios", 8, "usuarios", 1, null }
+                    { 26, null, null, "Gestión de usuarios", "Usuarios", 8, "usuarios", 1, null },
+                    { 27, null, null, "Informacion estadisticas del sistema", "Panel", 1, "panel", 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1195,7 +1196,8 @@ namespace Entity.Migrations.Postgres
                     { 3, null, null, "Módulo para gestión académica", "school", "Académico", 3, "", 1, null },
                     { 4, null, null, "Gestión de eventos y agendas", "book", "Agenda", 4, "", 1, null },
                     { 5, null, null, "Parámetros y ajustes del sistema", "settings", "Configuración", 5, "", 1, null },
-                    { 6, null, null, "Todo el tema de permisos del sistema", "calendar", "Seguridad", 6, "", 1, null }
+                    { 6, null, null, "Todo el tema de permisos del sistema", "security", "Seguridad", 6, "", 1, null },
+                    { 7, null, null, "Infomracion generada por el sistema", "bar_chart", "Reportes", 7, "", 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1555,7 +1557,8 @@ namespace Entity.Migrations.Postgres
                     { 23, null, null, 23, 1, 1, 1, null },
                     { 24, null, null, 24, 1, 1, 1, null },
                     { 25, null, null, 25, 1, 1, 1, null },
-                    { 26, null, null, 26, 1, 1, 1, null }
+                    { 26, null, null, 26, 1, 1, 1, null },
+                    { 27, null, null, 27, 1, 1, 1, null }
                 });
 
             migrationBuilder.InsertData(

@@ -3,6 +3,7 @@ using Business.Interfaces.Querys;
 using Entity.Dtos.Global;
 using Entity.Model.Global;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 
@@ -10,6 +11,7 @@ namespace Web.Controllers.Implements.Abstract
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public abstract class GenericController<
             TEntity,
             TReadDto,

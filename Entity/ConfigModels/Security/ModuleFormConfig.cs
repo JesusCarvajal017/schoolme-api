@@ -71,7 +71,10 @@ namespace Entity.ConfigModels.Security
                 new ModuleForm { Id = 23, ModuleId = 6, FormId = 23 },
                 new ModuleForm { Id = 24, ModuleId = 6, FormId = 24 },
                 new ModuleForm { Id = 25, ModuleId = 6, FormId = 25 },
-                new ModuleForm { Id = 26, ModuleId = 6, FormId = 26 }
+                new ModuleForm { Id = 26, ModuleId = 6, FormId = 26 },
+
+
+                new ModuleForm { Id = 27, ModuleId = 7, FormId = 27 }
             );
 
 

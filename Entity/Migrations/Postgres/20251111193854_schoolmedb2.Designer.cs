@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251109032007_dbSchoolMe-posgrest")]
-    partial class dbSchoolMeposgrest
+    [Migration("20251111193854_schoolmedb2")]
+    partial class schoolmedb2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -3212,6 +3212,15 @@ namespace Entity.Migrations.Postgres
                     b.HasData(
                         new
                         {
+                            Id = 27,
+                            Description = "Informacion estadisticas del sistema",
+                            Name = "Panel",
+                            Order = 1,
+                            Path = "panel",
+                            Status = 1
+                        },
+                        new
+                        {
                             Id = 1,
                             Description = "Vista de todos los registros administrativos",
                             Name = "Todos",
@@ -3555,9 +3564,19 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 6,
                             Description = "Todo el tema de permisos del sistema",
-                            Icon = "calendar",
+                            Icon = "security",
                             Name = "Seguridad",
                             Order = 6,
+                            Path = "",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Infomracion generada por el sistema",
+                            Icon = "bar_chart",
+                            Name = "Reportes",
+                            Order = 7,
                             Path = "",
                             Status = 1
                         });
@@ -3785,6 +3804,13 @@ namespace Entity.Migrations.Postgres
                             Id = 26,
                             FormId = 26,
                             ModuleId = 6,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            FormId = 27,
+                            ModuleId = 7,
                             Status = 1
                         });
                 });
@@ -4318,6 +4344,14 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 26,
                             FormId = 26,
+                            PermissionId = 1,
+                            RolId = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            FormId = 27,
                             PermissionId = 1,
                             RolId = 1,
                             Status = 1
