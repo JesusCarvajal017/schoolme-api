@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251111193854_schoolmedb2")]
-    partial class schoolmedb2
+    [Migration("20251112193128_dbSchoolMe-posgrest")]
+    partial class dbSchoolMeposgrest
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -4635,7 +4635,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.Person", "Person")
                         .WithMany("Attendants")
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_attendants_person");
 
@@ -4727,7 +4727,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Business.Teacher", "Teacher")
                         .WithMany("GroupDirector")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_group_director_teacher");
 
@@ -4768,7 +4768,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Groups");
@@ -4823,7 +4823,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_teacher_person");
 
@@ -4972,9 +4972,9 @@ namespace Entity.Migrations.Postgres
             modelBuilder.Entity("Entity.Model.Security.User", b =>
                 {
                     b.HasOne("Entity.Model.Security.Person", "Person")
-                        .WithOne()
+                        .WithOne("User")
                         .HasForeignKey("Entity.Model.Security.User", "PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Person");
@@ -4991,7 +4991,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.User", "User")
                         .WithMany("UserRol")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Rol");
@@ -5135,6 +5135,8 @@ namespace Entity.Migrations.Postgres
 
                     b.Navigation("DataBasic")
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Entity.Model.Security.Rol", b =>

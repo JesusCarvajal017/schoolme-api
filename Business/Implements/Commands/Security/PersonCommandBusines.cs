@@ -15,6 +15,7 @@ namespace Business.Implements.Commands.Security
     public class PersonCommandBusines : BaseCommandsBusiness<Person, PersonDto>, ICommandPersonServices
     {
         protected readonly ICommanPerson _data;
+
         // para poder crear el usuario y darle la asignación de rol
         protected readonly ICommandUser _commandUser;
         protected readonly ICommands<UserRol> _commandUserRol;

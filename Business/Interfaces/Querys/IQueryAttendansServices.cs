@@ -1,4 +1,5 @@
 ﻿using Entity.Dtos.Business.Attendants;
+using Entity.Dtos.Especific.DataBasicComplete;
 using Entity.Model.Business;
 
 namespace Business.Interfaces.Querys
@@ -7,5 +8,7 @@ namespace Business.Interfaces.Querys
     {
         Task<IEnumerable<AttendantsQueryDto>> GetRelationServices(int? status, int personId);
         Task<IEnumerable<AttStudentsQueryDto>> GetRelationStudentsServices(int? status, int personId);
+
+        Task<CompleteDataPersonDto> GetDataCompleteServices(int id);
     }
 }

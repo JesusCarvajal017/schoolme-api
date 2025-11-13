@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     /// <inheritdoc />
-    public partial class schoolmedb : Migration
+    public partial class dbSchoolMeposgrest : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -583,7 +583,7 @@ namespace Entity.Migrations.Postgres
                         principalSchema: "security",
                         principalTable: "person",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -612,7 +612,7 @@ namespace Entity.Migrations.Postgres
                         principalSchema: "security",
                         principalTable: "person",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -681,7 +681,7 @@ namespace Entity.Migrations.Postgres
                         principalSchema: "security",
                         principalTable: "person",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -816,7 +816,7 @@ namespace Entity.Migrations.Postgres
                         principalSchema: "business",
                         principalTable: "teacher",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -849,7 +849,7 @@ namespace Entity.Migrations.Postgres
                         principalSchema: "security",
                         principalTable: "users",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -918,7 +918,7 @@ namespace Entity.Migrations.Postgres
                         principalSchema: "security",
                         principalTable: "person",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_attendants_student",
                         column: x => x.student_id,
@@ -1311,7 +1311,8 @@ namespace Entity.Migrations.Postgres
                     { 23, null, null, 23, 6, 1, null },
                     { 24, null, null, 24, 6, 1, null },
                     { 25, null, null, 25, 6, 1, null },
-                    { 26, null, null, 26, 6, 1, null }
+                    { 26, null, null, 26, 6, 1, null },
+                    { 27, null, null, 27, 7, 1, null }
                 });
 
             migrationBuilder.InsertData(

@@ -60,6 +60,8 @@ namespace Entity.ConfigModels.Security
               .HasForeignKey(ur => ur.DocumentTypeId)
               .OnDelete(DeleteBehavior.Restrict);
 
+
+
             builder.MapBaseModel();
 
             builder.HasData(

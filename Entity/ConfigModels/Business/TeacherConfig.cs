@@ -40,7 +40,8 @@ namespace Entity.ConfigModels.Business
                    .WithMany() // o .WithMany(p => p.Teachers) si tienes la colección
                    .HasForeignKey(t => t.PersonId)
                    .HasConstraintName("fk_teacher_person")
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
+
 
             // Teacher (1) -> (N) GroupDirector
             builder.HasMany(t => t.GroupDirector)

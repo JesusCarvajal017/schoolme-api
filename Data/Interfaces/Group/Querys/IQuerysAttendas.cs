@@ -1,4 +1,5 @@
 ﻿using Entity.Model.Business;
+using Entity.Model.Security;
 
 namespace Data.Interfaces.Group.Querys
 {
@@ -11,5 +12,7 @@ namespace Data.Interfaces.Group.Querys
     {
         Task<IEnumerable<Attendants>> QueryRelations(int? status,int personId);
         Task<IEnumerable<Attendants>> QueryRelationsStudents(int? status,int personId);
+
+        Task<Attendants> QueryCompleteData(int personId);
     }
 }

@@ -29,6 +29,7 @@ namespace Entity.ConfigModels.Business
                    .HasColumnName("person_id")
                    .IsRequired();
 
+
             builder.Property(s => s.GroupId)
                    .HasColumnName("group_id"); 
                    //.IsRequired();
@@ -40,7 +41,7 @@ namespace Entity.ConfigModels.Business
             builder.HasOne(s => s.Person)
                    .WithMany() // usa .WithMany(p => p.Students) si existe la colección en Person
                    .HasForeignKey(s => s.PersonId)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
 
             // Relaciones: muchos(Student) -> uno(Group)
             builder.HasOne(s => s.Groups)

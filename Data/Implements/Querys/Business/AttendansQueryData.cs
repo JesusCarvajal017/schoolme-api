@@ -150,6 +150,43 @@ namespace Data.Implements.Querys.Business
 
         }
 
+        public virtual async Task<Attendants> QueryCompleteData(int attendansId)
+        {
+            try
+            {
+                var query = await _dbSet
+                 .AsNoTracking()
+                 .Include(p => p.Person)
+                     .ThenInclude(p => p.DocumentType)
+
+                 .Include(p => p.Person)
+                     .ThenInclude(p => p.DataBasic)
+                        .ThenInclude(d => d.Rh)
+
+                 .Include(p => p.Person)
+                     .ThenInclude(p => p.DataBasic)
+                         .ThenInclude(d => d.Eps)
+
+                  .Include(p => p.Person)
+                         .ThenInclude(d => d.DataBasic)
+                            .ThenInclude(d => d.Munisipality)
+                                .ThenInclude(m => m.Departament)
+                    .Include(p => p.Person)
+                         .ThenInclude(p => p.DataBasic)
+                             .ThenInclude(d => d.MaterialStatus)
+                 .AsSplitQuery()
+                 .FirstOrDefaultAsync(p => p.Id == attendansId);
+
+                return query;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex, "Error en la consulta la entidad {Entity}", typeof(Teacher).Name);
+                return new Attendants();
+            }
+        }
+
 
 
 

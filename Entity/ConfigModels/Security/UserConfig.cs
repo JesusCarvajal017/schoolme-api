@@ -52,9 +52,9 @@ namespace Entity.ConfigModels.Security
 
 
             builder.HasOne(p => p.Person)
-               .WithOne() 
+               .WithOne(p => p.User) 
                .HasForeignKey<User>(p => p.PersonId)
-               .OnDelete(DeleteBehavior.Restrict);
+               .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasData(
                 new User

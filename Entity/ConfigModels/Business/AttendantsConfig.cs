@@ -51,7 +51,8 @@ namespace Entity.ConfigModels.Business
                    .WithMany(p => p.Attendants)         // agrega ICollection<Attendants> en Person si la quieres
                    .HasForeignKey(a => a.PersonId)
                    .HasConstraintName("fk_attendants_person")
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
+
 
         }
     }
