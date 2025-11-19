@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251118210038_schoolmedb")]
+    [Migration("20251119053404_schoolmedb")]
     partial class schoolmedb
     {
         /// <inheritdoc />
@@ -3150,13 +3150,6 @@ namespace Entity.Migrations.Postgres
                             Id = 5,
                             Description = "Selección de opción única",
                             Name = "OptionSingle",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Description = "Selección múltiple",
-                            Name = "OptionMulti",
                             Status = 1
                         });
                 });

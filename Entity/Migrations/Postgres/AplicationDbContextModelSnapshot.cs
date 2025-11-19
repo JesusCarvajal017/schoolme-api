@@ -3148,13 +3148,6 @@ namespace Entity.Migrations.Postgres
                             Description = "Selección de opción única",
                             Name = "OptionSingle",
                             Status = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Description = "Selección múltiple",
-                            Name = "OptionMulti",
-                            Status = 1
                         });
                 });
 
