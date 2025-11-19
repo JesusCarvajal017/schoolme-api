@@ -38,7 +38,6 @@ namespace Entity.ConfigModels.Security
 
             builder.HasData(
                 // ADMINISTRACIÓN
-                new ModuleForm { Id = 1, ModuleId = 2, FormId = 1 },
                 new ModuleForm { Id = 2, ModuleId = 2, FormId = 2 },
                 new ModuleForm { Id = 3, ModuleId = 2, FormId = 3 },
                 new ModuleForm { Id = 4, ModuleId = 2, FormId = 4 },
@@ -71,7 +70,10 @@ namespace Entity.ConfigModels.Security
                 new ModuleForm { Id = 23, ModuleId = 6, FormId = 23 },
                 new ModuleForm { Id = 24, ModuleId = 6, FormId = 24 },
                 new ModuleForm { Id = 25, ModuleId = 6, FormId = 25 },
-                new ModuleForm { Id = 26, ModuleId = 6, FormId = 26 }
+                new ModuleForm { Id = 26, ModuleId = 6, FormId = 26 },
+
+
+                new ModuleForm { Id = 27, ModuleId = 7, FormId = 27 }
             );
 
 

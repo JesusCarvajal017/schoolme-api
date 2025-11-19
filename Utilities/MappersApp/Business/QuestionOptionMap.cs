@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Entity.Dtos.Business.Question;
 using Entity.Dtos.Business.QuestionOption;
 using Entity.Model.Business;
 
@@ -10,6 +11,11 @@ namespace Utilities.MappersApp.Business
         {
             // Mapeo de Rol a RolDto y viceversa
             CreateMap<QuestionOption, QuestionOptionDto>().ReverseMap();
+
+
+        
+
+
         }
     }
 }

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251109032007_dbSchoolMe-posgrest")]
-    partial class dbSchoolMeposgrest
+    [Migration("20251118210038_schoolmedb")]
+    partial class schoolmedb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -272,7 +272,7 @@ namespace Entity.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("StudentId")
                         .HasColumnType("integer")
                         .HasColumnName("student_id");
 
@@ -3212,11 +3212,11 @@ namespace Entity.Migrations.Postgres
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            Description = "Vista de todos los registros administrativos",
-                            Name = "Todos",
+                            Id = 27,
+                            Description = "Informacion estadisticas del sistema",
+                            Name = "Panel",
                             Order = 1,
-                            Path = "todos",
+                            Path = "panel",
                             Status = 1
                         },
                         new
@@ -3555,9 +3555,19 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 6,
                             Description = "Todo el tema de permisos del sistema",
-                            Icon = "calendar",
+                            Icon = "security",
                             Name = "Seguridad",
                             Order = 6,
+                            Path = "",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Infomracion generada por el sistema",
+                            Icon = "bar_chart",
+                            Name = "Reportes",
+                            Order = 7,
                             Path = "",
                             Status = 1
                         });
@@ -3605,13 +3615,6 @@ namespace Entity.Migrations.Postgres
                     b.ToTable("moduleForm", "security");
 
                     b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FormId = 1,
-                            ModuleId = 2,
-                            Status = 1
-                        },
                         new
                         {
                             Id = 2,
@@ -3785,6 +3788,13 @@ namespace Entity.Migrations.Postgres
                             Id = 26,
                             FormId = 26,
                             ModuleId = 6,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            FormId = 27,
+                            ModuleId = 7,
                             Status = 1
                         });
                 });
@@ -4124,14 +4134,6 @@ namespace Entity.Migrations.Postgres
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            FormId = 1,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 3,
                             FormId = 3,
                             PermissionId = 1,
@@ -4318,6 +4320,14 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 26,
                             FormId = 26,
+                            PermissionId = 1,
+                            RolId = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            FormId = 27,
                             PermissionId = 1,
                             RolId = 1,
                             Status = 1
@@ -4601,7 +4611,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.Person", "Person")
                         .WithMany("Attendants")
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_attendants_person");
 
@@ -4609,7 +4619,6 @@ namespace Entity.Migrations.Postgres
                         .WithMany("Attendants")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
                         .HasConstraintName("fk_attendants_student");
 
                     b.Navigation("Person");
@@ -4693,7 +4702,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Business.Teacher", "Teacher")
                         .WithMany("GroupDirector")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_group_director_teacher");
 
@@ -4734,7 +4743,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Groups");
@@ -4789,7 +4798,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_teacher_person");
 
@@ -4938,9 +4947,9 @@ namespace Entity.Migrations.Postgres
             modelBuilder.Entity("Entity.Model.Security.User", b =>
                 {
                     b.HasOne("Entity.Model.Security.Person", "Person")
-                        .WithOne()
+                        .WithOne("User")
                         .HasForeignKey("Entity.Model.Security.User", "PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Person");
@@ -4957,7 +4966,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.User", "User")
                         .WithMany("UserRol")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Rol");
@@ -5100,6 +5109,9 @@ namespace Entity.Migrations.Postgres
                     b.Navigation("Attendants");
 
                     b.Navigation("DataBasic")
+                        .IsRequired();
+
+                    b.Navigation("User")
                         .IsRequired();
                 });
 

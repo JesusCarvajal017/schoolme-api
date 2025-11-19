@@ -30,9 +30,7 @@ namespace Entity.ConfigModels.Business
                    .HasColumnName("grade_id")
                    .IsRequired();
 
-
             builder.MapBaseModel();
-
 
             // Relaciones
             builder.HasOne(a => a.Student)
@@ -47,7 +45,6 @@ namespace Entity.ConfigModels.Business
                    .HasForeignKey(a => a.GradeId)
                    .HasConstraintName("fk_academic_load_grade")
                    .OnDelete(DeleteBehavior.Restrict);
-
 
         }
     }

@@ -14,6 +14,7 @@ namespace Utilities.Helpers.Validations.Business
                     .WithMessage("El id de la persona no es valido.")
                     .NotEmpty().WithMessage("El id de la persona es obligatorio");
 
+
             });
 
             // Reglas para PATCH: solo valida si el campo viene presente
@@ -26,5 +27,7 @@ namespace Utilities.Helpers.Validations.Business
 
 
     }
+
+
     
 }

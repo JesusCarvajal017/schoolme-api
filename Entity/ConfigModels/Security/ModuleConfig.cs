@@ -92,8 +92,18 @@ namespace Entity.ConfigModels.Security
                      Name = "Seguridad",
                      Description = "Todo el tema de permisos del sistema",
                      Path = "",
-                     Icon = "calendar",
+                     Icon = "security",
                      Order = 6,
+                     Status = 1
+                 },
+                 new Module
+                 {
+                     Id = 7,
+                     Name = "Reportes",
+                     Description = "Infomracion generada por el sistema",
+                     Path = "",
+                     Icon = "bar_chart",
+                     Order = 7,
                      Status = 1
                  }
              );

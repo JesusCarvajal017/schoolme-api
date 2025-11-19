@@ -9,11 +9,11 @@ namespace Web.Controllers.Implements.Business
     public class QuestionController
        : GenericController<
        Question,
-       QuestionDto,
+       QuestionQueryDto,
        QuestionDto>
     {
         public QuestionController(
-            IQueryServices<Question, QuestionDto> q,
+            IQueryServices<Question, QuestionQueryDto> q,
             ICommandService<Question, QuestionDto> c)
           : base(q, c) { }
     }

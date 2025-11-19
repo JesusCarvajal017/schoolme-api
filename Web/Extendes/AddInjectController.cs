@@ -1,5 +1,6 @@
 ﻿using Business.Implements.Auth;
 using Business.Implements.Bases;
+using Business.Implements.Commands.Business;
 using Business.Implements.Commands.Security;
 using Business.Implements.Notification;
 using Business.Implements.Querys.Business;
@@ -8,6 +9,7 @@ using Business.Interfaces.Commands;
 using Business.Interfaces.Querys;
 using Data.Implements.Auth;
 using Data.Implements.Commands;
+using Data.Implements.Commands.Business;
 using Data.Implements.Commands.Security;
 using Data.Implements.Querys;
 using Data.Implements.Querys.Business;
@@ -95,14 +97,14 @@ namespace Web.Extendes
             );
 
             services.AddScoped(
-             typeof(IQuerys<Tutition>),
-             typeof(TutitionQueryData)
-            );
+               typeof(IQuerys<Question>),
+               typeof(QuestionQueryData)
+              );
 
-            services.AddScoped(typeof(IQuerys<Student>), typeof(StudentQueryData));
-            services.AddScoped(typeof(IQuerys<Teacher>), typeof(TeacherQueryData));
-            services.AddScoped(typeof(IQuerys<Attendants>), typeof(AttendansQueryData));
+            //tution
 
+            services.AddScoped<IQuerysTutition, TutitionQueryData>();
+            services.AddScoped<IQueryTutitionServices, TutitionQueryBusiness>();
 
             // muncipality
             services.AddScoped<IQuerysMunicipality, MunicipalityQueryData>();
@@ -116,7 +118,6 @@ namespace Web.Extendes
             services.AddScoped<IQuerysAcademicLoad, AcademimcLoadQueryData>();
             services.AddScoped<IQueryAcLoadServices, AcLoadQueryBusiness>();
 
-
             // user - rol
             services.AddScoped<IQuerysUserRol, UserRolQueryData>();
             services.AddScoped<IQueryUserRolServices, UserRolQueryBusiness>();
@@ -124,6 +125,18 @@ namespace Web.Extendes
             // attendans
             services.AddScoped<IQuerysAttendas, AttendansQueryData>();
             services.AddScoped<IQueryAttendansServices, AttendansQueryBusiness>();
+
+            services.AddScoped<IQuerysStudent, StudentQueryData>();
+            services.AddScoped<IQueryStudentServices, StudentQueryBusiness>();
+
+            services.AddScoped<IQueryTeacher, TeacherQueryData>();
+            services.AddScoped<IQueryTeacherServices, TeacherQueryBusiness>();
+
+            //groupss
+
+            services.AddScoped<IQuerysGrups, GroupsQueryData>();
+            services.AddScoped<IQueryGrupsServices, GroupsQueryBusiness>();
+
 
             // ================ COMMANDS ================
             services.AddScoped(
@@ -135,6 +148,10 @@ namespace Web.Extendes
             // user
             services.AddScoped<ICommandUser, UserCommandData>();
             services.AddScoped<ICommandUserServices, UserCommandBusines>();
+
+            // Students
+            services.AddScoped<ICommandStudents, StudentsCommandData>();
+            services.AddScoped<ICommandStudentsServices, StudentsCommandBusines>();
 
             //Person
             services.AddScoped<ICommanPerson, PersonCommandData>();

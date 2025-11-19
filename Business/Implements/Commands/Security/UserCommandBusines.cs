@@ -7,9 +7,7 @@ using Entity.Dtos.Especific;
 using Entity.Dtos.Especific.Security;
 using Entity.Dtos.Security.User;
 using Entity.Model.Security;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using Utilities.AlmacenadorArchivos.Interface;
 using Utilities.Helpers.Validations;
 

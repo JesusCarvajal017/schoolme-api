@@ -32,7 +32,8 @@ namespace Entity.ConfigModels.Business
                    .WithMany(t => t.GroupDirector)          // colección ya la tienes en Teacher
                    .HasForeignKey(x => x.TeacherId)
                    .HasConstraintName("fk_group_director_teacher")
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
+
 
             // 1:1 Group <-> GroupDirector (PK-FK compartida)
             builder.HasOne(x => x.Groups)

@@ -1,4 +1,5 @@
-﻿using Data.Implements.Auth;
+﻿using Business.Implements.Querys.Especific;
+using Data.Implements.Auth;
 using Entity.Dtos.Especific.System;
 using Entity.Dtos.Security.Auth;
 using Microsoft.Extensions.Logging;
@@ -7,7 +8,7 @@ using Utilities.Exceptions;
 
 namespace Business.Implements.Auth
 {
-    public class AuthBusiness
+    public class AuthBusiness : IAuth
     {
         protected readonly LoginData _data;
         protected readonly ILogger<AuthBusiness> _logger;
