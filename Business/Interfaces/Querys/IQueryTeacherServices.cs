@@ -1,5 +1,4 @@
 ﻿using Entity.Dtos.Business.Student;
-using Entity.Dtos.Especific.DataBasicComplete;
 using Entity.Model.Business;
 
 namespace Business.Interfaces.Querys
@@ -7,6 +6,12 @@ namespace Business.Interfaces.Querys
     public interface IQueryStudentServices : IQueryServices<Student, StudentQueryDto>
     {
 
-        Task<CompleteDataPersonDto> GetDataCompleteServices(int id);
+        Task<StudentModelDto> GetDataCompleteServices(int id);
+
+        Task<IEnumerable<StudentQueryDto>> GetNotMatriculados();
+
+        Task<IEnumerable<StudentQueryDto>> GetStudentsGroup(int groudId);
+
+
     }
 }

@@ -39,8 +39,7 @@ namespace Entity.ConfigModels.Business
             builder.HasOne(t => t.Person)
                    .WithMany() // o .WithMany(p => p.Teachers) si tienes la colección
                    .HasForeignKey(t => t.PersonId)
-                   .HasConstraintName("fk_teacher_person")
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .HasConstraintName("fk_teacher_person");
 
 
             // Teacher (1) -> (N) GroupDirector
@@ -48,21 +47,21 @@ namespace Entity.ConfigModels.Business
                    .WithOne(gd => gd.Teacher)          // requiere propiedad .Teacher en GroupDirector
                    .HasForeignKey(gd => gd.TeacherId)  // requiere columna teacher_id en GroupDirector
                    .HasConstraintName("fk_group_director_teacher")
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
 
             // Teacher (1) -> (N) AcademicLoad
             builder.HasMany(t => t.AcademicLoad)
                    .WithOne(al => al.Teacher)          // requiere propiedad .Teacher en AcademicLoad
                    .HasForeignKey(al => al.TeacherId)  // requiere columna teacher_id en AcademicLoad
                    .HasConstraintName("fk_academic_load_teacher")
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
 
             // Teacher (1) -> (N) TeacherObservation
             builder.HasMany(t => t.TeacherObservation)
                    .WithOne(to => to.Teacher)          // agrega la navegación en TeacherObservation si aún no la tienes
                    .HasForeignKey(to => to.TeacherId)  // requiere columna teacher_id en TeacherObservation
                    .HasConstraintName("fk_teacher_observation_teacher")
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
 
 
             builder.HasData

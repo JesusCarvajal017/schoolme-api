@@ -31,8 +31,8 @@ namespace Entity.ConfigModels.Business
 
 
             builder.Property(s => s.GroupId)
-                   .HasColumnName("group_id"); 
-                   //.IsRequired();
+                   .HasColumnName("group_id")
+                   .IsRequired(false);
 
             // Id / Status (y auditoría) del ABaseEntity
             builder.MapBaseModel();

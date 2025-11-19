@@ -7,5 +7,6 @@ namespace Business.Interfaces.Querys
     {
 
         Task<TeacherModelDto> GetDataCompleteServices(int id);
+
     }
 }

@@ -11,7 +11,7 @@ namespace Utilities.MappersApp.Business
         public StudentMap()
         {
 
-            CreateMap<Teacher, TeacherModelDto>().ReverseMap(); 
+            CreateMap<Student, StudentModelDto>().ReverseMap(); 
 
             // Mapeo de Rol a RolDto y viceversa
             CreateMap<Student, StudentDto>().ReverseMap();

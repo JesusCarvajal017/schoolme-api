@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     /// <inheritdoc />
-    public partial class dbSchoolMeposgrest : Migration
+    public partial class schoolmedb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -902,7 +902,7 @@ namespace Entity.Migrations.Postgres
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     person_id = table.Column<int>(type: "integer", nullable: false),
-                    student_id = table.Column<int>(type: "integer", nullable: false),
+                    student_id = table.Column<int>(type: "integer", nullable: true),
                     relationship_type = table.Column<int>(type: "integer", nullable: false),
                     status = table.Column<int>(type: "integer", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -1133,7 +1133,6 @@ namespace Entity.Migrations.Postgres
                 columns: new[] { "id", "created_at", "deleted_at", "description", "name", "order", "path", "status", "updated_at" },
                 values: new object[,]
                 {
-                    { 1, null, null, "Vista de todos los registros administrativos", "Todos", 1, "todos", 1, null },
                     { 2, null, null, "Gestión de personal administrativo", "Administrativos", 2, "administrativos", 1, null },
                     { 3, null, null, "Gestión de docentes", "Docentes", 3, "docentes", 1, null },
                     { 4, null, null, "Gestión de estudiantes", "Niños", 4, "ninos", 1, null },
@@ -1286,7 +1285,6 @@ namespace Entity.Migrations.Postgres
                 columns: new[] { "id", "created_at", "deleted_at", "form_id", "module_id", "status", "updated_at" },
                 values: new object[,]
                 {
-                    { 1, null, null, 1, 2, 1, null },
                     { 2, null, null, 2, 2, 1, null },
                     { 3, null, null, 3, 2, 1, null },
                     { 4, null, null, 4, 2, 1, null },
@@ -1534,7 +1532,6 @@ namespace Entity.Migrations.Postgres
                 columns: new[] { "id", "created_at", "deleted_at", "form_id", "permission_id", "rol_id", "status", "updated_at" },
                 values: new object[,]
                 {
-                    { 1, null, null, 1, 1, 1, 1, null },
                     { 3, null, null, 3, 1, 1, 1, null },
                     { 4, null, null, 4, 1, 1, 1, null },
                     { 5, null, null, 5, 1, 1, 1, null },

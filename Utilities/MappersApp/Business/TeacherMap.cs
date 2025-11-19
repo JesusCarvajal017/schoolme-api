@@ -12,6 +12,8 @@ namespace Utilities.MappersApp.Business
             // Mapeo de Rol a RolDto y viceversa
             CreateMap<Teacher, TeacherDto>().ReverseMap();
 
+            CreateMap<Teacher, TeacherModelDto>().ReverseMap();
+
             CreateMap<Teacher, TeacherReadDto>()
                   .ForMember(dest => dest.FullName, opt => opt.MapFrom(t => $"{t.Person.FisrtName} {t.Person.LastName}"))
                     .ForMember(dest => dest.DocumentTypeId, opt => opt.MapFrom(t => t.Person.DocumentTypeId))

@@ -11,7 +11,7 @@ namespace Web.Controllers.Implements.Abstract
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public abstract class GenericController<
             TEntity,
             TReadDto,
@@ -33,7 +33,7 @@ namespace Web.Controllers.Implements.Abstract
         }
 
         [HttpGet]
-        [OutputCache]
+        //[OutputCache]
         //[Authorize]
         public virtual async Task<IActionResult> GetAll([CustomizeValidator(RuleSet = "Full")]  int? status) => Ok(await _querySvc.GetAllServices(status));
 

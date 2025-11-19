@@ -1,5 +1,6 @@
 ﻿using Business.Implements.Auth;
 using Business.Implements.Bases;
+using Business.Implements.Commands.Business;
 using Business.Implements.Commands.Security;
 using Business.Implements.Notification;
 using Business.Implements.Querys.Business;
@@ -8,6 +9,7 @@ using Business.Interfaces.Commands;
 using Business.Interfaces.Querys;
 using Data.Implements.Auth;
 using Data.Implements.Commands;
+using Data.Implements.Commands.Business;
 using Data.Implements.Commands.Security;
 using Data.Implements.Querys;
 using Data.Implements.Querys.Business;
@@ -95,11 +97,15 @@ namespace Web.Extendes
             );
 
             services.AddScoped(
-             typeof(IQuerys<Tutition>),
-             typeof(TutitionQueryData)
-            );
+               typeof(IQuerys<Question>),
+               typeof(QuestionQueryData)
+              );
 
-         
+            //tution
+
+            services.AddScoped<IQuerysTutition, TutitionQueryData>();
+            services.AddScoped<IQueryTutitionServices, TutitionQueryBusiness>();
+
             // muncipality
             services.AddScoped<IQuerysMunicipality, MunicipalityQueryData>();
             services.AddScoped<IQueryMunicipalityServices, MunicipalityQueryBusiness>();
@@ -126,6 +132,12 @@ namespace Web.Extendes
             services.AddScoped<IQueryTeacher, TeacherQueryData>();
             services.AddScoped<IQueryTeacherServices, TeacherQueryBusiness>();
 
+            //groupss
+
+            services.AddScoped<IQuerysGrups, GroupsQueryData>();
+            services.AddScoped<IQueryGrupsServices, GroupsQueryBusiness>();
+
+
             // ================ COMMANDS ================
             services.AddScoped(
                 typeof(ICommands<User>),
@@ -136,6 +148,10 @@ namespace Web.Extendes
             // user
             services.AddScoped<ICommandUser, UserCommandData>();
             services.AddScoped<ICommandUserServices, UserCommandBusines>();
+
+            // Students
+            services.AddScoped<ICommandStudents, StudentsCommandData>();
+            services.AddScoped<ICommandStudentsServices, StudentsCommandBusines>();
 
             //Person
             services.AddScoped<ICommanPerson, PersonCommandData>();

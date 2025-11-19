@@ -3,9 +3,7 @@ using Business.Implements.Bases;
 using Business.Interfaces.Querys;
 using Data.Interfaces.Group.Querys;
 using Entity.Dtos.Business.Student;
-using Entity.Dtos.Especific.DataBasicComplete;
 using Entity.Model.Business;
-using Entity.Model.Security;
 using Microsoft.Extensions.Logging;
 using Utilities.Helpers.Validations;
 
@@ -24,25 +22,61 @@ namespace Business.Implements.Querys.Business
             _data = data;
         }
 
-        public virtual async Task<CompleteDataPersonDto> GetDataCompleteServices(int id)
+        public virtual async Task<StudentModelDto> GetDataCompleteServices(int id)
         {
             try
             {
                 var person = await _data.QueryCompleteData(id);
+                var dtoComplete = _mapper.Map<StudentModelDto>(person);
 
-                var dtoComplete = _mapper.Map<CompleteDataPersonDto>(person);
+                _logger.LogInformation($"Obteniendo datos {typeof(Student).Name} con ID: {id}");
 
-                _logger.LogInformation($"Obteniendo datos {typeof(Person).Name} con ID: {id}");
                 return dtoComplete;
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error al obtener datos {typeof(Person).Name} con ID {id}: {ex.Message}");
+                _logger.LogError($"Error al obtener datos {typeof(Student).Name} con ID {id}: {ex.Message}");
                 throw;
             }
         }
 
+        public virtual async Task<IEnumerable<StudentQueryDto>> GetNotMatriculados()
+        {
+            try
+            {
+                var person = await _data.QueryMatriculados();
+                var dtoComplete = _mapper.Map<IEnumerable<StudentQueryDto>>(person);
 
+                _logger.LogInformation($"Obteniendo datos {typeof(Student).Name}");
+
+                return dtoComplete;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al obtener datos {typeof(Student).Name} : {ex.Message}");
+                throw;
+            }
+
+        }
+
+        public virtual async Task<IEnumerable<StudentQueryDto>> GetStudentsGroup(int groudId)
+        {
+            try
+            {
+                var person = await _data.QueryStudentsGroup(groudId);
+                var dtoComplete = _mapper.Map<IEnumerable<StudentQueryDto>>(person);
+
+                _logger.LogInformation($"Obteniendo datos {typeof(Student).Name}");
+
+                return dtoComplete;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al obtener datos {typeof(Student).Name} : {ex.Message}");
+                throw;
+            }
+
+        }
 
 
     }

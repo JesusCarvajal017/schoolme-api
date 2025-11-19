@@ -4,8 +4,8 @@
     {
         Padre = 1,
         Madre = 2,
-        Hermano = 3,
-        Hermana = 4,
+        Abuelo = 3,
+        Abuela = 4,
         Tutor = 5 
     }
 }

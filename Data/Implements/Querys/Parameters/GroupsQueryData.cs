@@ -1,11 +1,12 @@
-﻿using Entity.Context.Main;
+﻿using Data.Interfaces.Group.Querys;
+using Entity.Context.Main;
 using Entity.Model.Paramters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Data.Implements.Querys.Parameters
 {
-    public class GroupsQueryData : BaseGenericQuerysData<Groups> 
+    public class GroupsQueryData : BaseGenericQuerysData<Groups> , IQuerysGrups
     {
         protected readonly ILogger<GroupsQueryData> _logger;
         protected readonly AplicationDbContext _context;
@@ -59,6 +60,25 @@ namespace Data.Implements.Querys.Parameters
                 return null;
             }
 
+        }
+
+        public async Task<IEnumerable<Groups>> QueryGrupsGrade(int gradeId)
+        {
+            try
+            {
+                var query = await _dbSet
+                   .Where(g => g.GradeId == gradeId)
+                   .Include(g => g.Grade)
+                   .ToListAsync();
+
+                return query;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex, "Error en la consulta de grupos relacionados con grupos {gradeId}", typeof(Groups).Name);
+                return null;
+            }
         }
 
 

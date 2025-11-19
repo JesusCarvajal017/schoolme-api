@@ -126,6 +126,20 @@ namespace Business.Implements.Commands.Security
             return _mapper.Map<PersonCompleteDto>(updated);
         }
 
+        public override async Task<bool> DeleteServices(int id)
+        {
+            try
+            {
+                _logger.LogInformation($"Eliminando {typeof(Person).Name} con ID: {id}");
+                return await _data.DeleteAsync(id);
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError($"Error al eliminar {typeof(T).Name} con ID {id}: {ex.Message}");
+                throw;
+            }
+        }
+
 
 
     }

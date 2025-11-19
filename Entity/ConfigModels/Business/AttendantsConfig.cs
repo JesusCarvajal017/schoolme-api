@@ -25,8 +25,7 @@ namespace Entity.ConfigModels.Business
                    .IsRequired();
 
             builder.Property(a => a.StudentId)
-               .HasColumnName("student_id")
-               .IsRequired();
+               .HasColumnName("student_id");
 
             builder.Property(a => a.RelationShipTypeEnum)
                 .HasColumnName("relationship_type")

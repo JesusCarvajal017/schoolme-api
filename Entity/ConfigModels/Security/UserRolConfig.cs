@@ -31,9 +31,7 @@ namespace Entity.ConfigModels.Security
 
             builder.HasOne(ur => ur.User)
                .WithMany(r => r.UserRol)
-               .HasForeignKey(ur => ur.UserId)
-               .OnDelete(DeleteBehavior.Cascade);
-
+               .HasForeignKey(ur => ur.UserId);
 
             builder.MapBaseModel();
 

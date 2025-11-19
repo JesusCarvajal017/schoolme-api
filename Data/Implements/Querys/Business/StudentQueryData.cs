@@ -103,5 +103,47 @@ namespace Data.Implements.Querys.Business
                 return new Student();
             }
         }
+
+        public virtual async Task<IEnumerable<Student>> QueryMatriculados()
+        {
+            try
+            {
+                var studentsSinMatricula = await _context.Students
+                    .Where(s => s.Tutition.Count() == 0)
+                    .Include(p => p.Person)
+                        .ThenInclude(P => P.DocumentType)
+                    .ToListAsync();
+
+                return studentsSinMatricula;
+            }catch(Exception ex)
+            {
+                _logger.LogInformation(ex, "Error en la consulta de los no matriculados {Entity}", typeof(Student).Name);
+                return [];
+            }
+
+
+        }
+
+
+        public virtual async Task<IEnumerable<Student>> QueryStudentsGroup(int groupId)
+        {
+            try
+            {
+                var studentsSinMatricula = await _context.Students
+                    .Where(s => s.GroupId == groupId)
+                    .Include(p => p.Person)
+                        .ThenInclude(P => P.DocumentType)
+                    .ToListAsync();
+
+                return studentsSinMatricula;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex, "Error en la consulta de los no matriculados {Entity}", typeof(Student).Name);
+                return [];
+            }
+
+
+        }
     }
 }

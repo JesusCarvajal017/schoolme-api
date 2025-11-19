@@ -49,7 +49,6 @@ namespace Business.Implements.Bases
         /// </summary>
         protected readonly ILogger<BaseCommandsBusiness<T, D>> _logger;
 
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase BaseBusiness.
         /// </summary>

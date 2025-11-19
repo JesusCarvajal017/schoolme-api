@@ -147,7 +147,6 @@ namespace Data.Implements.Querys.Business
                 _logger.LogInformation(ex, "Error en la consulta con id {id}", typeof(Attendants).Name);
                 return null;
             }
-
         }
 
         public virtual async Task<Attendants> QueryCompleteData(int attendansId)

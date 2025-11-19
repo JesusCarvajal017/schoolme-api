@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251112193128_dbSchoolMe-posgrest")]
-    partial class dbSchoolMeposgrest
+    [Migration("20251118210038_schoolmedb")]
+    partial class schoolmedb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -272,7 +272,7 @@ namespace Entity.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("StudentId")
                         .HasColumnType("integer")
                         .HasColumnName("student_id");
 
@@ -3221,15 +3221,6 @@ namespace Entity.Migrations.Postgres
                         },
                         new
                         {
-                            Id = 1,
-                            Description = "Vista de todos los registros administrativos",
-                            Name = "Todos",
-                            Order = 1,
-                            Path = "todos",
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 2,
                             Description = "Gestión de personal administrativo",
                             Name = "Administrativos",
@@ -3624,13 +3615,6 @@ namespace Entity.Migrations.Postgres
                     b.ToTable("moduleForm", "security");
 
                     b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FormId = 1,
-                            ModuleId = 2,
-                            Status = 1
-                        },
                         new
                         {
                             Id = 2,
@@ -4150,14 +4134,6 @@ namespace Entity.Migrations.Postgres
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            FormId = 1,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 3,
                             FormId = 3,
                             PermissionId = 1,
@@ -4643,7 +4619,6 @@ namespace Entity.Migrations.Postgres
                         .WithMany("Attendants")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
                         .HasConstraintName("fk_attendants_student");
 
                     b.Navigation("Person");
@@ -5136,7 +5111,8 @@ namespace Entity.Migrations.Postgres
                     b.Navigation("DataBasic")
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("User")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entity.Model.Security.Rol", b =>
