@@ -1261,8 +1261,7 @@ namespace Entity.Migrations.Postgres
                     { 2, null, null, "Sí / No", "Bool", 1, null },
                     { 3, null, null, "Numérica", "Number", 1, null },
                     { 4, null, null, "Fecha", "Date", 1, null },
-                    { 5, null, null, "Selección de opción única", "OptionSingle", 1, null },
-                    { 6, null, null, "Selección múltiple", "OptionMulti", 1, null }
+                    { 5, null, null, "Selección de opción única", "OptionSingle", 1, null }
                 });
 
             migrationBuilder.InsertData(
