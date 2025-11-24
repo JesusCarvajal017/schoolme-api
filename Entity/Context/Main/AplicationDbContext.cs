@@ -53,6 +53,7 @@ namespace Entity.Context.Main
         public DbSet<Attendants> Attendants { get; set; }
         public DbSet<GroupDirector> GroupDirector { get; set; }
         public DbSet<Tutition> Tutition { get; set; }
+        public DbSet<CompositionAgendaQuestion> CompositionAgendaQuestion { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -3,6 +3,7 @@ using Business.Implements.Bases;
 using Business.Interfaces.Querys;
 using Data.Interfaces.Group.Commands;
 using Data.Interfaces.Group.Querys;
+using Entity.Context.Main;
 using Entity.Dtos.Especific;
 using Entity.Dtos.Especific.Security;
 using Entity.Dtos.Security.User;
@@ -27,8 +28,9 @@ namespace Business.Implements.Commands.Security
             ILogger<UserCommandBusines> _logger,
             IAlmacenadorArchivos alamacenadorArchivos,
             IGenericHerlpers helpers,
-            IQuerys<User> dataQuery
-            ) : base(data, mapper, _logger, helpers)
+            IQuerys<User> dataQuery,
+            AplicationDbContext context
+            ) : base(data, mapper, _logger, helpers, context)
         {
             _data = data;
             _svArchv = alamacenadorArchivos;

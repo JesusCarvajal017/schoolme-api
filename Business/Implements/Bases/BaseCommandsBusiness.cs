@@ -1,8 +1,13 @@
 using AutoMapper;
 using Business.Implements.abastract;
 using Data.Interfaces.Group.Commands;
+using Entity.Context.Main;
 using Entity.Dtos.Global;
+using Entity.Dtos.Parameters.Group;
 using Entity.Model.Global;
+using Entity.Model.Paramters;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 using Utilities.Exceptions;
 using Utilities.Helpers.Validations;
@@ -25,6 +30,10 @@ namespace Business.Implements.Bases
     /// </remarks>
     public class BaseCommandsBusiness<T, D> : ABaseCommandsBusiness<T, D> where T : ABaseEntity where D : ABaseDto
     {
+
+        // Parche
+        protected readonly DbSet<T> _dbSet;
+        private readonly AplicationDbContext _context;
 
         /// <summary>
         /// Instancia de AutoMapper para realizar el mapeo entre DTOs y entidades.
@@ -56,12 +65,21 @@ namespace Business.Implements.Bases
         /// <param name="logger">Logger para registrar eventos y errores durante las operaciones</param>
         /// <param name="mapper">Instancia de AutoMapper para mapeo entre DTOs y entidades</param>
  
-        public BaseCommandsBusiness(ICommands<T> data, IMapper mapper, ILogger<BaseCommandsBusiness<T,D>> logger, IGenericHerlpers helpers) : base()
+        public BaseCommandsBusiness
+            (
+            ICommands<T> data, 
+            IMapper mapper, 
+            ILogger<BaseCommandsBusiness<T,D>> logger, 
+            IGenericHerlpers helpers,
+            AplicationDbContext context
+            ) : base()
         {
             _data = data;
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger;
             _helpers = helpers ?? throw new ArgumentNullException(nameof(helpers));
+            _context = context;
+            _dbSet = context.Set<T>();
         }
 
 
@@ -228,6 +246,75 @@ namespace Business.Implements.Bases
                 throw;
             }
         }
+
+        public override async Task<T?> UpdatePartialAsync(int id, D dto)
+        {
+            if (dto == null)
+                throw new ArgumentNullException(nameof(dto));
+
+            // 1. Buscar la entidad
+            var entity = await _context.Set<T>().FindAsync(id);
+            if (entity == null)
+                return null;
+
+            var entry = _context.Entry(entity);
+            var et = entry.Metadata;
+
+            if (et == null)
+                throw new InvalidOperationException(
+                    $"El tipo {typeof(T).Name} no está mapeado en el DbContext.");
+
+            // Solo propiedades escalares
+            var scalarNames = et.GetProperties()
+                                .Select(p => p.Name)
+                                .ToHashSet(StringComparer.Ordinal);
+
+            // Recorrer propiedades del DTO
+            foreach (var dtoProp in typeof(D).GetProperties())
+            {
+                var name = dtoProp.Name;
+
+                if (name is nameof(ABaseDto.Id))
+                    continue;
+
+                // Solo propiedades escalares mapeadas por EF
+                if (!scalarNames.Contains(name))
+                    continue;
+
+                var newValue = dtoProp.GetValue(dto);
+
+                if (newValue == null)
+                    continue;
+
+                // Aquí estaba el error — entry.Property(name) puede fallar internamente
+                PropertyEntry? propEntry = null;
+                try
+                {
+                    propEntry = entry.Property(name);
+                }
+                catch
+                {
+                    // no es una propiedad escalar real → ignorar
+                    continue;
+                }
+
+                if (propEntry == null)
+                    continue;
+
+                propEntry.CurrentValue = newValue;
+                propEntry.IsModified = true;
+            }
+
+            // Update audit
+            if (entity is ABaseEntity baseEntity)
+                baseEntity.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            await entry.ReloadAsync();
+
+            return entity;
+        }
+
 
     }
 }

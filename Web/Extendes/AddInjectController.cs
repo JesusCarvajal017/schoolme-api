@@ -99,7 +99,7 @@ namespace Web.Extendes
             services.AddScoped(
                typeof(IQuerys<Question>),
                typeof(QuestionQueryData)
-              );
+            );
 
             //tution
 
@@ -133,15 +133,24 @@ namespace Web.Extendes
             services.AddScoped<IQueryTeacherServices, TeacherQueryBusiness>();
 
             //groupss
-
             services.AddScoped<IQuerysGrups, GroupsQueryData>();
             services.AddScoped<IQueryGrupsServices, GroupsQueryBusiness>();
+
+            //Composition
+            services.AddScoped<IQueryCompositionAgenda, CompositionAgendaQueryData>();
+            services.AddScoped<IQueryCompositionServices, CompositionQueryBusiness>();
 
 
             // ================ COMMANDS ================
             services.AddScoped(
                 typeof(ICommands<User>),
                 typeof(UserCommandData)
+            );
+
+
+            services.AddScoped(
+               typeof(ICommands<GroupDirector>),
+               typeof(DirectorGroupCommandData)
             );
 
 
@@ -156,6 +165,10 @@ namespace Web.Extendes
             //Person
             services.AddScoped<ICommanPerson, PersonCommandData>();
             services.AddScoped<ICommandPersonServices, PersonCommandBusines>();
+
+            //Groups
+            services.AddScoped<ICommadGroups, GruopCommandData>();
+            services.AddScoped<ICommandGroupsServices, GroupsCommandBusines>();
 
             //services.AddScoped();
             services.AddScoped<AuthBusiness>();

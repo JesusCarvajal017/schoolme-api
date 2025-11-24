@@ -1,6 +1,4 @@
-﻿using Entity.Model.Business;
-using Entity.Model.Paramters;
-using Entity.Model.Security;
+﻿using Entity.Model.Paramters;
 
 namespace Data.Interfaces.Group.Querys
 {
@@ -12,5 +10,8 @@ namespace Data.Interfaces.Group.Querys
     public interface IQuerysGrups : IQuerys<Groups>
     {
         Task<IEnumerable<Groups>> QueryGrupsGrade(int gradeId);
+
+        //Task<IEnumerable<Groups>> QueryAgendaGroups(int gradeId, int agendaId);
+
     }
 }

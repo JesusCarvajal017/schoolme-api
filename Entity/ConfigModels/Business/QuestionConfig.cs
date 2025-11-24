@@ -60,6 +60,7 @@ namespace Entity.ConfigModels.Business
                    .HasForeignKey(sa => sa.QuestionId)
                    .OnDelete(DeleteBehavior.Restrict);
 
+
         }
     }
 }

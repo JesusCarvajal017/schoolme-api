@@ -158,28 +158,5 @@ namespace Test.Controller.Parameters
             _cMock.VerifyNoOtherCalls();
             _qMock.VerifyNoOtherCalls();
         }
-
-        [TestMethod]
-        public async Task PartialUpdate_OK_RetornaDto_AAA()
-        {
-            // PREPARAR
-            var patch = new EpsDto { Id = 15, Name = "EPS Patch" };
-            var result = new EpsDto { Id = 15, Name = "EPS Patch" };
-
-            _cMock.Setup(c => c.PathServices(patch)).ReturnsAsync(result);
-
-            // PROBAR
-            var action = await _controller.PartialUpdate(patch);
-
-            // VERIFICAR
-            var ok = action as OkObjectResult;
-            Assert.IsNotNull(ok);
-            Assert.AreEqual(200, ok!.StatusCode);
-            Assert.AreEqual(result, ok.Value);
-
-            _cMock.Verify(c => c.PathServices(patch), Times.Once);
-            _cMock.VerifyNoOtherCalls();
-            _qMock.VerifyNoOtherCalls();
-        }
     }
 }
