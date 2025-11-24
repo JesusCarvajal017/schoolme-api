@@ -12,7 +12,7 @@ namespace Entity.Model.Business
         public Person Person { get; set; }
         public ICollection<AgendaDayStudent> AgendaDayStudent { get; set; }
         public ICollection<Attendants> Attendants { get; set; }
-        public Groups Groups { get; set; }
+        public Groups? Groups { get; set; }
         public IEnumerable<Tutition> Tutition { get; private set; }
 
     }

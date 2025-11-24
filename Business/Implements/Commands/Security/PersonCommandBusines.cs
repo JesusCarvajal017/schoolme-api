@@ -2,6 +2,7 @@
 using Business.Implements.Bases;
 using Business.Interfaces.Querys;
 using Data.Interfaces.Group.Commands;
+using Entity.Context.Main;
 using Entity.Dtos.Security.Person;
 using Entity.Dtos.Security.User;
 using Entity.Model.Business;
@@ -25,8 +26,9 @@ namespace Business.Implements.Commands.Security
             IMapper mapper,
             ILogger<PersonCommandBusines> _logger,
             IGenericHerlpers helpers, ICommandUser commandUser, 
-            ICommands<UserRol> commandUserRol
-            ) : base(data, mapper, _logger, helpers)
+            ICommands<UserRol> commandUserRol,
+            AplicationDbContext context
+            ) : base(data, mapper, _logger, helpers, context)
         {
             _data = data;
             _commandUser = commandUser;

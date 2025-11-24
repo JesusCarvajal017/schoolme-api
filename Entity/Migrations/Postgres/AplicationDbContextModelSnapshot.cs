@@ -1453,30 +1453,6 @@ namespace Entity.Migrations.Postgres
                             GradeId = 1,
                             Name = "Primero C",
                             Status = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AmountStudents = 20,
-                            GradeId = 1,
-                            Name = "Segundo A",
-                            Status = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AmountStudents = 20,
-                            GradeId = 1,
-                            Name = "Quinto B",
-                            Status = 5
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AmountStudents = 20,
-                            GradeId = 1,
-                            Name = "Cuarto C",
-                            Status = 4
                         });
                 });
 
@@ -3211,15 +3187,6 @@ namespace Entity.Migrations.Postgres
                         },
                         new
                         {
-                            Id = 2,
-                            Description = "Gestión de personal administrativo",
-                            Name = "Administrativos",
-                            Order = 2,
-                            Path = "administrativos",
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 3,
                             Description = "Gestión de docentes",
                             Name = "Docentes",
@@ -3284,8 +3251,8 @@ namespace Entity.Migrations.Postgres
                         new
                         {
                             Id = 10,
-                            Description = "Gestión de composiciones",
-                            Name = "Composición",
+                            Description = "Creacion de preguntas globales",
+                            Name = "Preguntas",
                             Order = 1,
                             Path = "composicion",
                             Status = 1
@@ -3297,15 +3264,6 @@ namespace Entity.Migrations.Postgres
                             Name = "Agendas",
                             Order = 2,
                             Path = "agendas",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Description = "Asignación de agendas",
-                            Name = "Asignación",
-                            Order = 3,
-                            Path = "asignacion",
                             Status = 1
                         },
                         new
@@ -3328,38 +3286,11 @@ namespace Entity.Migrations.Postgres
                         },
                         new
                         {
-                            Id = 15,
-                            Description = "Gestión de tipos de identificación",
-                            Name = "Tipo Identificación",
-                            Order = 3,
-                            Path = "tipoIdentificacion",
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 16,
                             Description = "Gestión de EPS",
                             Name = "EPS",
                             Order = 4,
                             Path = "eps",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Description = "Gestión de municipios",
-                            Name = "Municipios",
-                            Order = 5,
-                            Path = "municipio",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Description = "Gestión de tipos de sangre",
-                            Name = "RH",
-                            Order = 6,
-                            Path = "rh",
                             Status = 1
                         },
                         new
@@ -3607,13 +3538,6 @@ namespace Entity.Migrations.Postgres
                     b.HasData(
                         new
                         {
-                            Id = 2,
-                            FormId = 2,
-                            ModuleId = 2,
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 3,
                             FormId = 3,
                             ModuleId = 2,
@@ -3677,13 +3601,6 @@ namespace Entity.Migrations.Postgres
                         },
                         new
                         {
-                            Id = 12,
-                            FormId = 12,
-                            ModuleId = 4,
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 13,
                             FormId = 13,
                             ModuleId = 5,
@@ -3698,29 +3615,8 @@ namespace Entity.Migrations.Postgres
                         },
                         new
                         {
-                            Id = 15,
-                            FormId = 15,
-                            ModuleId = 5,
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 16,
                             FormId = 16,
-                            ModuleId = 5,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 17,
-                            FormId = 17,
-                            ModuleId = 5,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            FormId = 18,
                             ModuleId = 5,
                             Status = 1
                         },
@@ -4071,6 +3967,13 @@ namespace Entity.Migrations.Postgres
                             Description = "Solo interactura de forma base",
                             Name = "Acudiente",
                             Status = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Docente que tiene a cargo un grado como su representante",
+                            Name = "Docente director",
+                            Status = 1
                         });
                 });
 
@@ -4196,14 +4099,6 @@ namespace Entity.Migrations.Postgres
                         },
                         new
                         {
-                            Id = 12,
-                            FormId = 12,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 13,
                             FormId = 13,
                             PermissionId = 1,
@@ -4214,38 +4109,6 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 14,
                             FormId = 14,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 15,
-                            FormId = 15,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 16,
-                            FormId = 16,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 17,
-                            FormId = 17,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            FormId = 18,
                             PermissionId = 1,
                             RolId = 1,
                             Status = 1

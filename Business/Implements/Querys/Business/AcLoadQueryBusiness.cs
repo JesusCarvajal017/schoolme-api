@@ -22,7 +22,6 @@ namespace Business.Implements.Querys.Business
             _data = data;
         }
 
-
         public override async Task<IEnumerable<AcademicLoadReadDto>> GetAllServices(int? status)
         {
             try

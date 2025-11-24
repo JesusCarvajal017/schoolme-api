@@ -21,7 +21,7 @@ namespace Utilities.Helpers.Validations.Business
             // Reglas para PATCH: solo valida si el campo viene presente
             RuleSet("Patch", () =>
             {
-                RuleFor(x => x.Id).NotEmpty().WithMessage("El Id es obligatorio");
+                //RuleFor(x => x.Id).NotEmpty().WithMessage("El Id es obligatorio");
 
             });
            

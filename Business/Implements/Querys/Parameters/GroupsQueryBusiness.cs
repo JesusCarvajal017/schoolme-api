@@ -40,6 +40,36 @@ namespace Business.Implements.Querys.Security
             }
         }
 
+        public async Task<IEnumerable<GroupsAgendaDto>> GetGroupsAgendas(int gradeId, int agendaId)
+        {
+            try
+            {
+                // Se optiene los grupos segun el grado
+                var entities = await _data.QueryGrupsGrade(gradeId);
+
+                // map normal
+                var dtos = _mapper.Map<List<GroupsAgendaDto>>(entities);
+
+                // lógica de negocio: marcar si el grupo tiene esta agenda
+                foreach (var dto in dtos)
+                {
+                    var entity = entities.First(g => g.Id == dto.Id);
+                    dto.IsAssigned = entity.AgendaId == agendaId;
+                }
+
+                _logger.LogInformation(
+                    "Obteniendo grupos de grado {GradeId} para agenda {AgendaId}",
+                    gradeId, agendaId);
+
+                return dtos;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al obtener los grupos con las agendas relacionadas: {gradeId}");
+                throw;
+            }
+        }
+
 
 
 

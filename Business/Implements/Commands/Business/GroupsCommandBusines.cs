@@ -4,21 +4,21 @@ using Business.Interfaces.Querys;
 using Data.Interfaces.Group.Commands;
 using Entity.Context.Main;
 using Entity.Dtos.Business.Student;
-using Entity.Model.Business;
+using Entity.Dtos.Parameters.Group;
+using Entity.Model.Paramters;
 using Microsoft.Extensions.Logging;
 using Utilities.Helpers.Validations;
 
 namespace Business.Implements.Commands.Business
 {
-    public class StudentsCommandBusines : BaseCommandsBusiness<Student, StudentDto>, ICommandStudentsServices
+    public class GroupsCommandBusines : BaseCommandsBusiness<Groups, GroupsDto>, ICommandGroupsServices
     {
-        protected readonly ICommandStudents _data;
+        protected readonly ICommadGroups _data;
 
-
-        public StudentsCommandBusines(
-            ICommandStudents data,
+        public GroupsCommandBusines(
+            ICommadGroups data,
             IMapper mapper,
-            ILogger<StudentsCommandBusines> _logger,
+            ILogger<GroupsCommandBusines> _logger,
             IGenericHerlpers helpers,
             AplicationDbContext context
             ) : base(data, mapper, _logger, helpers, context)
@@ -27,15 +27,15 @@ namespace Business.Implements.Commands.Business
         }
 
    
-        public virtual async Task<bool> ChangeGrupServices(StudentsUpGrupDto dataUpdate)
+        public virtual async Task<bool> ChangeAgendaServies(int id, int? agendaId)
         {
             try
             {
-                return await _data.UpdateGrade(dataUpdate);
+                return await _data.UpdateAgendaAsync(id, agendaId);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error al actualizar la contraseña de la persona {dataUpdate.Id}");
+                _logger.LogError($"Error al actualizar la genda del grupo con id: {id}");
                 throw;
             }
         }

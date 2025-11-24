@@ -69,6 +69,7 @@ namespace Data.Implements.Querys.Parameters
                 var query = await _dbSet
                    .Where(g => g.GradeId == gradeId)
                    .Include(g => g.Grade)
+                   .OrderBy(g=> g.Id)
                    .ToListAsync();
 
                 return query;
@@ -80,9 +81,6 @@ namespace Data.Implements.Querys.Parameters
                 return null;
             }
         }
-
-
-
 
     }
 }

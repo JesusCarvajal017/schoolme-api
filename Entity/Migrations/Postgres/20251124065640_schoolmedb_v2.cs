@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     /// <inheritdoc />
-    public partial class schoolmedb : Migration
+    public partial class schoolmedb_v2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -1133,7 +1133,6 @@ namespace Entity.Migrations.Postgres
                 columns: new[] { "id", "created_at", "deleted_at", "description", "name", "order", "path", "status", "updated_at" },
                 values: new object[,]
                 {
-                    { 2, null, null, "Gestión de personal administrativo", "Administrativos", 2, "administrativos", 1, null },
                     { 3, null, null, "Gestión de docentes", "Docentes", 3, "docentes", 1, null },
                     { 4, null, null, "Gestión de estudiantes", "Niños", 4, "ninos", 1, null },
                     { 5, null, null, "Gestión de acudientes", "Acudientes", 5, "acudientes", 1, null },
@@ -1141,15 +1140,11 @@ namespace Entity.Migrations.Postgres
                     { 7, null, null, "Gestión de agrupaciones", "Agrupación", 2, "agrupación", 1, null },
                     { 8, null, null, "Asignación de directores de grupo", "Director de Grupo", 3, "directorGrupo", 1, null },
                     { 9, null, null, "Gestión de carga académica", "Carga Académica", 4, "cargaAcademica", 1, null },
-                    { 10, null, null, "Gestión de composiciones", "Composición", 1, "composicion", 1, null },
+                    { 10, null, null, "Creacion de preguntas globales", "Preguntas", 1, "composicion", 1, null },
                     { 11, null, null, "Gestión de agendas", "Agendas", 2, "agendas", 1, null },
-                    { 12, null, null, "Asignación de agendas", "Asignación", 3, "asignacion", 1, null },
                     { 13, null, null, "Gestión de grados", "Grados", 1, "grados", 1, null },
                     { 14, null, null, "Gestión de grupos", "Grupos", 2, "grupos", 1, null },
-                    { 15, null, null, "Gestión de tipos de identificación", "Tipo Identificación", 3, "tipoIdentificacion", 1, null },
                     { 16, null, null, "Gestión de EPS", "EPS", 4, "eps", 1, null },
-                    { 17, null, null, "Gestión de municipios", "Municipios", 5, "municipio", 1, null },
-                    { 18, null, null, "Gestión de tipos de sangre", "RH", 6, "rh", 1, null },
                     { 19, null, null, "Gestión de roles de usuario", "Roles", 1, "roles", 1, null },
                     { 20, null, null, "Gestión de permisos", "Permisos", 2, "permisos", 1, null },
                     { 21, null, null, "Gestión de módulos", "Módulos", 3, "modulos", 1, null },
@@ -1230,7 +1225,8 @@ namespace Entity.Migrations.Postgres
                     { 1, null, null, "Control sobre todo", "Administrador", 1, null },
                     { 2, null, null, "Permisos al 90%", "Administrativo", 1, null },
                     { 3, null, null, "Permisos al 30%", "Docente", 1, null },
-                    { 4, null, null, "Solo interactura de forma base", "Acudiente", 1, null }
+                    { 4, null, null, "Solo interactura de forma base", "Acudiente", 1, null },
+                    { 5, null, null, "Docente que tiene a cargo un grado como su representante", "Docente director", 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1272,10 +1268,7 @@ namespace Entity.Migrations.Postgres
                 {
                     { 1, null, 20, null, null, 1, "Primero A", 1, null },
                     { 3, null, 20, null, null, 1, "Primero B", 1, null },
-                    { 4, null, 20, null, null, 1, "Primero C", 1, null },
-                    { 5, null, 20, null, null, 1, "Segundo A", 2, null },
-                    { 6, null, 20, null, null, 1, "Quinto B", 5, null },
-                    { 7, null, 20, null, null, 1, "Cuarto C", 4, null }
+                    { 4, null, 20, null, null, 1, "Primero C", 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1284,7 +1277,6 @@ namespace Entity.Migrations.Postgres
                 columns: new[] { "id", "created_at", "deleted_at", "form_id", "module_id", "status", "updated_at" },
                 values: new object[,]
                 {
-                    { 2, null, null, 2, 2, 1, null },
                     { 3, null, null, 3, 2, 1, null },
                     { 4, null, null, 4, 2, 1, null },
                     { 5, null, null, 5, 2, 1, null },
@@ -1294,13 +1286,9 @@ namespace Entity.Migrations.Postgres
                     { 9, null, null, 9, 3, 1, null },
                     { 10, null, null, 10, 4, 1, null },
                     { 11, null, null, 11, 4, 1, null },
-                    { 12, null, null, 12, 4, 1, null },
                     { 13, null, null, 13, 5, 1, null },
                     { 14, null, null, 14, 5, 1, null },
-                    { 15, null, null, 15, 5, 1, null },
                     { 16, null, null, 16, 5, 1, null },
-                    { 17, null, null, 17, 5, 1, null },
-                    { 18, null, null, 18, 5, 1, null },
                     { 19, null, null, 19, 6, 1, null },
                     { 20, null, null, 20, 6, 1, null },
                     { 21, null, null, 21, 6, 1, null },
@@ -1540,13 +1528,8 @@ namespace Entity.Migrations.Postgres
                     { 9, null, null, 9, 1, 1, 1, null },
                     { 10, null, null, 10, 1, 1, 1, null },
                     { 11, null, null, 11, 1, 1, 1, null },
-                    { 12, null, null, 12, 1, 1, 1, null },
                     { 13, null, null, 13, 1, 1, 1, null },
                     { 14, null, null, 14, 1, 1, 1, null },
-                    { 15, null, null, 15, 1, 1, 1, null },
-                    { 16, null, null, 16, 1, 1, 1, null },
-                    { 17, null, null, 17, 1, 1, 1, null },
-                    { 18, null, null, 18, 1, 1, 1, null },
                     { 19, null, null, 19, 1, 1, 1, null },
                     { 20, null, null, 20, 1, 1, 1, null },
                     { 21, null, null, 21, 1, 1, 1, null },
