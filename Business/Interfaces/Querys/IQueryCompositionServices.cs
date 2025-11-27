@@ -6,6 +6,8 @@ namespace Business.Interfaces.Querys
 {
     public interface IQueryCompositionServices : IQueryServices<CompositionAgendaQuestion, CompositionDto>
     {
-        Task<IEnumerable<QuestionQueryDto>> AgendaCompsition(int id);
+        Task<IEnumerable<QuestionCompositionQueryDto>> AgendaCompsition(int id);
+
+        Task<List<QuestionCompositionQueryDto>> GetQuestionsByAgendaAsync(int agendaId, CancellationToken ct = default);
     }
 }

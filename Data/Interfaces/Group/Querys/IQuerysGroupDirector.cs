@@ -10,6 +10,6 @@ namespace Data.Interfaces.Group.Querys
     /// <typeparam name="T"></typeparam>
     public interface IQuerysGroupDirector : IQuerys<GroupDirector>
     {
-        
+        Task<IEnumerable<GroupDirector>> GroupsDirector(int teacherId);
     }
 }

@@ -30,6 +30,17 @@ namespace Web.Controllers.Implements.Business
             var result = await _queryAcLoadServices.GetTeacherLoad(techerId, status);
             return Ok(result);
         }
+
+        [HttpGet("teacher/{idTeacher}")]
+        public async Task<ActionResult<IEnumerable<LoadByDayReadDto>>> GetTeacherLoad(
+            int idTeacher,
+            [FromQuery] int? status,
+            int? day  // aquí recibes el flag del día
+        )
+        {
+            var result = await _queryAcLoadServices.GetTeacherLoadDay(idTeacher, status, day);
+            return Ok(result);
+        }
     }
 
 }

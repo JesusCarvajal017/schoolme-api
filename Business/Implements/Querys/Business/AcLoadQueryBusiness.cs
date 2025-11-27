@@ -53,6 +53,28 @@ namespace Business.Implements.Querys.Business
         }
 
 
+        public virtual async Task<IEnumerable<LoadByDayReadDto>> GetTeacherLoadDay(
+            int idTeacher,
+            int? status,
+            int? day // NUEVO
+        )
+        {
+            try
+            {
+                var entities = await _data.LoadTeacherDay(idTeacher, status, day);
+                _logger.LogInformation($"Obteniendo todos los registros de {typeof(AcademicLoad).Name}");
+
+                return _mapper.Map<IEnumerable<LoadByDayReadDto>>(entities);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al obtener registros de {typeof(AcademicLoad).Name}: {ex.Message}");
+                throw;
+            }
+        }
+
+
+
 
     }
 }

@@ -4,6 +4,7 @@ using Business.Interfaces.Querys;
 using Data.Interfaces.Group.Querys;
 using Entity.Dtos.Business.CompositionAgenda;
 using Entity.Dtos.Business.Question;
+using Entity.Dtos.Business.QuestionOption;
 using Entity.Dtos.Business.Tution;
 using Entity.Model.Business;
 using Microsoft.Extensions.Logging;
@@ -25,21 +26,51 @@ namespace Business.Implements.Querys.Business
         }
 
 
-        public virtual async Task<IEnumerable<QuestionQueryDto>> AgendaCompsition(int agendaId)
+        public virtual async Task<IEnumerable<QuestionCompositionQueryDto>> AgendaCompsition(int agendaId)
         {
             try
             {
                 var entities = await _data.QuerAgendaComposite(agendaId);
-                _logger.LogInformation($"Obteniendo todos los registros de {typeof(QuestionQueryDto).Name}");
-                return _mapper.Map<IEnumerable<QuestionQueryDto>>(entities);
+                _logger.LogInformation($"Obteniendo todos los registros de {typeof(QuestionCompositionQueryDto).Name}");
+                return _mapper.Map<IEnumerable<QuestionCompositionQueryDto>>(entities);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error al obtener registros de {typeof(QuestionQueryDto).Name}: {ex.Message}");
+                _logger.LogError($"Error al obtener registros de {typeof(QuestionCompositionQueryDto).Name}: {ex.Message}");
                 throw;
             }
         }
 
+        public async Task<List<QuestionCompositionQueryDto>> GetQuestionsByAgendaAsync(int agendaId, CancellationToken ct = default)
+        {
+            var questions = await _data.GetQuestionsByAgendaAsync(agendaId, ct);
+
+            var result = questions
+                .Where(q => q.Status == 1)
+                .Select(q => new QuestionCompositionQueryDto
+                {
+                    Id = q.Id,
+                    Text = q.Text,
+                    TypeAnswerId = q.TypeAnswerId,
+                    NameAnswer = q.TypeAswer.Name,
+                    Status = q.Status,   // 👈 si lo tienes en el DTO
+
+                    Options = q.QuestionOptions
+                        .Where(o => o.Status == 1)
+                        .Select(o => new QuestionOptionCompositionDto
+                        {
+                            Id = o.Id,
+                            QuestionId = o.QuestionId,  // 👈 ahora sí
+                            Text = o.Text,
+                            Order = o.Order,
+                            Status = o.Status           // 👈 ahora sí
+                        })
+                        .ToList()
+                })
+                .ToList();
+
+            return result;
+        }
 
 
     }

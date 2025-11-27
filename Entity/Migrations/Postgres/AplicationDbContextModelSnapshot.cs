@@ -216,10 +216,7 @@ namespace Entity.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("StudentsId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("integer")
                         .HasColumnName("student_id");
 
@@ -231,9 +228,7 @@ namespace Entity.Migrations.Postgres
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("StudentsId");
-
-                    b.HasIndex("AgendaDayId", "StudentsId")
+                    b.HasIndex("AgendaDayId", "StudentId")
                         .IsUnique()
                         .HasDatabaseName("uq_ads_agenda_day_student");
 
@@ -3124,6 +3119,13 @@ namespace Entity.Migrations.Postgres
                             Description = "Selección de opción única",
                             Name = "OptionSingle",
                             Status = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Selección de opción múltiple",
+                            Name = "OptionMulti",
+                            Status = 1
                         });
                 });
 
@@ -3363,6 +3365,33 @@ namespace Entity.Migrations.Postgres
                             Name = "Usuarios",
                             Order = 8,
                             Path = "usuarios",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Description = "Gestión de carga académica",
+                            Name = "Carga Académica",
+                            Order = 1,
+                            Path = "mihorario",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Description = "Gestion de agenda diaria",
+                            Name = "Registro de agenda",
+                            Order = 1,
+                            Path = "dashagenda",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Description = "Gestion de observaciones diaria",
+                            Name = "Observaciones",
+                            Order = 2,
+                            Path = "observacion",
                             Status = 1
                         });
                 });
@@ -3681,6 +3710,27 @@ namespace Entity.Migrations.Postgres
                             Id = 27,
                             FormId = 27,
                             ModuleId = 7,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            FormId = 28,
+                            ModuleId = 3,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 29,
+                            FormId = 29,
+                            ModuleId = 4,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            FormId = 30,
+                            ModuleId = 4,
                             Status = 1
                         });
                 });
@@ -4184,6 +4234,30 @@ namespace Entity.Migrations.Postgres
                             PermissionId = 1,
                             RolId = 1,
                             Status = 1
+                        },
+                        new
+                        {
+                            Id = 29,
+                            FormId = 28,
+                            PermissionId = 1,
+                            RolId = 5,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            FormId = 29,
+                            PermissionId = 1,
+                            RolId = 5,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 31,
+                            FormId = 30,
+                            PermissionId = 1,
+                            RolId = 5,
+                            Status = 1
                         });
                 });
 
@@ -4443,20 +4517,16 @@ namespace Entity.Migrations.Postgres
                         .IsRequired()
                         .HasConstraintName("fk_ads_agenda_day");
 
-                    b.HasOne("Entity.Model.Business.Student", null)
-                        .WithMany("AgendaDayStudent")
-                        .HasForeignKey("StudentId");
-
-                    b.HasOne("Entity.Model.Business.Student", "Students")
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
+                    b.HasOne("Entity.Model.Business.Student", "Student")
+                        .WithMany("AgendaDayStudents")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
-                        .HasConstraintName("fk_ads_student");
+                        .HasConstraintName("fk_ads_students");
 
                     b.Navigation("AgendaDay");
 
-                    b.Navigation("Students");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Entity.Model.Business.Attendants", b =>
@@ -4864,7 +4934,7 @@ namespace Entity.Migrations.Postgres
 
             modelBuilder.Entity("Entity.Model.Business.Student", b =>
                 {
-                    b.Navigation("AgendaDayStudent");
+                    b.Navigation("AgendaDayStudents");
 
                     b.Navigation("Attendants");
 

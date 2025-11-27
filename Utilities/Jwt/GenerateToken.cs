@@ -22,8 +22,8 @@ namespace Utilities.Jwt
         {
             var claims = new List<Claim>
             {
-                new Claim("rol", id.ToString()),
-                new Claim("id", rol.ToString()),
+                new Claim("id", id.ToString()),
+                new Claim("rol", rol.ToString()),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:key"]!));

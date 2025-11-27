@@ -31,6 +31,13 @@ namespace Web.Controllers.Implements.Business
             return Ok(result);
         }
 
+        [HttpGet("{agendaId}/questions")]
+        public async Task<IActionResult> GetQuestionsByAgenda(int agendaId, CancellationToken ct)
+        {
+            var result = await _queryCompositionServices.GetQuestionsByAgendaAsync(agendaId, ct);
+            return Ok(result);
+        }
+
     }
 
 

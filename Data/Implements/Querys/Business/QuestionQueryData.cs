@@ -40,9 +40,30 @@ namespace Data.Implements.Querys.Business
             }
         }
 
+        public override async Task<Question?> QueryById(int id)
+        {
 
-    
-  
+            try
+            {
+                var query = await _dbSet
+                  .AsNoTracking()
+                  .Include(q => q.QuestionOptions)
+                   .FirstOrDefaultAsync(q => q.Id == id);
+
+                return query;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex, "Error en la consulta con id {id}", typeof(Question).Name);
+                return null;
+            }
+
+        }
+
+
+
+
 
 
     }

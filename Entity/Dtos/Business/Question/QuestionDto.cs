@@ -1,4 +1,5 @@
-﻿using Entity.Dtos.Global;
+﻿using Entity.Dtos.Business.QuestionOption;
+using Entity.Dtos.Global;
 
 namespace Entity.Dtos.Business.Question
 {
@@ -6,6 +7,8 @@ namespace Entity.Dtos.Business.Question
     {
         public string? Text { get; set; } = null!;
         public int? TypeAnswerId { get; set; }
+
+        public List<QuestionOptionDto>? Options { get; set; }
 
     }
 }

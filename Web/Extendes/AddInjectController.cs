@@ -140,6 +140,18 @@ namespace Web.Extendes
             services.AddScoped<IQueryCompositionAgenda, CompositionAgendaQueryData>();
             services.AddScoped<IQueryCompositionServices, CompositionQueryBusiness>();
 
+            //Composition
+            services.AddScoped<IQuerysGroupDirector, GroupDirectorQueryData>();
+            services.AddScoped<IQueryGroupDirectorServices, GroupDirectorQueryBusiness>();
+
+            //StudentAsware
+            services.AddScoped<IQueryStudentAsware, StudentAswareQueryData>();
+            services.AddScoped<IQueryStudentAswareServices, StudentAswareQueryBusiness>();
+
+
+            services.AddScoped<IQuerysAgendaDayStudent, AgendaDayStudentQueryData>();
+            services.AddScoped<IQueryAgendaStudentDayServices, AgendaDayStudentQueryBusiness>();
+
 
             // ================ COMMANDS ================
             services.AddScoped(
@@ -169,6 +181,14 @@ namespace Web.Extendes
             //Groups
             services.AddScoped<ICommadGroups, GruopCommandData>();
             services.AddScoped<ICommandGroupsServices, GroupsCommandBusines>();
+
+            //Groups
+            services.AddScoped<ICommandQuestion, QuestionCommandData>();
+            services.AddScoped<ICommandQuestionServices, QuestionCommandBusines>();
+
+            //Student Asware
+            services.AddScoped<ICommandStudentAnswar, StudentAnswarCommandData>();
+            services.AddScoped<ICommandStAswareServices, StudentAnswerCommandBusines>();
 
             //services.AddScoped();
             services.AddScoped<AuthBusiness>();
