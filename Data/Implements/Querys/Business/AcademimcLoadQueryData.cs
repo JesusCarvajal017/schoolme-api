@@ -47,6 +47,7 @@ namespace Data.Implements.Querys.Business
         }
 
 
+        // consulta de carga academica para un docente
         public virtual async Task<IEnumerable<AcademicLoad>> QueryCargaAcademica(int idTeacher, int? status)
         {
             try
@@ -75,6 +76,49 @@ namespace Data.Implements.Querys.Business
             }
 
         }
+
+        // Consulta de carga academica de un docente con filtro de dia 
+        public virtual async Task<IEnumerable<AcademicLoad>> LoadTeacherDay(
+            int idTeacher,
+            int? status,
+            int? day // NUEVO
+        )
+        {
+            try
+            {
+                IQueryable<AcademicLoad> query = _dbSet
+                    .AsQueryable()
+                    .Include(p => p.Teacher)
+                        .ThenInclude(d => d.Person)
+                    .Include(p => p.Group)
+                    .Include(p => p.Subject)
+                    .Where(a => a.TeacherId == idTeacher);
+
+                if (status.HasValue)
+                    query = query.Where(x => x.Status == status.Value);
+
+                if (day.HasValue)
+                {
+                    var dayMask = day.Value; // ej: 1=Lunes, 2=Martes, 4=Miércoles, etc.
+
+                    query = query.Where(a =>
+                        a.Days.HasValue &&           // que tenga algo
+                        (a.Days.Value & dayMask) == dayMask // bitwise AND
+                    );
+                }
+
+                var model = await query.ToListAsync();
+
+                _logger.LogInformation("Consulta de la entidad {Entity} se realizó exitosamente", typeof(AcademicLoad).Name);
+                return model;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error en la consulta la entidad {Entity}", typeof(AcademicLoad).Name);
+                throw;
+            }
+        }
+
 
 
 

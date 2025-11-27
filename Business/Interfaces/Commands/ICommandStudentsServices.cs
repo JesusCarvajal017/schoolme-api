@@ -1,6 +1,5 @@
 ﻿using Business.Interfaces.Commands;
 using Entity.Dtos.Business.Student;
-using Entity.Dtos.Especific.Security;
 using Entity.Model.Business;
 
 namespace Business.Interfaces.Querys

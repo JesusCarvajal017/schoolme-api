@@ -3,7 +3,6 @@ using Business.Implements.Bases;
 using Business.Interfaces.Querys;
 using Data.Interfaces.Group.Commands;
 using Entity.Context.Main;
-using Entity.Dtos.Business.Student;
 using Entity.Dtos.Parameters.Group;
 using Entity.Model.Paramters;
 using Microsoft.Extensions.Logging;

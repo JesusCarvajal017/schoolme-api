@@ -67,7 +67,15 @@ namespace Entity.ConfigModels.Security
                  new Form { Id = 23, Name = "Asignación Roles", Description = "Asignación de roles a usuarios", Path = "asignacionRoles", Order = 5 },
                  new Form { Id = 24, Name = "Asignación Módulos", Description = "Asignación de módulos a roles", Path = "asiganacionModulos", Order = 6 },
                  new Form { Id = 25, Name = "Asignación de Permisos", Description = "Asignación de permisos a roles", Path = "asignacionPermisos", Order = 7 },
-                 new Form { Id = 26, Name = "Usuarios", Description = "Gestión de usuarios", Path = "usuarios", Order = 8 }
+                 new Form { Id = 26, Name = "Usuarios", Description = "Gestión de usuarios", Path = "usuarios", Order = 8 },
+
+
+                 //Rol -> docente director
+                 new Form { Id = 28, Name = "Carga Académica", Description = "Gestión de carga académica", Path = "mihorario", Order = 1 },
+                 new Form { Id = 29, Name = "Registro de agenda", Description = "Gestion de agenda diaria", Path = "dashagenda", Order = 1 },
+                 new Form { Id = 30, Name = "Observaciones", Description = "Gestion de observaciones diaria", Path = "observacion", Order = 2 }
+
+
              );
 
         }

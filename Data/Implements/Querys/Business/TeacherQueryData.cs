@@ -54,7 +54,7 @@ namespace Data.Implements.Querys.Business
                   .AsNoTracking()
                   .Include(p => p.Person)
                       .ThenInclude(P => P.DocumentType)
-                  .FirstOrDefaultAsync(e => e.Id == id); ;
+                  .FirstOrDefaultAsync(e => e.PersonId == id); ;
 
                 return query;
 

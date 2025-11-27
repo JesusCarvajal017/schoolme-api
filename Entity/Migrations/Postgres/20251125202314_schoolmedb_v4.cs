@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     /// <inheritdoc />
-    public partial class schoolmedb_v2 : Migration
+    public partial class schoolmedb_v4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -863,7 +863,6 @@ namespace Entity.Migrations.Postgres
                     student_id = table.Column<int>(type: "integer", nullable: false),
                     agenda_day_student_status = table.Column<int>(type: "integer", nullable: false),
                     completed_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    StudentId = table.Column<int>(type: "integer", nullable: true),
                     status = table.Column<int>(type: "integer", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -873,12 +872,6 @@ namespace Entity.Migrations.Postgres
                 {
                     table.PrimaryKey("PK_agenda_day_student", x => x.id);
                     table.ForeignKey(
-                        name: "FK_agenda_day_student_student_StudentId",
-                        column: x => x.StudentId,
-                        principalSchema: "business",
-                        principalTable: "student",
-                        principalColumn: "id");
-                    table.ForeignKey(
                         name: "fk_ads_agenda_day",
                         column: x => x.agenda_day_id,
                         principalSchema: "business",
@@ -886,7 +879,7 @@ namespace Entity.Migrations.Postgres
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_ads_student",
+                        name: "fk_ads_students",
                         column: x => x.student_id,
                         principalSchema: "business",
                         principalTable: "student",
@@ -1153,7 +1146,10 @@ namespace Entity.Migrations.Postgres
                     { 24, null, null, "Asignación de módulos a roles", "Asignación Módulos", 6, "asiganacionModulos", 1, null },
                     { 25, null, null, "Asignación de permisos a roles", "Asignación de Permisos", 7, "asignacionPermisos", 1, null },
                     { 26, null, null, "Gestión de usuarios", "Usuarios", 8, "usuarios", 1, null },
-                    { 27, null, null, "Informacion estadisticas del sistema", "Panel", 1, "panel", 1, null }
+                    { 27, null, null, "Informacion estadisticas del sistema", "Panel", 1, "panel", 1, null },
+                    { 28, null, null, "Gestión de carga académica", "Carga Académica", 1, "mihorario", 1, null },
+                    { 29, null, null, "Gestion de agenda diaria", "Registro de agenda", 1, "dashagenda", 1, null },
+                    { 30, null, null, "Gestion de observaciones diaria", "Observaciones", 2, "observacion", 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1297,7 +1293,10 @@ namespace Entity.Migrations.Postgres
                     { 24, null, null, 24, 6, 1, null },
                     { 25, null, null, 25, 6, 1, null },
                     { 26, null, null, 26, 6, 1, null },
-                    { 27, null, null, 27, 7, 1, null }
+                    { 27, null, null, 27, 7, 1, null },
+                    { 28, null, null, 28, 3, 1, null },
+                    { 29, null, null, 29, 4, 1, null },
+                    { 30, null, null, 30, 4, 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1538,7 +1537,10 @@ namespace Entity.Migrations.Postgres
                     { 24, null, null, 24, 1, 1, 1, null },
                     { 25, null, null, 25, 1, 1, 1, null },
                     { 26, null, null, 26, 1, 1, 1, null },
-                    { 27, null, null, 27, 1, 1, 1, null }
+                    { 27, null, null, 27, 1, 1, 1, null },
+                    { 29, null, null, 28, 1, 5, 1, null },
+                    { 30, null, null, 29, 1, 5, 1, null },
+                    { 31, null, null, 30, 1, 5, 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1642,12 +1644,6 @@ namespace Entity.Migrations.Postgres
                 schema: "business",
                 table: "agenda_day_student",
                 column: "student_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_agenda_day_student_StudentId",
-                schema: "business",
-                table: "agenda_day_student",
-                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "uq_ads_agenda_day_student",
@@ -2023,11 +2019,11 @@ namespace Entity.Migrations.Postgres
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "student",
+                name: "agenda_day",
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "agenda_day",
+                name: "student",
                 schema: "business");
 
             migrationBuilder.DropTable(
@@ -2035,16 +2031,12 @@ namespace Entity.Migrations.Postgres
                 schema: "parameters");
 
             migrationBuilder.DropTable(
-                name: "person",
-                schema: "security");
-
-            migrationBuilder.DropTable(
                 name: "group",
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "documentType",
-                schema: "parameters");
+                name: "person",
+                schema: "security");
 
             migrationBuilder.DropTable(
                 name: "agenda",
@@ -2052,6 +2044,10 @@ namespace Entity.Migrations.Postgres
 
             migrationBuilder.DropTable(
                 name: "grade",
+                schema: "parameters");
+
+            migrationBuilder.DropTable(
+                name: "documentType",
                 schema: "parameters");
         }
     }

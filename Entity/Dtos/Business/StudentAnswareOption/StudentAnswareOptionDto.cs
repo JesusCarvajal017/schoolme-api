@@ -7,6 +7,5 @@ namespace Entity.Dtos.Business.StudentAnswareOption
         public int? StudentAnswerId { get; set; }
         public int? QuestionOptionId { get; set; }
 
-
     }
 }

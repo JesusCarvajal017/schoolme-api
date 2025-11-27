@@ -33,7 +33,7 @@ namespace Business.Implements.Bases
 
         // Parche
         protected readonly DbSet<T> _dbSet;
-        private readonly AplicationDbContext _context;
+        protected readonly AplicationDbContext _context;
 
         /// <summary>
         /// Instancia de AutoMapper para realizar el mapeo entre DTOs y entidades.

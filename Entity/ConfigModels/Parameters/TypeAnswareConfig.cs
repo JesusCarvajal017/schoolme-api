@@ -34,7 +34,8 @@ namespace Entity.ConfigModels.Parameters
                 new TypeAnsware { Id = 2, Name = "Bool", Description = "Sí / No", Status = 1 },
                 new TypeAnsware { Id = 3, Name = "Number", Description = "Numérica", Status = 1 },
                 new TypeAnsware { Id = 4, Name = "Date", Description = "Fecha", Status = 1 },
-                new TypeAnsware { Id = 5, Name = "OptionSingle", Description = "Selección de opción única", Status = 1 }
+                new TypeAnsware { Id = 5, Name = "OptionSingle", Description = "Selección de opción única", Status = 1 },
+                new TypeAnsware { Id = 6, Name = "OptionMulti", Description = "Selección de opción múltiple", Status = 1 }
             );
 
         }

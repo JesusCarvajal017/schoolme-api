@@ -37,10 +37,28 @@ namespace Data.Implements.Querys.Business
                 throw;
 
             }
-            
         }
-    
-  
+
+        public async Task<List<Question>> GetQuestionsByAgendaAsync(int agendaId, CancellationToken ct = default)
+        {
+            return await _dbSet
+                .Where(c => c.AgendaId == agendaId)
+
+                // 👇 Primero incluyen las navegaciones sobre la entidad raíz (CompositionAgendaQuestion)
+                .Include(c => c.Question)
+                    .ThenInclude(q => q.TypeAswer)   // OJO: nombre correcto de la prop
+                .Include(c => c.Question)
+                    .ThenInclude(q => q.QuestionOptions)
+
+                // 👇 Recién aquí proyectas a Question
+                .Select(c => c.Question)
+                .AsNoTracking()
+                .ToListAsync(ct);
+        }
+
+
+
+
 
 
     }

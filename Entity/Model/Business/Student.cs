@@ -10,7 +10,7 @@ namespace Entity.Model.Business
         public int? GroupId { get; set; }
         
         public Person Person { get; set; }
-        public ICollection<AgendaDayStudent> AgendaDayStudent { get; set; }
+        public ICollection<AgendaDayStudent> AgendaDayStudents { get; set; } = new List<AgendaDayStudent>();
         public ICollection<Attendants> Attendants { get; set; }
         public Groups? Groups { get; set; }
         public IEnumerable<Tutition> Tutition { get; private set; }

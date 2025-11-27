@@ -16,10 +16,11 @@ namespace Utilities.MappersApp.Business
             CreateMap<CompositionQueryDto, CompositionAgendaQuestion>().ReverseMap();
 
 
-            CreateMap<CompositionAgendaQuestion, QuestionQueryDto>()
-                .ForMember(d => d.NameAnswer, o => o.MapFrom(s => s.Question.Text))
+            CreateMap<CompositionAgendaQuestion, QuestionCompositionQueryDto>()
+                //.ForMember(d => d.NameAnswer, o => o.MapFrom(s => s.Question.Text))
                 .ForMember(d => d.TypeAnswerId, o => o.MapFrom(s => s.Question.TypeAnswerId))
-                .ForMember(d => d.Text, o => o.MapFrom(s => s.Question.TypeAswer.Name))
+                .ForMember(d => d.NameAnswer, o => o.MapFrom(s => s.Question.TypeAswer.Description))
+                .ForMember(d => d.Text, o => o.MapFrom(s => s.Question.Text))
                 .ReverseMap();
 
 
