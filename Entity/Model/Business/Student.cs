@@ -7,7 +7,7 @@ namespace Entity.Model.Business
     public class Student : ABaseEntity
     {
         public int PersonId { get; set; }
-        public int? GroupId { get; set; }
+        public int? GroupId { get; set; } = null!;
         
         public Person Person { get; set; }
         public ICollection<AgendaDayStudent> AgendaDayStudents { get; set; } = new List<AgendaDayStudent>();

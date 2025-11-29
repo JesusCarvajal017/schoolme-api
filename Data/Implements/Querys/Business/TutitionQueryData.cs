@@ -60,8 +60,31 @@ namespace Data.Implements.Querys.Business
             return studentsTutition;
 
         }
-    
-  
+
+        // trae la matricula con el id del studiante
+        public override async Task<Tutition?> QueryById(int id)
+        {
+
+            try
+            {
+                var query = await _dbSet
+                  .AsNoTracking()
+                  .FirstOrDefaultAsync(e => e.StudentId == id); ;
+
+                return query;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex, "Error en la consulta con id {id}", typeof(Tutition).Name);
+                return null;
+            }
+
+        }
+
+
+
+
 
 
     }

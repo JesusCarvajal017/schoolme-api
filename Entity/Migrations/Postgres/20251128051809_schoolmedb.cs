@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     /// <inheritdoc />
-    public partial class schoolmedb_v4 : Migration
+    public partial class schoolmedb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -1129,7 +1129,7 @@ namespace Entity.Migrations.Postgres
                     { 3, null, null, "Gestión de docentes", "Docentes", 3, "docentes", 1, null },
                     { 4, null, null, "Gestión de estudiantes", "Niños", 4, "ninos", 1, null },
                     { 5, null, null, "Gestión de acudientes", "Acudientes", 5, "acudientes", 1, null },
-                    { 6, null, null, "Gestión de aulas", "Aulas", 1, "aulas", 1, null },
+                    { 6, null, null, "Gestión de aulas", "Matricula", 1, "aulas", 1, null },
                     { 7, null, null, "Gestión de agrupaciones", "Agrupación", 2, "agrupación", 1, null },
                     { 8, null, null, "Asignación de directores de grupo", "Director de Grupo", 3, "directorGrupo", 1, null },
                     { 9, null, null, "Gestión de carga académica", "Carga Académica", 4, "cargaAcademica", 1, null },
@@ -1253,7 +1253,8 @@ namespace Entity.Migrations.Postgres
                     { 2, null, null, "Sí / No", "Bool", 1, null },
                     { 3, null, null, "Numérica", "Number", 1, null },
                     { 4, null, null, "Fecha", "Date", 1, null },
-                    { 5, null, null, "Selección de opción única", "OptionSingle", 1, null }
+                    { 5, null, null, "Selección de opción única", "OptionSingle", 1, null },
+                    { 6, null, null, "Selección de opción múltiple", "OptionMulti", 1, null }
                 });
 
             migrationBuilder.InsertData(

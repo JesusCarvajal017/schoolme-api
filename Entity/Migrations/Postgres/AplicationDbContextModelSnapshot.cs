@@ -3218,7 +3218,7 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 6,
                             Description = "Gestión de aulas",
-                            Name = "Aulas",
+                            Name = "Matricula",
                             Order = 1,
                             Path = "aulas",
                             Status = 1

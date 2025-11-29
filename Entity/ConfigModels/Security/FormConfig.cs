@@ -45,7 +45,7 @@ namespace Entity.ConfigModels.Security
                  new Form { Id = 5, Name = "Acudientes", Description = "Gestión de acudientes", Path = "acudientes", Order = 5 },
 
                  // ACADÉMICO
-                 new Form { Id = 6, Name = "Aulas", Description = "Gestión de aulas", Path = "aulas", Order = 1 },
+                 new Form { Id = 6, Name = "Matricula", Description = "Gestión de aulas", Path = "aulas", Order = 1 },
                  new Form { Id = 7, Name = "Agrupación", Description = "Gestión de agrupaciones", Path = "agrupación", Order = 2 },
                  new Form { Id = 8, Name = "Director de Grupo", Description = "Asignación de directores de grupo", Path = "directorGrupo", Order = 3 },
                  new Form { Id = 9, Name = "Carga Académica", Description = "Gestión de carga académica", Path = "cargaAcademica", Order = 4 },
