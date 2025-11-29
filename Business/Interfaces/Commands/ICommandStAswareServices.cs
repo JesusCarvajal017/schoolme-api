@@ -10,5 +10,8 @@ namespace Business.Interfaces.Querys
         Task RegisterAnswersAsync(RegisterStudentAnswersDto dto, CancellationToken ct = default);
 
         Task UpdateAnswersAsync(RegisterStudentAnswersDto dto, CancellationToken ct = default);
+
+
+        Task ApplyGlobalAnswersAsync(RegisterGlobalStudentAnswersDto dto, CancellationToken ct = default);
     }
 }

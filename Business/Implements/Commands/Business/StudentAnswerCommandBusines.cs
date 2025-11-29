@@ -7,6 +7,7 @@ using Entity.Context.Main;
 using Entity.Dtos.Business.StudentAnsware;
 using Entity.Dtos.Business.StudentAnswareOption;
 using Entity.Model.Business;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Utilities.Helpers.Validations;
 
@@ -136,6 +137,54 @@ namespace Business.Implements.Commands.Business
             await _data.SaveChangesAsync(ct);
         }
 
+
+        public async Task ApplyGlobalAnswersAsync(
+        RegisterGlobalStudentAnswersDto dto,
+        CancellationToken ct = default)
+        {
+            // 1️⃣ Buscar todos los estudiantes activos del grupo
+            var students = await _context.Students
+                .Where(s => s.GroupId == dto.GroupId && s.Status == 1)
+                .ToListAsync(ct);
+
+            if (!students.Any())
+                return;
+
+            // 2️⃣ Para cada estudiante del grupo...
+            foreach (var student in students)
+            {
+                // 2.1️⃣ Asegurar que exista el AgendaDayStudent
+                var ads = await _context.AgendaDayStudent
+                    .FirstOrDefaultAsync(x =>
+                        x.AgendaDayId == dto.AgendaDayId &&
+                        x.StudentId == student.Id,
+                        ct);
+
+                if (ads is null)
+                {
+                    ads = new AgendaDayStudent
+                    {
+                        AgendaDayId = dto.AgendaDayId,
+                        StudentId = student.Id,
+                        AgendaDayStudentStatus = 1, // ajusta según tu enum
+                        Status = 1,
+                        CreatedAt = DateTime.UtcNow
+                    };
+
+                    _context.AgendaDayStudent.Add(ads);
+                    await _context.SaveChangesAsync(ct); // para obtener ads.Id
+                }
+
+                // 2.2️⃣ Reutilizar la lógica de UpdateAnswersAsync
+                var perStudentDto = new RegisterStudentAnswersDto
+                {
+                    AgendaDayStudentId = ads.Id,
+                    Answers = dto.Answers
+                };
+
+                await UpdateAnswersAsync(perStudentDto, ct);
+            }
+        }
 
 
 

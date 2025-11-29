@@ -26,15 +26,6 @@ namespace Web.Controllers.Implements.Business
         }
 
 
-        //[HttpPost("answers")]
-        //public async Task<IActionResult> RegisterAnswers(
-        //   [FromBody] RegisterStudentAnswersDto dto,
-        //   CancellationToken ct)
-        //{
-        //    await _command.RegisterAnswersAsync(dto, ct);
-        //    return NoContent();
-        //}
-
         /// <summary>
         /// Registra o actualiza las respuestas de un estudiante en una agendaDayStudent dada.
         /// </summary>
@@ -60,7 +51,14 @@ namespace Web.Controllers.Implements.Business
             return Ok(dto);
         }
 
-
+        [HttpPost("answers/global")]
+        public async Task<IActionResult> UpsertGlobalAnswers(
+            [FromBody] RegisterGlobalStudentAnswersDto dto,
+            CancellationToken ct)
+        {
+            await _command.ApplyGlobalAnswersAsync(dto, ct);
+            return NoContent();
+        }
 
     }
 

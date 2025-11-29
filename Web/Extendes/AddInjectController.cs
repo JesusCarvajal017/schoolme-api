@@ -190,6 +190,10 @@ namespace Web.Extendes
             services.AddScoped<ICommandStudentAnswar, StudentAnswarCommandData>();
             services.AddScoped<ICommandStAswareServices, StudentAnswerCommandBusines>();
 
+            //AgendaDay
+            services.AddScoped<ICommanAgendaDay, AgendaDayCommandData>();
+            services.AddScoped<ICommandAgedaDayServices, AgedaDayCommandBusines>();
+
             //services.AddScoped();
             services.AddScoped<AuthBusiness>();
             services.AddScoped<LoginData>();

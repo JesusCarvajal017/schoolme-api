@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251127045925_schoolmedb_v5")]
-    partial class schoolmedb_v5
+    [Migration("20251128051809_schoolmedb")]
+    partial class schoolmedb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -3221,7 +3221,7 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 6,
                             Description = "Gestión de aulas",
-                            Name = "Aulas",
+                            Name = "Matricula",
                             Order = 1,
                             Path = "aulas",
                             Status = 1
