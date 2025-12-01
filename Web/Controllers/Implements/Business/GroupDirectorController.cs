@@ -2,6 +2,7 @@
 using Business.Interfaces.Querys;
 using Entity.Dtos.Business.GroupDirector;
 using Entity.Model.Business;
+using Microsoft.AspNetCore.Mvc;
 using Web.Controllers.Implements.Abstract;
 
 namespace Web.Controllers.Implements.Business
@@ -12,10 +13,25 @@ namespace Web.Controllers.Implements.Business
        GroupDirectorQueryDto,
        GroupDirectorDto>
     {
+         private readonly IQueryGroupDirectorServices _querys;
+
         public GroupDirectorController(
-            IQueryServices<GroupDirector, GroupDirectorQueryDto> q,
+            IQueryGroupDirectorServices q,
             ICommandService<GroupDirector, GroupDirectorDto> c)
-          : base(q, c) { }
+          : base(q, c) 
+        {
+            _querys = q;    
+        
+        }
+
+        [HttpGet("Groups/{teacherId}")]
+        public async Task<IActionResult> GetGroupLeader(int teacherId)
+        {
+            var result = await _querys.GetGroupsDirect(teacherId);
+            return Ok(result);
+        }
+
+
     }
 
 }

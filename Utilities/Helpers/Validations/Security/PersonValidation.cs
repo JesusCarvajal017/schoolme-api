@@ -28,7 +28,6 @@ namespace Utilities.Helpers.Validations.Security
 
                 RuleFor(x => x.FisrtName)
                     .Cascade(CascadeMode.Stop)
-                    .NotEmpty().WithMessage("El nombre es obligatorio.")
                     .Must(s => !string.IsNullOrWhiteSpace(s))
                         .WithMessage("El nombre no puede ser solo espacios.")
                     .Matches(@"^[\p{L}\s'\-]+$") // letras Unicode + espacios + ' y -
@@ -56,7 +55,6 @@ namespace Utilities.Helpers.Validations.Security
 
                 RuleFor(x => x.SecondLastName)
                   .Cascade(CascadeMode.Stop)
-                  .NotEmpty().WithMessage("El segundo apellido es obligatorio.")
                   .Must(s => !string.IsNullOrWhiteSpace(s))
                       .WithMessage("El nombre no puede ser solo espacios.")
                   .Matches(@"^[\p{L}\s'\-]+$") // letras Unicode + espacios + ' y -
@@ -90,9 +88,11 @@ namespace Utilities.Helpers.Validations.Security
                     .WithMessage("El id de rh no es valido.")
                    .NotEmpty().WithMessage("El id del rh es obligatorio");
 
-                    RuleFor(x => x.Email)
-                   .NotEmpty().WithMessage("El correo es obligatorio")
-                   .EmailAddress().WithMessage("Formato de correo inválido");
+                    RuleFor(x => x.FisrtName)
+                   .NotEmpty().WithMessage("El nombre primer nobmre debe ser obligatorio");
+
+                    RuleFor(x => x.LastName)
+                     .NotEmpty().WithMessage("El nombre primer apellido debe ser obligatorio");
                 });
             }
         }

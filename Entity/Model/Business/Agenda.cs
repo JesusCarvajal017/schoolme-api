@@ -14,9 +14,5 @@ namespace Entity.Model.Business
         public ICollection<CompositionAgendaQuestion> CompositionAgendaQuestion { get; set; }
 
 
-        // Si "compositionAgenda" es una relación hacia otra entidad, 
-        // habría que aclarar a qué apunta (puede ser una relación de composición)
-
-        //public ICollection<Agenda> CompositionAgenda { get; set; 
     }
 }

@@ -8,7 +8,7 @@ namespace Entity.Model.Business
     {
         public int PersonId { get; set; }
 
-        public int StudentId { get; set; }
+        public int? StudentId { get; set; }
 
         public RelationShipTypeEnum? RelationShipTypeEnum { get; set; }
         public Person Person { get; set; }

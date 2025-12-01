@@ -8,6 +8,8 @@ namespace Entity.Dtos.Business.Teacher
         public string? FullName { get; set; }
         public int? DocumentTypeId { get; set; }
         public string? AcronymDocument { get; set; }
+        public long Phone { get; set; }
+        public string LastName { get; set; }
         public long? Identification { get; set; }
 
     }

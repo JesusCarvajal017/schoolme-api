@@ -46,7 +46,6 @@ namespace Entity.ConfigModels.Security
 
             //builder.HasData(
                builder.HasData(
-                    new RolFormPermission { Id = 1, RolId = 1, FormId = 1, PermissionId = 1, Status= 1},
                     new RolFormPermission { Id = 3, RolId = 1, FormId = 3, PermissionId = 1, Status= 1},
                     new RolFormPermission { Id = 4, RolId = 1, FormId = 4, PermissionId = 1, Status= 1},
                     new RolFormPermission { Id = 5, RolId = 1, FormId = 5, PermissionId = 1, Status= 1},
@@ -56,13 +55,8 @@ namespace Entity.ConfigModels.Security
                     new RolFormPermission { Id = 9, RolId = 1, FormId = 9, PermissionId = 1, Status= 1},
                     new RolFormPermission { Id = 10, RolId = 1, FormId = 10, PermissionId = 1, Status= 1 },
                     new RolFormPermission { Id = 11, RolId = 1, FormId = 11, PermissionId = 1, Status= 1 },
-                    new RolFormPermission { Id = 12, RolId = 1, FormId = 12, PermissionId = 1, Status= 1 },
                     new RolFormPermission { Id = 13, RolId = 1, FormId = 13, PermissionId = 1, Status= 1 },
                     new RolFormPermission { Id = 14, RolId = 1, FormId = 14, PermissionId = 1, Status= 1 },
-                    new RolFormPermission { Id = 15, RolId = 1, FormId = 15, PermissionId = 1, Status= 1 },
-                    new RolFormPermission { Id = 16, RolId = 1, FormId = 16, PermissionId = 1, Status= 1 },
-                    new RolFormPermission { Id = 17, RolId = 1, FormId = 17, PermissionId = 1, Status= 1 },
-                    new RolFormPermission { Id = 18, RolId = 1, FormId = 18, PermissionId = 1, Status= 1 },
                     new RolFormPermission { Id = 19, RolId = 1, FormId = 19, PermissionId = 1, Status= 1 },
                     new RolFormPermission { Id = 20, RolId = 1, FormId = 20, PermissionId = 1, Status= 1 },
                     new RolFormPermission { Id = 21, RolId = 1, FormId = 21, PermissionId = 1, Status= 1 },
@@ -70,8 +64,12 @@ namespace Entity.ConfigModels.Security
                     new RolFormPermission { Id = 23, RolId = 1, FormId = 23, PermissionId = 1, Status= 1 },
                     new RolFormPermission { Id = 24, RolId = 1, FormId = 24, PermissionId = 1, Status= 1 },
                     new RolFormPermission { Id = 25, RolId = 1, FormId = 25, PermissionId = 1, Status= 1 },
-                    new RolFormPermission { Id = 26, RolId = 1, FormId = 26, PermissionId = 1, Status= 1 }
-                    //)
+                    new RolFormPermission { Id = 26, RolId = 1, FormId = 26, PermissionId = 1, Status= 1 },
+                    new RolFormPermission { Id = 27, RolId = 1, FormId = 27, PermissionId = 1, Status = 1 },
+
+                    new RolFormPermission { Id = 29, RolId = 5, FormId = 28, PermissionId = 1, Status = 1 },
+                    new RolFormPermission { Id = 30, RolId = 5, FormId = 29, PermissionId = 1, Status = 1 },
+                    new RolFormPermission { Id = 31, RolId = 5, FormId = 30, PermissionId = 1, Status = 1 }
            );
         }
     }

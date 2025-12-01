@@ -1,11 +1,13 @@
-﻿using Entity.Context.Main;
+﻿using Data.Interfaces.Group.Querys;
+using Entity.Context.Main;
 using Entity.Model.Business;
+using Entity.Model.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Data.Implements.Querys.Business
 {
-    public class StudentQueryData : BaseGenericQuerysData<Student> 
+    public class StudentQueryData : BaseGenericQuerysData<Student> , IQuerysStudent
     {
         protected readonly ILogger<StudentQueryData> _logger;
         protected readonly AplicationDbContext _context;
@@ -42,7 +44,6 @@ namespace Data.Implements.Querys.Business
             }
         }
 
-
         public override async Task<Student?> QueryById(int id)
         {
 
@@ -62,6 +63,86 @@ namespace Data.Implements.Querys.Business
                 _logger.LogInformation(ex, "Error en la consulta con id {id}", typeof(Student).Name);
                 return null;
             }
+
+        }
+
+        public virtual async Task<Student> QueryCompleteData(int studentId)
+        {
+            try
+            {
+                var query = await _dbSet
+                 .AsNoTracking()
+                 .Include(p => p.Person)
+                     .ThenInclude(p => p.DocumentType)
+
+                 .Include(p => p.Person)
+                     .ThenInclude(p => p.DataBasic)
+                        .ThenInclude(d => d.Rh)
+
+                 .Include(p => p.Person)
+                     .ThenInclude(p => p.DataBasic)
+                         .ThenInclude(d => d.Eps)
+
+                  .Include(p => p.Person)
+                         .ThenInclude(d => d.DataBasic)
+                            .ThenInclude(d => d.Munisipality)
+                                .ThenInclude(m => m.Departament)
+                    .Include(p => p.Person)
+                         .ThenInclude(p => p.DataBasic)
+                             .ThenInclude(d => d.MaterialStatus)
+                 .AsSplitQuery() 
+                 .FirstOrDefaultAsync(p => p.Id == studentId);
+
+                return query;
+
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogInformation(ex, "Error en la consulta la entidad {Entity}", typeof(Student).Name);
+                return new Student();
+            }
+        }
+
+        public virtual async Task<IEnumerable<Student>> QueryMatriculados()
+        {
+            try
+            {
+                var studentsSinMatricula = await _context.Students
+                    .Where(s => s.Tutition.Count() == 0)
+                    .Include(p => p.Person)
+                        .ThenInclude(P => P.DocumentType)
+                    .ToListAsync();
+
+                return studentsSinMatricula;
+            }catch(Exception ex)
+            {
+                _logger.LogInformation(ex, "Error en la consulta de los no matriculados {Entity}", typeof(Student).Name);
+                return [];
+            }
+
+
+        }
+
+
+        public virtual async Task<IEnumerable<Student>> QueryStudentsGroup(int groupId)
+        {
+            try
+            {
+                var studentsSinMatricula = await _context.Students
+                    .Where(s => s.GroupId == groupId)
+                    .Include(p => p.Person)
+                        .ThenInclude(P => P.DocumentType)
+                    .ToListAsync();
+
+                return studentsSinMatricula;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex, "Error en la consulta de los no matriculados {Entity}", typeof(Student).Name);
+                return [];
+            }
+
 
         }
     }

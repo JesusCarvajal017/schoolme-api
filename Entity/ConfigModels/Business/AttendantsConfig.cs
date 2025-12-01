@@ -25,8 +25,7 @@ namespace Entity.ConfigModels.Business
                    .IsRequired();
 
             builder.Property(a => a.StudentId)
-               .HasColumnName("student_id")
-               .IsRequired();
+               .HasColumnName("student_id");
 
             builder.Property(a => a.RelationShipTypeEnum)
                 .HasColumnName("relationship_type")
@@ -51,7 +50,8 @@ namespace Entity.ConfigModels.Business
                    .WithMany(p => p.Attendants)         // agrega ICollection<Attendants> en Person si la quieres
                    .HasForeignKey(a => a.PersonId)
                    .HasConstraintName("fk_attendants_person")
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
+
 
         }
     }

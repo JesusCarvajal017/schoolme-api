@@ -2,6 +2,7 @@
 using Business.Implements.Bases;
 using Business.Interfaces.Querys;
 using Data.Interfaces.Group.Commands;
+using Entity.Context.Main;
 using Entity.Dtos.Security.Person;
 using Entity.Dtos.Security.User;
 using Entity.Model.Business;
@@ -15,6 +16,7 @@ namespace Business.Implements.Commands.Security
     public class PersonCommandBusines : BaseCommandsBusiness<Person, PersonDto>, ICommandPersonServices
     {
         protected readonly ICommanPerson _data;
+
         // para poder crear el usuario y darle la asignación de rol
         protected readonly ICommandUser _commandUser;
         protected readonly ICommands<UserRol> _commandUserRol;
@@ -24,8 +26,9 @@ namespace Business.Implements.Commands.Security
             IMapper mapper,
             ILogger<PersonCommandBusines> _logger,
             IGenericHerlpers helpers, ICommandUser commandUser, 
-            ICommands<UserRol> commandUserRol
-            ) : base(data, mapper, _logger, helpers)
+            ICommands<UserRol> commandUserRol,
+            AplicationDbContext context
+            ) : base(data, mapper, _logger, helpers, context)
         {
             _data = data;
             _commandUser = commandUser;
@@ -123,6 +126,20 @@ namespace Business.Implements.Commands.Security
 
             var updated = await _data.UpdateCompleteAsync(existing); // guarda en Data
             return _mapper.Map<PersonCompleteDto>(updated);
+        }
+
+        public override async Task<bool> DeleteServices(int id)
+        {
+            try
+            {
+                _logger.LogInformation($"Eliminando {typeof(Person).Name} con ID: {id}");
+                return await _data.DeleteAsync(id);
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError($"Error al eliminar {typeof(T).Name} con ID {id}: {ex.Message}");
+                throw;
+            }
         }
 
 

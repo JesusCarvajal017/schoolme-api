@@ -6,5 +6,8 @@ namespace Business.Interfaces.Querys
     public interface IQueryAcLoadServices : IQueryServices<AcademicLoad, AcademicLoadReadDto>
     {
         Task<IEnumerable<AcademicLoadReadDto>> GetTeacherLoad(int IdUser, int? status);
+        Task<IEnumerable<LoadByDayReadDto>> GetTeacherLoadDay(int idTeacher, int? status,int? day );
+
+        Task<List<TeacherTodayClassDto>> GetTodayLoadsByTeacherAsync(int teacherId, CancellationToken ct = default);
     }
 }

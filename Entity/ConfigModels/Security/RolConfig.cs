@@ -55,7 +55,15 @@ namespace Entity.ConfigModels.Security
                     Name = "Acudiente",
                     Description = "Solo interactura de forma base",
                     Status = 1
+                },
+                new Rol
+                {
+                    Id = 5,
+                    Name = "Docente director",
+                    Description = "Docente que tiene a cargo un grado como su representante",
+                    Status = 1
                 }
+
             );
         }
     }

@@ -2,6 +2,7 @@
 using Business.Interfaces.Querys;
 using Entity.Dtos.Business.TeacherObservation;
 using Entity.Model.Business;
+using Microsoft.AspNetCore.Mvc;
 using Web.Controllers.Implements.Abstract;
 
 namespace Web.Controllers.Implements.Business
@@ -12,10 +13,23 @@ namespace Web.Controllers.Implements.Business
        TeacherObservationDto,
        TeacherObservationDto>
     {
+
+        private readonly IQueryTeacherObservationServices _query;
         public TeacherObservationController(
-            IQueryServices<TeacherObservation, TeacherObservationDto> q,
+            IQueryTeacherObservationServices q,
             ICommandService<TeacherObservation, TeacherObservationDto> c)
-          : base(q, c) { }
+          : base(q, c) {
+            _query = q;
+        }
+
+
+        // Consulta de información completa de la persona
+        [HttpGet("ObservationStudent/{agendaDayStudentId}")]
+        public async Task<IActionResult> GetPersonBasic(int agendaDayStudentId)
+        {
+            var result = await _query.GetObservationStudent(agendaDayStudentId);
+            return Ok(result);
+        }
     }
 
 }
