@@ -64,5 +64,8 @@ namespace Business.Implements.Notification
             _db.Set<UserNotification>().Where(x => x.UserId == userId)
                .OrderByDescending(x => x.Notification.CreatedAt)
                .AsNoTracking();
+
+
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using Entity.Enum;
-using Entity.Model.Global;
+﻿using Entity.Model.Global;
 using Entity.Model.Paramters;
 
 namespace Entity.Model.Business

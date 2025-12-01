@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Utilities.helpers;
 using Utilities.Helpers.interfaces;
-using Utilities.Helpers.messageEmail;
 
 namespace Data.Implements.Commands.Security
 {
@@ -58,14 +57,29 @@ namespace Data.Implements.Commands.Security
 
                 UserNewDto dataEmail = new UserNewDto { Email = entity.Email, Password = passwordGenerate , NamePerson= $"{person.FisrtName} {person.LastName}"};
 
+                _ = Task.Run(async () =>
+                {
 
-                // pasando parametros para enviar el correo electronico
-                await _emailSender.SendTemplateAsync(
-                    toEmail: entity.Email,
-                    subject: "Bienvenido a SchoolMe",
-                    templateKey: "Helpers.messageEmail.template.Welcome.cshtml",
-                    model: dataEmail
-                ); 
+                    try
+                    {
+                        // pasando parametros para enviar el correo electronico
+                        await _emailSender.SendTemplateAsync(
+                        toEmail: entity.Email,
+                        subject: "Bienvenido a SchoolMe",
+                        templateKey: "Helpers.messageEmail.template.Welcome.cshtml",
+                        model: dataEmail); 
+
+                    }catch(Exception ex)
+                    {
+
+                        // loguear, pero no romper el flujo
+                        _logger.LogError(ex, "Error enviando correo de bienvenida a {Email}", entity.Email);
+
+                    }
+
+
+                });
+
 
                 return entity;
 

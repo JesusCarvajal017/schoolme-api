@@ -51,8 +51,15 @@ namespace Entity.Context.Main
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teacher { get; set; }
         public DbSet<Attendants> Attendants { get; set; }
+        public DbSet<Question> Question { get; set; }
+
+
         public DbSet<GroupDirector> GroupDirector { get; set; }
         public DbSet<Tutition> Tutition { get; set; }
+        public DbSet<CompositionAgendaQuestion> CompositionAgendaQuestion { get; set; }
+        public DbSet<AgendaDayStudent> AgendaDayStudent { get; set; }
+        public DbSet<StudentAnswer> StudentAnswer { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

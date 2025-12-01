@@ -46,9 +46,31 @@ namespace Data.Implements.Querys.Business
         }
 
 
-    
-  
+        // consulta de grupos los cuales el docente director esta a cargo
+        public virtual async Task<IEnumerable<GroupDirector>> GroupsDirector(int teacherId)
+        {
+            try
+            {
+                var query = await _dbSet
+                   .AsNoTracking()
+                    .Where(t => t.TeacherId == teacherId)
+                    .Include(t => t.Groups)
+                        .ThenInclude(g => g.Grade)
+                    .Include(t => t.Groups)
+                        .ThenInclude(g => g.Agenda)
+                    .Include(t => t.Groups)
+                        .ThenInclude(g => g.AgendaDay)
+                    .ToListAsync();
 
+                return query;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex, "Error en la consulta con id {id}", typeof(GroupDirector).Name);
+                return null;
+            }
+        }
 
     }
 }

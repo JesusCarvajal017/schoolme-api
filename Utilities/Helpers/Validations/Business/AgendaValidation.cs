@@ -10,7 +10,7 @@ namespace Utilities.Helpers.Validations.Business
         {
             RuleSet("Full", () =>
             {
-                RuleFor(x => x.Name).StandardName(min: 4, max: 20);
+                RuleFor(x => x.Name).StandardName(min: 4, max: 150);
 
                 RuleFor(x => x.Description)
                     .NotEmpty().WithMessage("La descripcion es obligatoria");

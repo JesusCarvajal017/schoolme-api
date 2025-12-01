@@ -41,6 +41,13 @@ namespace Web.Controllers.Implements.Business
 
             return Ok(resultQuery);
         }
+
+        [HttpGet("DataBasic/{attendansId}")]
+        public async Task<IActionResult> GetPersonBasic(int attendansId)
+        {
+            var result = await _queryServices.GetDataCompleteServices(attendansId);
+            return Ok(result);
+        }
     }
 
 }

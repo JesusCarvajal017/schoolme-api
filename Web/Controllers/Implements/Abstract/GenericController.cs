@@ -3,6 +3,7 @@ using Business.Interfaces.Querys;
 using Entity.Dtos.Global;
 using Entity.Model.Global;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 
@@ -10,6 +11,7 @@ namespace Web.Controllers.Implements.Abstract
 {
     [ApiController]
     [Route("api/[controller]")]
+    //[Authorize]
     public abstract class GenericController<
             TEntity,
             TReadDto,
@@ -31,7 +33,7 @@ namespace Web.Controllers.Implements.Abstract
         }
 
         [HttpGet]
-        [OutputCache]
+        //[OutputCache]
         //[Authorize]
         public virtual async Task<IActionResult> GetAll([CustomizeValidator(RuleSet = "Full")]  int? status) => Ok(await _querySvc.GetAllServices(status));
 
@@ -66,7 +68,33 @@ namespace Web.Controllers.Implements.Abstract
         //[Authorize]
         public virtual async Task<IActionResult> DeleteLogica([CustomizeValidator(RuleSet = "Full")] int id, int status) => Ok(await _cmdSvc.DeleteLogicalServices(id, status));
 
-        [HttpPatch]
-        public virtual async Task<IActionResult> PartialUpdate([FromBody] [CustomizeValidator(RuleSet = "Patch")] TWriteDto dto) => Ok(await _cmdSvc.PathServices(dto));
+        //[HttpPatch]
+        //public virtual async Task<IActionResult> PartialUpdate([FromBody] [CustomizeValidator(RuleSet = "Patch")] TWriteDto dto) => Ok(await _cmdSvc.PathServices(dto));
+
+
+        [HttpPatch("partial/{id:int}")]
+        public virtual async Task<IActionResult> PartialDefault(
+            [FromRoute] int id,
+            [FromBody][CustomizeValidator(RuleSet = "Patch")] TWriteDto dto)
+        {
+            if (dto == null)
+                return BadRequest("Body requerido.");
+
+            if (dto.Id != 0 && dto.Id != id)
+                return BadRequest("El id del body no coincide con el de la ruta.");
+
+            dto.Id = id;   // asegurar que el servicio trabaje con el ID correcto
+
+            var result = await _cmdSvc.UpdatePartialAsync(id, dto);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+
+
+
+
     }
 }

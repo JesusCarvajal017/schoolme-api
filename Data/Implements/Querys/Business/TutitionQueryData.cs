@@ -1,12 +1,12 @@
-﻿using Entity.Context.Main;
+﻿using Data.Interfaces.Group.Querys;
+using Entity.Context.Main;
 using Entity.Model.Business;
-using Entity.Model.Paramters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Data.Implements.Querys.Business
 {
-    public class TutitionQueryData : BaseGenericQuerysData<Tutition>
+    public class TutitionQueryData : BaseGenericQuerysData<Tutition>, IQuerysTutition
     {
         protected readonly ILogger<TutitionQueryData> _logger;
         protected readonly AplicationDbContext _context;
@@ -46,8 +46,45 @@ namespace Data.Implements.Querys.Business
         }
 
 
-    
-  
+
+        public async Task<IEnumerable<Tutition>> QueryTutitionGrade(int gradeId)
+        {
+            var studentsTutition = await _context.Tutition
+                                    .Where(t=> t.GradeId == gradeId && t.Status == 1)
+
+                                     .Include(p => p.Student)
+                                                    .ThenInclude(P => P.Person)
+                                                .Include(q => q.Grade)
+                                    .ToListAsync();
+
+            return studentsTutition;
+
+        }
+
+        // trae la matricula con el id del studiante
+        public override async Task<Tutition?> QueryById(int id)
+        {
+
+            try
+            {
+                var query = await _dbSet
+                  .AsNoTracking()
+                  .FirstOrDefaultAsync(e => e.StudentId == id); ;
+
+                return query;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex, "Error en la consulta con id {id}", typeof(Tutition).Name);
+                return null;
+            }
+
+        }
+
+
+
+
 
 
     }

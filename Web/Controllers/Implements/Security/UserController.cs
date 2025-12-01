@@ -4,6 +4,7 @@ using Entity.Dtos.Especific.Security;
 using Entity.Dtos.Security.User;
 using Entity.Model.Security;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Controllers.Implements.Abstract;
 
@@ -68,6 +69,7 @@ namespace Web.Controllers.Implements.Security
             return Ok(await _cmdSvc.UpdateServices(dto));
         }
 
+        [AllowAnonymous]
         [HttpPost("passwordUpdate")]
         //[Authorize]
         public virtual async Task<IActionResult> UpdatePassword([FromBody][CustomizeValidator(RuleSet = "Full")] ChangePassword dto)
