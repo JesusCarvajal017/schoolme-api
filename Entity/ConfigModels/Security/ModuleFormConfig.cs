@@ -38,8 +38,6 @@ namespace Entity.ConfigModels.Security
 
             builder.HasData(
                 // ADMINISTRACIÓN
-                new ModuleForm { Id = 1, ModuleId = 2, FormId = 1 },
-                new ModuleForm { Id = 2, ModuleId = 2, FormId = 2 },
                 new ModuleForm { Id = 3, ModuleId = 2, FormId = 3 },
                 new ModuleForm { Id = 4, ModuleId = 2, FormId = 4 },
                 new ModuleForm { Id = 5, ModuleId = 2, FormId = 5 },
@@ -53,15 +51,11 @@ namespace Entity.ConfigModels.Security
                 // AGENDA
                 new ModuleForm { Id = 10, ModuleId = 4, FormId = 10 },
                 new ModuleForm { Id = 11, ModuleId = 4, FormId = 11 },
-                new ModuleForm { Id = 12, ModuleId = 4, FormId = 12 },
 
                 // CONFIGURACIÓN
                 new ModuleForm { Id = 13, ModuleId = 5, FormId = 13 },
                 new ModuleForm { Id = 14, ModuleId = 5, FormId = 14 },
-                new ModuleForm { Id = 15, ModuleId = 5, FormId = 15 },
                 new ModuleForm { Id = 16, ModuleId = 5, FormId = 16 },
-                new ModuleForm { Id = 17, ModuleId = 5, FormId = 17 },
-                new ModuleForm { Id = 18, ModuleId = 5, FormId = 18 },
 
                 // SEGURIDAD
                 new ModuleForm { Id = 19, ModuleId = 6, FormId = 19 },
@@ -71,7 +65,14 @@ namespace Entity.ConfigModels.Security
                 new ModuleForm { Id = 23, ModuleId = 6, FormId = 23 },
                 new ModuleForm { Id = 24, ModuleId = 6, FormId = 24 },
                 new ModuleForm { Id = 25, ModuleId = 6, FormId = 25 },
-                new ModuleForm { Id = 26, ModuleId = 6, FormId = 26 }
+                new ModuleForm { Id = 26, ModuleId = 6, FormId = 26 },
+
+
+                new ModuleForm { Id = 27, ModuleId = 7, FormId = 27 },
+
+                new ModuleForm { Id = 28, ModuleId = 3, FormId = 28 },
+                new ModuleForm { Id = 29, ModuleId = 4, FormId = 29 },
+                new ModuleForm { Id = 30, ModuleId = 4, FormId = 30 }
             );
 
 

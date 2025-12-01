@@ -10,7 +10,7 @@ namespace Data.Interfaces.Group.Querys
     public interface IQuerysPerson : IQuerys<Person>
     {
         Task<Person> QueryCompleteData(int personId);
-      
+
     }
 
 

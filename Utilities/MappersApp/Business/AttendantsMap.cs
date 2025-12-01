@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Entity.Dtos.Business.Attendants;
+using Entity.Dtos.Especific.DataBasicComplete;
 using Entity.Model.Business;
 
 namespace Utilities.MappersApp.Business
@@ -14,11 +15,13 @@ namespace Utilities.MappersApp.Business
             CreateMap<Attendants, AttendantsQueryDto>()
                 .ForMember(dest => dest.NameAttendant, opt => opt.MapFrom(t => $"{t.Person.FisrtName} {t.Person.LastName}"))
                 .ForMember(dest => dest.AttendantId, opt => opt.MapFrom(t => t.PersonId))
+                .ForMember(dest => dest.RelationShipType, opt => opt.MapFrom(t => t.RelationShipTypeEnum))
 
 
                 .ForMember(dest => dest.StudentId, opt => opt.MapFrom(t => t.StudentId))
                 .ForMember(dest => dest.NameStudent, opt => opt.MapFrom(t => $"{t.Student.Person.FisrtName} {t.Student.Person.LastName}"))
                 .ForMember(dest => dest.DocumentTypeId, opt => opt.MapFrom(t => t.Student.Person.DocumentType.Id))
+                .ForMember(dest => dest.Document, opt => opt.MapFrom(t => t.Student.Person.Identification))
                 .ForMember(dest => dest.Identification, opt => opt.MapFrom(t => t.Student.Person.Identification))
                 .ForMember(dest => dest.AcronymDocument, opt => opt.MapFrom(t => t.Student.Person.DocumentType.Acronym))
                 .ReverseMap();
@@ -47,6 +50,12 @@ namespace Utilities.MappersApp.Business
                .ForMember(dest => dest.Identification, opt => opt.MapFrom(t => t.Person.Identification))
                .ForMember(dest => dest.AcronymDocument, opt => opt.MapFrom(t => t.Person.DocumentType.Acronym))
                .ReverseMap();
+
+
+            CreateMap<Attendants, CompleteDataPersonDto>()
+               // Si quieres exponer PersonId en el DTO, mapealo así (si tu DTO tiene esa propiedad):
+               // .ForMember(d => d.PersonId, o => o.MapFrom(s => s.PersonId))
+               .IncludeMembers(t => t.Person);
 
 
         }

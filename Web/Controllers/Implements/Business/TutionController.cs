@@ -2,6 +2,7 @@
 using Business.Interfaces.Querys;
 using Entity.Dtos.Business.Tution;
 using Entity.Model.Business;
+using Microsoft.AspNetCore.Mvc;
 using Web.Controllers.Implements.Abstract;
 
 namespace Web.Controllers.Implements.Business
@@ -12,10 +13,24 @@ namespace Web.Controllers.Implements.Business
        TutionReadDto,
        TutionDto>
     {
+
+        private readonly IQueryTutitionServices _querys;
         public TutionController(
-            IQueryServices<Tutition, TutionReadDto> q,
+            IQueryTutitionServices q,
             ICommandService<Tutition, TutionDto> c)
-          : base(q, c) { }
+          : base(q, c) 
+        {
+            _querys = q;
+        }
+
+        [HttpGet("TutitionGrade/{gradeId}")]
+        public async Task<IActionResult> GetTutuionGradeController(int gradeId)
+        {
+            var result = await _querys.GetTutitionGrade(gradeId);
+            return Ok(result);
+        }
+
+
     }
 
 }

@@ -1,10 +1,10 @@
 ﻿using Entity.Dtos.Global;
+using Entity.Dtos.Parameters.Group;
 
 namespace Entity.Dtos.Business.DataBasic
 {
     public class DataBasicDto : ABaseDto
     {
-
         public int PersonId { get; set; }
         public int? RhId { get; set; }
         public string? Adress { get; set; }
@@ -15,5 +15,7 @@ namespace Entity.Dtos.Business.DataBasic
 
         public int? EpsId { get; set; }
         public int? MunisipalityId { get; set; }
+        public int? DepartamentId { get; set; }
+        //public MunicipalityDto Municipality { get; set;  }
     }
 }

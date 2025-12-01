@@ -89,6 +89,56 @@ namespace Data.Implements.Commands.Security
         }
 
 
+        public override async Task<bool> DeleteAsync(int id)
+        {
+            using var tx = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                // 1) Cargar todo el grafo necesario
+                var person = await _context.Person
+                    .Include(p => p.DataBasic)
+                    .Include(p => p.User)
+                        .ThenInclude(u => u.UserRol)
+                    .FirstOrDefaultAsync(p => p.Id == id);
+
+                if (person is null)
+                    throw new Exception($"Persona {id} no encontrada");
+
+                // 2) Borrar enlaces UserRol (tabla puente)
+                if (person.User?.UserRol != null && person.User.UserRol.Any())
+                    _context.RemoveRange(person.User.UserRol);
+
+                // 3) Borrar User (si no confías en cascada)
+                if (person.User != null)
+                    _context.User.Remove(person.User);
+
+                // 4) Borrar DataBasic (si no confías en cascada)
+                if (person.DataBasic != null)
+                    _context.DataBasic.Remove(person.DataBasic);
+
+                // 5) Borrar Person (principal)
+                _context.Person.Remove(person);
+
+                await _context.SaveChangesAsync();
+                await tx.CommitAsync();
+
+                return true; // ✅ Todo salió bien
+            }
+            catch (Exception ex)
+            {
+                await tx.RollbackAsync();
+
+                // puedes loguearlo si tienes un ILogger inyectado
+                // _logger.LogError(ex, "Error al eliminar persona {Id}", id);
+
+                // Opcional: propagar la excepción o devolver false
+                // throw; // si quieres que se propague al middleware
+                return false;
+            }
+        }
+
+
 
     }
 }

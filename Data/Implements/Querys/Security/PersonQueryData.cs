@@ -30,12 +30,12 @@ namespace Data.Implements.Querys.Security
                 var model = await query.OrderBy(x => x.Id).ToListAsync();
 
                 //ToListAsync();
-                _logger.LogInformation("Consulta de la enidad {Entity} se realizo exitosamente", typeof(UserRol).Name);
+                _logger.LogInformation("Consulta de la enidad {Entity} se realizo exitosamente", typeof(Person).Name);
                 return model;
             }
             catch (Exception ex)
             {
-                _logger.LogInformation(ex, "Error en la consulta la entidad {Entity}", typeof(UserRol).Name);
+                _logger.LogInformation(ex, "Error en la consulta la entidad {Entity}", typeof(Person).Name);
                 throw;
             }
         }
@@ -70,6 +70,7 @@ namespace Data.Implements.Querys.Security
                 return new Person();
             }
         }
+
         public override async Task<Person?> QueryById(int id)
         {
             try

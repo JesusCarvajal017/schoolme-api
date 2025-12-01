@@ -1,12 +1,14 @@
-﻿using Entity.Context.Main;
+﻿using Data.Interfaces.Group.Querys;
+using Entity.Context.Main;
 using Entity.Model.Business;
 using Entity.Model.Paramters;
+using Entity.Model.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Data.Implements.Querys.Business
 {
-    public class TeacherQueryData : BaseGenericQuerysData<Teacher>
+    public class TeacherQueryData : BaseGenericQuerysData<Teacher> , IQueryTeacher
     {
         protected readonly ILogger<TeacherQueryData> _logger;
         protected readonly AplicationDbContext _context;
@@ -23,9 +25,9 @@ namespace Data.Implements.Querys.Business
             {
                 // El as queryable me permite ir construyendo la consulta
                 IQueryable<Teacher> query = _dbSet.
-                                                AsQueryable()
-                                                .Include(p => p.Person)
-                                                    .ThenInclude(P => P.DocumentType);
+                        AsQueryable()
+                        .Include(p => p.Person)
+                            .ThenInclude(P => P.DocumentType);
 
                 if (status.HasValue)
                     query = query.Where(x => x.Status == status.Value);
@@ -52,7 +54,7 @@ namespace Data.Implements.Querys.Business
                   .AsNoTracking()
                   .Include(p => p.Person)
                       .ThenInclude(P => P.DocumentType)
-                  .FirstOrDefaultAsync(e => e.Id == id); ;
+                  .FirstOrDefaultAsync(e => e.PersonId == id); ;
 
                 return query;
 
@@ -63,6 +65,44 @@ namespace Data.Implements.Querys.Business
                 return null;
             }
 
+        }
+
+        public virtual async Task<Teacher> QueryCompleteData(int teacherId)
+        {
+            try
+            {
+                var query = await _dbSet
+                 .AsNoTracking()
+                 .Include(p => p.Person)
+                     .ThenInclude(p => p.DocumentType)
+
+                 .Include(p => p.Person)
+                     .ThenInclude(p => p.DataBasic)
+                        .ThenInclude(d => d.Rh)
+
+                 .Include(p => p.Person)
+                     .ThenInclude(p => p.DataBasic)
+                         .ThenInclude(d => d.Eps)
+
+                  .Include(p => p.Person)
+                         .ThenInclude(d => d.DataBasic)
+                            .ThenInclude(d => d.Munisipality)
+                                .ThenInclude(m => m.Departament)
+                    .Include(p => p.Person)
+                         .ThenInclude(p => p.DataBasic)
+                             .ThenInclude(d => d.MaterialStatus)
+                 .AsSplitQuery()
+                 .FirstOrDefaultAsync(p => p.Id == teacherId);
+
+                return query;
+
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogInformation(ex, "Error en la consulta la entidad {Entity}", typeof(Teacher).Name);
+                return new Teacher();
+            }
         }
 
 

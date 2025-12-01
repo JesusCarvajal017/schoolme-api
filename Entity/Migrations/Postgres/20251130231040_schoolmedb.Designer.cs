@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251109032007_dbSchoolMe-posgrest")]
-    partial class dbSchoolMeposgrest
+    [Migration("20251130231040_schoolmedb")]
+    partial class schoolmedb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -219,10 +219,7 @@ namespace Entity.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("StudentsId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("integer")
                         .HasColumnName("student_id");
 
@@ -234,9 +231,7 @@ namespace Entity.Migrations.Postgres
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("StudentsId");
-
-                    b.HasIndex("AgendaDayId", "StudentsId")
+                    b.HasIndex("AgendaDayId", "StudentId")
                         .IsUnique()
                         .HasDatabaseName("uq_ads_agenda_day_student");
 
@@ -272,7 +267,7 @@ namespace Entity.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("StudentId")
                         .HasColumnType("integer")
                         .HasColumnName("student_id");
 
@@ -1456,30 +1451,6 @@ namespace Entity.Migrations.Postgres
                             GradeId = 1,
                             Name = "Primero C",
                             Status = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AmountStudents = 20,
-                            GradeId = 1,
-                            Name = "Segundo A",
-                            Status = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AmountStudents = 20,
-                            GradeId = 1,
-                            Name = "Quinto B",
-                            Status = 5
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AmountStudents = 20,
-                            GradeId = 1,
-                            Name = "Cuarto C",
-                            Status = 4
                         });
                 });
 
@@ -3155,7 +3126,7 @@ namespace Entity.Migrations.Postgres
                         new
                         {
                             Id = 6,
-                            Description = "Selección múltiple",
+                            Description = "Selección de opción múltiple",
                             Name = "OptionMulti",
                             Status = 1
                         });
@@ -3212,20 +3183,11 @@ namespace Entity.Migrations.Postgres
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            Description = "Vista de todos los registros administrativos",
-                            Name = "Todos",
+                            Id = 27,
+                            Description = "Informacion estadisticas del sistema",
+                            Name = "Panel",
                             Order = 1,
-                            Path = "todos",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Gestión de personal administrativo",
-                            Name = "Administrativos",
-                            Order = 2,
-                            Path = "administrativos",
+                            Path = "panel",
                             Status = 1
                         },
                         new
@@ -3259,7 +3221,7 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 6,
                             Description = "Gestión de aulas",
-                            Name = "Aulas",
+                            Name = "Matricula",
                             Order = 1,
                             Path = "aulas",
                             Status = 1
@@ -3294,8 +3256,8 @@ namespace Entity.Migrations.Postgres
                         new
                         {
                             Id = 10,
-                            Description = "Gestión de composiciones",
-                            Name = "Composición",
+                            Description = "Creacion de preguntas globales",
+                            Name = "Preguntas",
                             Order = 1,
                             Path = "composicion",
                             Status = 1
@@ -3307,15 +3269,6 @@ namespace Entity.Migrations.Postgres
                             Name = "Agendas",
                             Order = 2,
                             Path = "agendas",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Description = "Asignación de agendas",
-                            Name = "Asignación",
-                            Order = 3,
-                            Path = "asignacion",
                             Status = 1
                         },
                         new
@@ -3338,38 +3291,11 @@ namespace Entity.Migrations.Postgres
                         },
                         new
                         {
-                            Id = 15,
-                            Description = "Gestión de tipos de identificación",
-                            Name = "Tipo Identificación",
-                            Order = 3,
-                            Path = "tipoIdentificacion",
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 16,
                             Description = "Gestión de EPS",
                             Name = "EPS",
                             Order = 4,
                             Path = "eps",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Description = "Gestión de municipios",
-                            Name = "Municipios",
-                            Order = 5,
-                            Path = "municipio",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Description = "Gestión de tipos de sangre",
-                            Name = "RH",
-                            Order = 6,
-                            Path = "rh",
                             Status = 1
                         },
                         new
@@ -3442,6 +3368,33 @@ namespace Entity.Migrations.Postgres
                             Name = "Usuarios",
                             Order = 8,
                             Path = "usuarios",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Description = "Gestión de carga académica",
+                            Name = "Carga Académica",
+                            Order = 1,
+                            Path = "mihorario",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Description = "Gestion de agenda diaria",
+                            Name = "Registro de agenda",
+                            Order = 1,
+                            Path = "dashagenda",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Description = "Gestion de observaciones diaria",
+                            Name = "Observaciones",
+                            Order = 2,
+                            Path = "observacion",
                             Status = 1
                         });
                 });
@@ -3555,9 +3508,19 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 6,
                             Description = "Todo el tema de permisos del sistema",
-                            Icon = "calendar",
+                            Icon = "security",
                             Name = "Seguridad",
                             Order = 6,
+                            Path = "",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Infomracion generada por el sistema",
+                            Icon = "bar_chart",
+                            Name = "Reportes",
+                            Order = 7,
                             Path = "",
                             Status = 1
                         });
@@ -3605,20 +3568,6 @@ namespace Entity.Migrations.Postgres
                     b.ToTable("moduleForm", "security");
 
                     b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FormId = 1,
-                            ModuleId = 2,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FormId = 2,
-                            ModuleId = 2,
-                            Status = 1
-                        },
                         new
                         {
                             Id = 3,
@@ -3684,13 +3633,6 @@ namespace Entity.Migrations.Postgres
                         },
                         new
                         {
-                            Id = 12,
-                            FormId = 12,
-                            ModuleId = 4,
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 13,
                             FormId = 13,
                             ModuleId = 5,
@@ -3705,29 +3647,8 @@ namespace Entity.Migrations.Postgres
                         },
                         new
                         {
-                            Id = 15,
-                            FormId = 15,
-                            ModuleId = 5,
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 16,
                             FormId = 16,
-                            ModuleId = 5,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 17,
-                            FormId = 17,
-                            ModuleId = 5,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            FormId = 18,
                             ModuleId = 5,
                             Status = 1
                         },
@@ -3785,6 +3706,34 @@ namespace Entity.Migrations.Postgres
                             Id = 26,
                             FormId = 26,
                             ModuleId = 6,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            FormId = 27,
+                            ModuleId = 7,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            FormId = 28,
+                            ModuleId = 3,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 29,
+                            FormId = 29,
+                            ModuleId = 4,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            FormId = 30,
+                            ModuleId = 4,
                             Status = 1
                         });
                 });
@@ -3985,7 +3934,7 @@ namespace Entity.Migrations.Postgres
                             Phone = 301654987L,
                             SecondLastName = "Castro",
                             SecondName = "Isabel",
-                            Status = 1
+                            Status = 3
                         },
                         new
                         {
@@ -4071,6 +4020,13 @@ namespace Entity.Migrations.Postgres
                             Description = "Solo interactura de forma base",
                             Name = "Acudiente",
                             Status = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Docente que tiene a cargo un grado como su representante",
+                            Name = "Docente director",
+                            Status = 1
                         });
                 });
 
@@ -4122,14 +4078,6 @@ namespace Entity.Migrations.Postgres
                     b.ToTable("rolFormPermission", "security");
 
                     b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FormId = 1,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
                         new
                         {
                             Id = 3,
@@ -4204,14 +4152,6 @@ namespace Entity.Migrations.Postgres
                         },
                         new
                         {
-                            Id = 12,
-                            FormId = 12,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
                             Id = 13,
                             FormId = 13,
                             PermissionId = 1,
@@ -4222,38 +4162,6 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 14,
                             FormId = 14,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 15,
-                            FormId = 15,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 16,
-                            FormId = 16,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 17,
-                            FormId = 17,
-                            PermissionId = 1,
-                            RolId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            FormId = 18,
                             PermissionId = 1,
                             RolId = 1,
                             Status = 1
@@ -4320,6 +4228,38 @@ namespace Entity.Migrations.Postgres
                             FormId = 26,
                             PermissionId = 1,
                             RolId = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            FormId = 27,
+                            PermissionId = 1,
+                            RolId = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 29,
+                            FormId = 28,
+                            PermissionId = 1,
+                            RolId = 5,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            FormId = 29,
+                            PermissionId = 1,
+                            RolId = 5,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 31,
+                            FormId = 30,
+                            PermissionId = 1,
+                            RolId = 5,
                             Status = 1
                         });
                 });
@@ -4580,20 +4520,16 @@ namespace Entity.Migrations.Postgres
                         .IsRequired()
                         .HasConstraintName("fk_ads_agenda_day");
 
-                    b.HasOne("Entity.Model.Business.Student", null)
-                        .WithMany("AgendaDayStudent")
-                        .HasForeignKey("StudentId");
-
-                    b.HasOne("Entity.Model.Business.Student", "Students")
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
+                    b.HasOne("Entity.Model.Business.Student", "Student")
+                        .WithMany("AgendaDayStudents")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
-                        .HasConstraintName("fk_ads_student");
+                        .HasConstraintName("fk_ads_students");
 
                     b.Navigation("AgendaDay");
 
-                    b.Navigation("Students");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Entity.Model.Business.Attendants", b =>
@@ -4601,7 +4537,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.Person", "Person")
                         .WithMany("Attendants")
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_attendants_person");
 
@@ -4609,7 +4545,6 @@ namespace Entity.Migrations.Postgres
                         .WithMany("Attendants")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
                         .HasConstraintName("fk_attendants_student");
 
                     b.Navigation("Person");
@@ -4693,7 +4628,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Business.Teacher", "Teacher")
                         .WithMany("GroupDirector")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_group_director_teacher");
 
@@ -4734,7 +4669,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Groups");
@@ -4789,7 +4724,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_teacher_person");
 
@@ -4938,9 +4873,9 @@ namespace Entity.Migrations.Postgres
             modelBuilder.Entity("Entity.Model.Security.User", b =>
                 {
                     b.HasOne("Entity.Model.Security.Person", "Person")
-                        .WithOne()
+                        .WithOne("User")
                         .HasForeignKey("Entity.Model.Security.User", "PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Person");
@@ -4957,7 +4892,7 @@ namespace Entity.Migrations.Postgres
                     b.HasOne("Entity.Model.Security.User", "User")
                         .WithMany("UserRol")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Rol");
@@ -5002,7 +4937,7 @@ namespace Entity.Migrations.Postgres
 
             modelBuilder.Entity("Entity.Model.Business.Student", b =>
                 {
-                    b.Navigation("AgendaDayStudent");
+                    b.Navigation("AgendaDayStudents");
 
                     b.Navigation("Attendants");
 
@@ -5100,6 +5035,9 @@ namespace Entity.Migrations.Postgres
                     b.Navigation("Attendants");
 
                     b.Navigation("DataBasic")
+                        .IsRequired();
+
+                    b.Navigation("User")
                         .IsRequired();
                 });
 

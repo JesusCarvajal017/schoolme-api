@@ -35,31 +35,29 @@ namespace Entity.ConfigModels.Security
             builder.MapBaseModel();
 
             builder.HasData(
+
+                 // REPORTES
+                 new Form { Id = 27, Name = "Panel", Description = "Informacion estadisticas del sistema", Path = "panel", Order = 1 },
+
                  // ADMINISTRACIÓN
-                 new Form { Id = 1, Name = "Todos", Description = "Vista de todos los registros administrativos", Path = "todos", Order = 1 },
-                 new Form { Id = 2, Name = "Administrativos", Description = "Gestión de personal administrativo", Path = "administrativos", Order = 2 },
                  new Form { Id = 3, Name = "Docentes", Description = "Gestión de docentes", Path = "docentes", Order = 3 },
                  new Form { Id = 4, Name = "Niños", Description = "Gestión de estudiantes", Path = "ninos", Order = 4 },
                  new Form { Id = 5, Name = "Acudientes", Description = "Gestión de acudientes", Path = "acudientes", Order = 5 },
 
                  // ACADÉMICO
-                 new Form { Id = 6, Name = "Aulas", Description = "Gestión de aulas", Path = "aulas", Order = 1 },
+                 new Form { Id = 6, Name = "Matricula", Description = "Gestión de aulas", Path = "aulas", Order = 1 },
                  new Form { Id = 7, Name = "Agrupación", Description = "Gestión de agrupaciones", Path = "agrupación", Order = 2 },
                  new Form { Id = 8, Name = "Director de Grupo", Description = "Asignación de directores de grupo", Path = "directorGrupo", Order = 3 },
                  new Form { Id = 9, Name = "Carga Académica", Description = "Gestión de carga académica", Path = "cargaAcademica", Order = 4 },
 
                  // AGENDA
-                 new Form { Id = 10, Name = "Composición", Description = "Gestión de composiciones", Path = "composicion", Order = 1 },
+                 new Form { Id = 10, Name = "Preguntas", Description = "Creacion de preguntas globales", Path = "composicion", Order = 1 },
                  new Form { Id = 11, Name = "Agendas", Description = "Gestión de agendas", Path = "agendas", Order = 2 },
-                 new Form { Id = 12, Name = "Asignación", Description = "Asignación de agendas", Path = "asignacion", Order = 3 },
 
                  // CONFIGURACIÓN
                  new Form { Id = 13, Name = "Grados", Description = "Gestión de grados", Path = "grados", Order = 1 },
                  new Form { Id = 14, Name = "Grupos", Description = "Gestión de grupos", Path = "grupos", Order = 2 },
-                 new Form { Id = 15, Name = "Tipo Identificación", Description = "Gestión de tipos de identificación", Path = "tipoIdentificacion", Order = 3 },
                  new Form { Id = 16, Name = "EPS", Description = "Gestión de EPS", Path = "eps", Order = 4 },
-                 new Form { Id = 17, Name = "Municipios", Description = "Gestión de municipios", Path = "municipio", Order = 5 },
-                 new Form { Id = 18, Name = "RH", Description = "Gestión de tipos de sangre", Path = "rh", Order = 6 },
 
                  // SEGURIDAD
                  new Form { Id = 19, Name = "Roles", Description = "Gestión de roles de usuario", Path = "roles", Order = 1 },
@@ -69,7 +67,15 @@ namespace Entity.ConfigModels.Security
                  new Form { Id = 23, Name = "Asignación Roles", Description = "Asignación de roles a usuarios", Path = "asignacionRoles", Order = 5 },
                  new Form { Id = 24, Name = "Asignación Módulos", Description = "Asignación de módulos a roles", Path = "asiganacionModulos", Order = 6 },
                  new Form { Id = 25, Name = "Asignación de Permisos", Description = "Asignación de permisos a roles", Path = "asignacionPermisos", Order = 7 },
-                 new Form { Id = 26, Name = "Usuarios", Description = "Gestión de usuarios", Path = "usuarios", Order = 8 }
+                 new Form { Id = 26, Name = "Usuarios", Description = "Gestión de usuarios", Path = "usuarios", Order = 8 },
+
+
+                 //Rol -> docente director
+                 new Form { Id = 28, Name = "Carga Académica", Description = "Gestión de carga académica", Path = "mihorario", Order = 1 },
+                 new Form { Id = 29, Name = "Registro de agenda", Description = "Gestion de agenda diaria", Path = "dashagenda", Order = 1 },
+                 new Form { Id = 30, Name = "Observaciones", Description = "Gestion de observaciones diaria", Path = "observacion", Order = 2 }
+
+
              );
 
         }
