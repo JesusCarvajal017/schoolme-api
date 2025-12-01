@@ -7,5 +7,7 @@ namespace Business.Interfaces.Querys
     {
         Task<IEnumerable<AcademicLoadReadDto>> GetTeacherLoad(int IdUser, int? status);
         Task<IEnumerable<LoadByDayReadDto>> GetTeacherLoadDay(int idTeacher, int? status,int? day );
+
+        Task<List<TeacherTodayClassDto>> GetTodayLoadsByTeacherAsync(int teacherId, CancellationToken ct = default);
     }
 }

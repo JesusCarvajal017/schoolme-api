@@ -58,6 +58,8 @@ namespace Entity.Context.Main
         public DbSet<Tutition> Tutition { get; set; }
         public DbSet<CompositionAgendaQuestion> CompositionAgendaQuestion { get; set; }
         public DbSet<AgendaDayStudent> AgendaDayStudent { get; set; }
+        public DbSet<StudentAnswer> StudentAnswer { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

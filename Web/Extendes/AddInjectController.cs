@@ -153,6 +153,10 @@ namespace Web.Extendes
             services.AddScoped<IQueryAgendaStudentDayServices, AgendaDayStudentQueryBusiness>();
 
 
+            services.AddScoped<IQueryTeacherObservation, TeacherObservationQueryData>();
+            services.AddScoped<IQueryTeacherObservationServices, TeacherObservationQueryBusiness>();
+
+
             // ================ COMMANDS ================
             services.AddScoped(
                 typeof(ICommands<User>),

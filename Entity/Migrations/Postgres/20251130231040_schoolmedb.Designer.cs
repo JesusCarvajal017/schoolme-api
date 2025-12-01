@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251128051809_schoolmedb")]
+    [Migration("20251130231040_schoolmedb")]
     partial class schoolmedb
     {
         /// <inheritdoc />
@@ -3934,7 +3934,7 @@ namespace Entity.Migrations.Postgres
                             Phone = 301654987L,
                             SecondLastName = "Castro",
                             SecondName = "Isabel",
-                            Status = 1
+                            Status = 3
                         },
                         new
                         {

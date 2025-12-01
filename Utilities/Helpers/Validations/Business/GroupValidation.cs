@@ -11,11 +11,6 @@ namespace Utilities.Helpers.Validations.Business
             RuleSet("Full", () =>
             {
                 RuleFor(x => x.Name).StandardName(min: 4, max: 15);
-                //RuleFor(x => x.AgendaId)
-                //    .GreaterThan(0)
-                //    .WithMessage("El id de la agenda no es valido.")
-                //    .NotEmpty().WithMessage("El id de la agenda es obligatorio");
-
             });
 
             // Reglas para PATCH: solo valida si el campo viene presente

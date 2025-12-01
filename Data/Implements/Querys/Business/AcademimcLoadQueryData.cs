@@ -1,5 +1,6 @@
 ﻿using Data.Interfaces.Group.Querys;
 using Entity.Context.Main;
+using Entity.Enum;
 using Entity.Model.Business;
 using Entity.Model.Paramters;
 using Microsoft.EntityFrameworkCore;
@@ -118,6 +119,24 @@ namespace Data.Implements.Querys.Business
                 throw;
             }
         }
+
+        // Consulta la materias que dicta en el dia para su observacion
+        public async Task<List<AcademicLoad>> GetLoadsByTeacherAndDayAsync(int teacherId,Days day, CancellationToken ct = default)
+        {
+            return await _dbSet
+                .Where(a => a.TeacherId == teacherId
+                            && a.Days.HasValue
+                            && ((Days)a.Days.Value).HasFlag(day))
+                .Include(a => a.Subject)
+                .Include(a => a.Group)
+                    .ThenInclude(g => g.Grade)
+                .Include(a => a.Group)
+                    .ThenInclude(g => g.AgendaDay)   
+                .AsNoTracking()
+                .ToListAsync(ct);
+        }
+
+
 
 
 

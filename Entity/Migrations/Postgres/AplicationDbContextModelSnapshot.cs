@@ -3931,7 +3931,7 @@ namespace Entity.Migrations.Postgres
                             Phone = 301654987L,
                             SecondLastName = "Castro",
                             SecondName = "Isabel",
-                            Status = 1
+                            Status = 3
                         },
                         new
                         {

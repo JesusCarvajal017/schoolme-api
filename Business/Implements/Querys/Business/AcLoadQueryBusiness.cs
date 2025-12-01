@@ -3,6 +3,7 @@ using Business.Implements.Bases;
 using Business.Interfaces.Querys;
 using Data.Interfaces.Group.Querys;
 using Entity.Dtos.Business.AcademicLoad;
+using Entity.Enum;
 using Entity.Model.Business;
 using Microsoft.Extensions.Logging;
 using Utilities.Helpers.Validations;
@@ -52,7 +53,6 @@ namespace Business.Implements.Querys.Business
             }
         }
 
-
         public virtual async Task<IEnumerable<LoadByDayReadDto>> GetTeacherLoadDay(
             int idTeacher,
             int? status,
@@ -73,7 +73,65 @@ namespace Business.Implements.Querys.Business
             }
         }
 
+        public async Task<List<TeacherTodayClassDto>> GetTodayLoadsByTeacherAsync(int teacherId, CancellationToken ct = default)
+        {
+            var todayFlag = MapDayOfWeekToDays(DateTime.Now.DayOfWeek);
+            var todayDate = DateOnly.FromDateTime(DateTime.Now);
 
+            var loads = await _data.GetLoadsByTeacherAndDayAsync(teacherId, todayFlag, ct);
+
+            var result = new List<TeacherTodayClassDto>();
+
+            foreach (var a in loads)
+            {
+                // 👇 AgendaDay de HOY para ese grupo (puede ser null)
+                var todayAgenda = a.Group.AgendaDay
+                    .FirstOrDefault(ad => ad.Date == todayDate);
+
+                int? agendaDayId = null;
+                var agendaState = AgendaDayStateEnum.NotInitialized;
+
+                if (todayAgenda is not null)
+                {
+                    agendaDayId = todayAgenda.Id;
+
+                    agendaState = todayAgenda.ClosedAt switch
+                    {
+                        not null => AgendaDayStateEnum.Closed,
+                        null => AgendaDayStateEnum.Open,
+                    };
+                }
+
+                result.Add(new TeacherTodayClassDto
+                {
+                    AcademicLoadId = a.Id,
+                    SubjectName = a.Subject.Name,
+                    GroupName = a.Group.Name,
+                    GradeName = a.Group.Grade.Name,
+                    GroupId = a.GroupId,
+
+                    AgendaDayId = agendaDayId,
+                    AgendaState = agendaState,
+                });
+            }
+
+            return result;
+        }
+
+        private Days MapDayOfWeekToDays(DayOfWeek dayOfWeek)
+        {
+            return dayOfWeek switch
+            {
+                DayOfWeek.Monday => Days.Monday,
+                DayOfWeek.Tuesday => Days.Tuesday,
+                DayOfWeek.Wednesday => Days.Wednesday,
+                DayOfWeek.Thursday => Days.Thursday,
+                DayOfWeek.Friday => Days.Friday,
+                DayOfWeek.Saturday => Days.Saturday,
+                DayOfWeek.Sunday => Days.Sunday,
+                _ => Days.None
+            };
+        }
 
 
     }
