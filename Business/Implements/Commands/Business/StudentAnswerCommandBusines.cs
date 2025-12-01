@@ -71,20 +71,21 @@ namespace Business.Implements.Commands.Business
             await _data.RegisterAnswersAsync(entities, ct);
         }
 
+        
         public async Task UpdateAnswersAsync(RegisterStudentAnswersDto dto, CancellationToken ct = default)
         {
-            // 1️⃣ Cargar respuestas existentes
-            var existing = await _queryStudentAsware.GetAnswersByAgendaDayStudentAsync(dto.AgendaDayStudentId, ct);
+            // 1️⃣ Cargar respuestas EXISTENTES (TRACKED)
+            var existing = await _data.GetTrackedByAgendaDayStudentAsync(dto.AgendaDayStudentId, ct);
 
-            // 2️⃣ Convertir lista a diccionario por QuestionId
+            // 2️⃣ Diccionario por QuestionId
             var existingDict = existing.ToDictionary(x => x.QuestionId, x => x);
 
-            // 3️⃣ Recorrer las respuestas nuevas
+            // 3️⃣ Recorrer respuestas nuevas
             foreach (var a in dto.Answers)
             {
                 if (!existingDict.TryGetValue(a.QuestionId, out var answerEntity))
                 {
-                    // 3.1️⃣ No existía → crear
+                    // 3.1️⃣ No existía → crear y AGREGAR AL CONTEXTO
                     answerEntity = new StudentAnswer
                     {
                         AgendaDayStudentId = dto.AgendaDayStudentId,
@@ -93,10 +94,11 @@ namespace Business.Implements.Commands.Business
                         CreatedAt = DateTime.UtcNow,
                     };
 
-                    existing.Add(answerEntity);
+                    _data.Add(answerEntity);        // 👈 ESTA ES LA CLAVE
+                    existingDict[a.QuestionId] = answerEntity;
                 }
 
-                // 3.2️⃣ Actualizar valores del answer
+                // 3.2️⃣ Actualizar valores
                 answerEntity.ValueText = a.ValueText;
                 answerEntity.ValueBool = a.ValueBool;
                 answerEntity.ValueNumber = a.ValueNumber;
@@ -104,10 +106,13 @@ namespace Business.Implements.Commands.Business
                 answerEntity.UpdatedAt = DateTime.UtcNow;
 
                 // 3.3️⃣ Actualizar opciones seleccionadas
-                var oldOptionIds = answerEntity.SelectedOptions.Select(o => o.QuestionOptionId).ToList();
+                var oldOptionIds = answerEntity.SelectedOptions
+                    .Select(o => o.QuestionOptionId)
+                    .ToList();
+
                 var newOptionIds = a.OptionIds ?? new List<int>();
 
-                // Eliminar las que ya no están
+                // Quitar las que ya no están
                 var toRemove = answerEntity.SelectedOptions
                     .Where(o => !newOptionIds.Contains(o.QuestionOptionId))
                     .ToList();
@@ -133,7 +138,7 @@ namespace Business.Implements.Commands.Business
                 }
             }
 
-            // 4️⃣ Guardar todo
+            // 4️⃣ Guardar cambios
             await _data.SaveChangesAsync(ct);
         }
 

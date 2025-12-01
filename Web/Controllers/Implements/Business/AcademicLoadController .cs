@@ -41,6 +41,20 @@ namespace Web.Controllers.Implements.Business
             var result = await _queryAcLoadServices.GetTeacherLoadDay(idTeacher, status, day);
             return Ok(result);
         }
+
+        /// <summary>
+        /// Devuelve las clases que dicta hoy un docente (según su carga académica),
+        /// incluyendo el estado de la AgendaDay del día de hoy para cada grupo.
+        /// </summary>
+        /// GET: api/AcademicLoad/Teacher/5/Today
+        [HttpGet("teacher/{teacherId:int}/today")]
+        public async Task<IActionResult> GetTodayLoadsByTeacher(
+            int teacherId,
+            CancellationToken ct)
+        {
+            var result = await _queryAcLoadServices.GetTodayLoadsByTeacherAsync(teacherId, ct);
+            return Ok(result);
+        }
     }
 
 }

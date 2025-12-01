@@ -1509,7 +1509,7 @@ namespace Entity.Migrations.Postgres
                     { 1, 32, null, null, 1, "Carlos", 0, 100200300L, "Pérez", 300123456L, "García", "Andrés", 1, null },
                     { 2, 25, null, null, 2, "María", 1, 500600700L, "López", 310987654L, "Martínez", "Fernanda", 1, null },
                     { 3, 18, null, null, 3, "Juan", 0, 800900100L, "Rodríguez", 320456789L, "Hernández", "Camilo", 1, null },
-                    { 4, 29, null, null, 1, "Laura", 1, 111222333L, "Moreno", 301654987L, "Castro", "Isabel", 1, null },
+                    { 4, 29, null, null, 1, "Laura", 1, 111222333L, "Moreno", 301654987L, "Castro", "Isabel", 3, null },
                     { 5, 21, null, null, 2, "Santiago", 2, 444555666L, "Ramírez", 312789654L, "Torres", "Esteban", 1, null }
                 });
 

@@ -124,7 +124,8 @@ namespace Entity.ConfigModels.Security
                     //Nation = "Colombia",
                     Phone = 301654987,
                     Gender = GenderEmun.Femenino,
-                    Age = 29
+                    Age = 29,
+                    Status = 3
                 },
                 new Person
                 {

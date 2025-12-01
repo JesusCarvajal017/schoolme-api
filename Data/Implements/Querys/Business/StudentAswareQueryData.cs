@@ -25,9 +25,5 @@ namespace Data.Implements.Querys.Business
                 .ToListAsync(ct);
         }
 
-
-
-
-
     }
 }

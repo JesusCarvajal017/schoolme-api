@@ -37,6 +37,8 @@ namespace Web.Controllers.Implements.Business
             // este método internamente crea o actualiza según existan respuestas previas
             await _command.UpdateAnswersAsync(dto, ct);
 
+            //Console.WriteLine("No se que le esta pasando a este enpoint, no esta funcionando");s
+
             return NoContent();
         }
 
