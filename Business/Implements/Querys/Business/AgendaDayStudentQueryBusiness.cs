@@ -30,7 +30,18 @@ namespace Business.Implements.Querys.Business
             return _mapper.Map<List<AgendaDayStudentListDto>>(items);
         }
 
+        // Metodo de logica de engocio si tiene para confirmar
+        public async Task<List<AgendaConfirmationQueryDto>> GetPendingConfirmationsByStudentAsync(
+            int studentId,
+            CancellationToken ct = default)
+        {
+            var today = DateOnly.FromDateTime(DateTime.Now);
 
+            var entities = await _data.GetPendingConfirmationsByStudentAsync(studentId, today, ct);
 
+            var dtos = _mapper.Map<List<AgendaConfirmationQueryDto>>(entities);
+
+            return dtos;
+        }
     }
 }

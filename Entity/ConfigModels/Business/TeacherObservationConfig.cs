@@ -24,24 +24,20 @@ namespace Entity.ConfigModels.Business
                    .HasColumnName("teacher_id")
                    .IsRequired();
 
+            builder.Property(e => e.AcademicLoadId)
+                   .HasColumnName("academic_load_id");
+
             builder.Property(e => e.AgendaDayStudentId)
                    .HasColumnName("agenda_day_student_id")
                    .IsRequired();
 
             builder.Property(e => e.Text)
                    .HasColumnName("text")
-                   .HasMaxLength(1000)       // ajusta si quieres más
+                   .HasMaxLength(1000)      
                    .IsRequired();
 
             // Auditoría / estado comunes (created_at, updated_at, status, etc.)
             builder.MapBaseModel();
-
-            // Índices
-            //builder.HasIndex(e => e.AgendaDayStudentId)
-            //       .HasDatabaseName("ix_to_agenda_day_student");
-
-            //builder.HasIndex(e => new { e.AgendaDayStudentId, e.TeacherId, e.CreatedAt })
-            //       .HasDatabaseName("ix_to_ads_teacher_created");
 
             // Relaciones
             builder.HasOne(e => e.AgendaDayStudent)
@@ -55,6 +51,13 @@ namespace Entity.ConfigModels.Business
                    .HasForeignKey(e => e.TeacherId)
                    .HasConstraintName("fk_to_teacher")
                    .OnDelete(DeleteBehavior.Restrict); // protege al docente (borrado lógico recomendado)
+
+
+            builder.HasOne(e => e.AcademicLoad)
+                   .WithMany(t => t.TeacherObservations)
+                   .HasForeignKey(e => e.AcademicLoadId)
+                   .HasConstraintName("fk_to_teacher_acadmic_observation")
+                   .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

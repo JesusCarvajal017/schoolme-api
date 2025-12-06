@@ -1000,6 +1000,7 @@ namespace Entity.Migrations.Postgres
                     teacher_id = table.Column<int>(type: "integer", nullable: false),
                     agenda_day_student_id = table.Column<int>(type: "integer", nullable: false),
                     text = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
+                    academic_load_id = table.Column<int>(type: "integer", nullable: true),
                     status = table.Column<int>(type: "integer", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -1020,6 +1021,13 @@ namespace Entity.Migrations.Postgres
                         column: x => x.teacher_id,
                         principalSchema: "business",
                         principalTable: "teacher",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_to_teacher_acadmic_observation",
+                        column: x => x.academic_load_id,
+                        principalSchema: "business",
+                        principalTable: "academic_load",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1149,7 +1157,8 @@ namespace Entity.Migrations.Postgres
                     { 27, null, null, "Informacion estadisticas del sistema", "Panel", 1, "panel", 1, null },
                     { 28, null, null, "Gestión de carga académica", "Carga Académica", 1, "mihorario", 1, null },
                     { 29, null, null, "Gestion de agenda diaria", "Registro de agenda", 1, "dashagenda", 1, null },
-                    { 30, null, null, "Gestion de observaciones diaria", "Observaciones", 2, "observacion", 1, null }
+                    { 30, null, null, "Gestion de observaciones diaria", "Observaciones", 2, "observacion", 1, null },
+                    { 31, null, null, "Agenda de los niños vinculados", "Agendas vinculadas", 1, "confirmacionagenda", 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1297,7 +1306,8 @@ namespace Entity.Migrations.Postgres
                     { 27, null, null, 27, 7, 1, null },
                     { 28, null, null, 28, 3, 1, null },
                     { 29, null, null, 29, 4, 1, null },
-                    { 30, null, null, 30, 4, 1, null }
+                    { 30, null, null, 30, 4, 1, null },
+                    { 31, null, null, 31, 4, 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1541,7 +1551,10 @@ namespace Entity.Migrations.Postgres
                     { 27, null, null, 27, 1, 1, 1, null },
                     { 29, null, null, 28, 1, 5, 1, null },
                     { 30, null, null, 29, 1, 5, 1, null },
-                    { 31, null, null, 30, 1, 5, 1, null }
+                    { 31, null, null, 30, 1, 5, 1, null },
+                    { 32, null, null, 28, 1, 3, 1, null },
+                    { 33, null, null, 30, 1, 3, 1, null },
+                    { 34, null, null, 31, 1, 4, 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1589,7 +1602,7 @@ namespace Entity.Migrations.Postgres
                 values: new object[,]
                 {
                     { 1, null, null, 1, 1, null, 1 },
-                    { 2, null, null, 2, 1, null, 2 },
+                    { 2, null, null, 3, 1, null, 2 },
                     { 3, null, null, 3, 1, null, 3 },
                     { 4, null, null, 2, 1, null, 4 },
                     { 5, null, null, 4, 1, null, 5 }
@@ -1850,6 +1863,12 @@ namespace Entity.Migrations.Postgres
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_teacher_observation_academic_load_id",
+                schema: "business",
+                table: "teacher_observation",
+                column: "academic_load_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_teacher_observation_agenda_day_student_id",
                 schema: "business",
                 table: "teacher_observation",
@@ -1907,10 +1926,6 @@ namespace Entity.Migrations.Postgres
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "academic_load",
-                schema: "business");
-
-            migrationBuilder.DropTable(
                 name: "attendants",
                 schema: "business");
 
@@ -1953,10 +1968,6 @@ namespace Entity.Migrations.Postgres
                 schema: "security");
 
             migrationBuilder.DropTable(
-                name: "subject",
-                schema: "parameters");
-
-            migrationBuilder.DropTable(
                 name: "eps",
                 schema: "parameters");
 
@@ -1993,7 +2004,7 @@ namespace Entity.Migrations.Postgres
                 schema: "business");
 
             migrationBuilder.DropTable(
-                name: "teacher",
+                name: "academic_load",
                 schema: "business");
 
             migrationBuilder.DropTable(
@@ -2017,6 +2028,14 @@ namespace Entity.Migrations.Postgres
 
             migrationBuilder.DropTable(
                 name: "question",
+                schema: "business");
+
+            migrationBuilder.DropTable(
+                name: "subject",
+                schema: "parameters");
+
+            migrationBuilder.DropTable(
+                name: "teacher",
                 schema: "business");
 
             migrationBuilder.DropTable(

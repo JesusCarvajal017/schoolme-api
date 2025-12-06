@@ -8,5 +8,10 @@ namespace Business.Interfaces.Querys
         Task<List<AgendaDayStudentListDto>> GetStudentsByAgendaDayAsync(
            int agendaDayId,
            CancellationToken ct = default);
+
+
+        Task<List<AgendaConfirmationQueryDto>> GetPendingConfirmationsByStudentAsync(
+        int studentId,
+        CancellationToken ct = default);
     }
 }

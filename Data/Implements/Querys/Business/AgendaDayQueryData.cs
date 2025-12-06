@@ -15,12 +15,5 @@ namespace Data.Implements.Querys.Business
             _context = context;
             _logger = logger;
         }
-
-     
-      
-        //public virtual async Task<AgendaDay> 
-
-
-
     }
 }

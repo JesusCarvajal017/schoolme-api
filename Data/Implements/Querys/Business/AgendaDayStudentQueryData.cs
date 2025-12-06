@@ -45,7 +45,32 @@ namespace Data.Implements.Querys.Business
                 .AsNoTracking()
                 .ToListAsync(ct);
         }
+
+        // metodo que consulta si la agenda del estudiante ya esta disponible para poder confirmala
+        public async Task<List<AgendaDayStudent>> GetPendingConfirmationsByStudentAsync(
+        int studentId,
+        DateOnly date,
+        CancellationToken ct = default)
+        {
+            return await _dbSet
+                .Where(x =>
+                    x.StudentId == studentId &&
+                    x.Status == 1 &&                       // activo
+
+                    // aquí pones el estado que signifique "pendiente de confirmación"
+                    x.AgendaDayStudentStatus == 1 &&
+                    x.AgendaDay.Date == date &&
+                    x.AgendaDay.ClosedAt != null)          // agenda cerrada
+                .Include(x => x.AgendaDay)
+                    .ThenInclude(ad => ad.Agenda)
+                .Include(x => x.AgendaDay)
+                    .ThenInclude(ad => ad.Group)
+                .AsNoTracking()
+                .ToListAsync(ct);
+        }
+
+
     }
 
-   
+
 }

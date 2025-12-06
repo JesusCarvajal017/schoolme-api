@@ -32,6 +32,21 @@ namespace Web.Controllers.Implements.Business
             var result = await _query.GetStudentsByAgendaDayAsync(agendaDayId, ct);
             return Ok(result);
         }
+
+
+        /// <summary>
+        /// Obtiene las agendas CERRADAS de HOY que están listas para confirmación
+        /// para un estudiante específico.
+        /// </summary>
+        [HttpGet("Confirmations/Student/{studentId:int}")]
+        public async Task<IActionResult> GetConfirmationsByStudent(
+            int studentId,
+            CancellationToken ct = default)
+        {
+            var result = await _query.GetPendingConfirmationsByStudentAsync(studentId, ct);
+
+            return Ok(result);
+        }
     }
 
 }

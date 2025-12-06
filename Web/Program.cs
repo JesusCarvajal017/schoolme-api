@@ -25,7 +25,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMapperApp();
 
-builder.Services.AddApplicationInsightsTelemetry();
 
 // Configuracion de la base de datos
 builder.Services.AddDb("PgAdmin", builder.Configuration);

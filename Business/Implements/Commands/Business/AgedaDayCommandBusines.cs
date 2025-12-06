@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using Business.Implements.Bases;
 using Business.Interfaces.Querys;
 using Data.Interfaces.Group.Commands;
@@ -24,8 +25,6 @@ namespace Business.Implements.Commands.Business
         {
             _data = data;
         }
-
-
         public async Task CloseAsync(int agendaDayId, CancellationToken ct = default)
         {
             var entity = await _data.GetByIdAsync(agendaDayId, ct);
@@ -37,6 +36,7 @@ namespace Business.Implements.Commands.Business
             }
 
             // si ya está cerrada, no hacemos nada
+            // el estado que decide si colocarle null
             if (entity.ClosedAt != null)
             {
                 _logger.LogInformation("AgendaDay {Id} ya estaba cerrada", agendaDayId);

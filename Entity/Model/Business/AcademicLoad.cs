@@ -12,5 +12,7 @@ namespace Entity.Model.Business
         public  Teacher Teacher { get; set; }
         public  Subject Subject { get; set; }
         public  Groups Group { get; set; }
+
+        public IEnumerable<TeacherObservation> TeacherObservations { get; set; }
     }
 }
