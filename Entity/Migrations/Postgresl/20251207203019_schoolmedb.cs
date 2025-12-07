@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Entity.Migrations.Postgres
+namespace Entity.Migrations.Postgresl
 {
     /// <inheritdoc />
     public partial class schoolmedb : Migration
@@ -1604,7 +1604,7 @@ namespace Entity.Migrations.Postgres
                     { 1, null, null, 1, 1, null, 1 },
                     { 2, null, null, 3, 1, null, 2 },
                     { 3, null, null, 3, 1, null, 3 },
-                    { 4, null, null, 2, 1, null, 4 },
+                    { 4, null, null, 4, 1, null, 4 },
                     { 5, null, null, 4, 1, null, 5 }
                 });
 

@@ -3,20 +3,17 @@ using System;
 using Entity.Context.Main;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Entity.Migrations.Postgres
+namespace Entity.Migrations.Postgresl
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251202201102_schoolmedb")]
-    partial class schoolmedb
+    partial class AplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -4493,7 +4490,7 @@ namespace Entity.Migrations.Postgres
                         new
                         {
                             Id = 4,
-                            RolId = 2,
+                            RolId = 4,
                             Status = 1,
                             UserId = 4
                         },

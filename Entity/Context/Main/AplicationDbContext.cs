@@ -61,6 +61,7 @@ namespace Entity.Context.Main
         public DbSet<StudentAnswer> StudentAnswer { get; set; }
 
         public DbSet<AcademicLoad> AcademicLoad { get; set; }
+        public DbSet<AgendaDay> AgendaDay { get; set; }
 
 
 

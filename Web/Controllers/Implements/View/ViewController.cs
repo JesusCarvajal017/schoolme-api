@@ -1,6 +1,7 @@
 ﻿using Business.Implements.Auth;
 using Data.Implements.View;
 using Entity.Dtos.Security.Auth;
+using Entity.Dtos.View;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.Exceptions;
 
@@ -68,6 +69,17 @@ namespace Web.Controllers.Implements.View
                 _logger.LogError("Error al consultar la informacion del los registros");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error interno consultado los registros");
             }
+        }
+
+
+        /// <summary>
+        /// Devuelve todo el dashboard (pie + barras + línea) en un solo objeto.
+        /// </summary>
+        [HttpGet("dasboard")]
+        public async Task<ActionResult<DashboardDto>> GetDashboard()
+        {
+            var dto = await _data.GetDashboardAsync();
+            return Ok(dto);
         }
 
     }
