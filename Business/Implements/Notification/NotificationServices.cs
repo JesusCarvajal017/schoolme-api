@@ -2,7 +2,6 @@
 using Entity.Model.Notification;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Text.Json;
 using Utilities.SignalR.Implements;
 using Utilities.SignalR.Interfaces;

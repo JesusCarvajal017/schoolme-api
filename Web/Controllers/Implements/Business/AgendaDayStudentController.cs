@@ -47,6 +47,23 @@ namespace Web.Controllers.Implements.Business
 
             return Ok(result);
         }
+
+
+        /// <summary>
+        /// Sincroniza los estudiantes actuales del grupo con la AgendaDay.
+        /// Crea AgendaDayStudent faltantes. NO borra nada.
+        /// </summary>
+        [HttpPost("{agendaDayId:int}/sync-students")]
+        public async Task<IActionResult> SyncStudents(int agendaDayId, CancellationToken ct)
+        {
+            await _query.SyncAgendaDayStudentsAsync(agendaDayId, ct);
+
+            return Ok(new
+            {
+                message = "Sincronización completada correctamente.",
+                agendaDayId
+            });
+        }
     }
 
 }

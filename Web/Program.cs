@@ -70,7 +70,7 @@ await app.MigrateDatabaseAsync<AplicationDbContext>();
 // descripcion de errores
 app.UseMiddleware<ProblemDetailsMiddleware>();
 
-app.MapHub<NotificationHub>("/hubs/notifications");
+
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
@@ -90,6 +90,9 @@ app.UseOutputCache();
 
 app.UseHttpsRedirection();
 app.UseCors();
+
+app.MapHub<NotificationHub>("/hubs/notifications");
+
 app.UseAuthorization();
 
 app.MapControllers();

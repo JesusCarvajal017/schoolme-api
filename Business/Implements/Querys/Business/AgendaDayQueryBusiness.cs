@@ -25,7 +25,7 @@ namespace Business.Implements.Querys.Business
         }
 
         public async Task<List<AgendaDayAdminListDto>> GetTodayAgendaDaysAsync(
-        CancellationToken ct = default)
+            CancellationToken ct = default)
         {
             var today = DateOnly.FromDateTime(DateTime.Now);
 
