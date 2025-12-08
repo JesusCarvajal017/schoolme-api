@@ -75,7 +75,8 @@ namespace Entity.ConfigModels.Security
                     new RolFormPermission { Id = 32, RolId = 3, FormId = 28, PermissionId = 1, Status = 1 },
                     new RolFormPermission { Id = 33, RolId = 3, FormId = 30, PermissionId = 1, Status = 1 },
 
-                    new RolFormPermission { Id = 34, RolId = 4, FormId = 31, PermissionId = 1, Status = 1 }
+                    new RolFormPermission { Id = 34, RolId = 4, FormId = 31, PermissionId = 1, Status = 1 }, 
+                    new RolFormPermission { Id = 35, RolId = 1, FormId = 32, PermissionId = 1, Status = 1 }
 
            );
         }

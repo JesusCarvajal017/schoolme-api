@@ -9,10 +9,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Entity.Migrations.Postgresl
+namespace Entity.Migrations.Postgres
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251207203019_schoolmedb")]
+    [Migration("20251208184015_schoolmedb")]
     partial class schoolmedb
     {
         /// <inheritdoc />
@@ -3411,6 +3411,15 @@ namespace Entity.Migrations.Postgresl
                             Order = 1,
                             Path = "confirmacionagenda",
                             Status = 1
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Description = "Administracion de agendas diarias",
+                            Name = "Visor",
+                            Order = 3,
+                            Path = "visor",
+                            Status = 1
                         });
                 });
 
@@ -3755,6 +3764,13 @@ namespace Entity.Migrations.Postgresl
                         {
                             Id = 31,
                             FormId = 31,
+                            ModuleId = 4,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 32,
+                            FormId = 32,
                             ModuleId = 4,
                             Status = 1
                         });
@@ -4306,6 +4322,14 @@ namespace Entity.Migrations.Postgresl
                             FormId = 31,
                             PermissionId = 1,
                             RolId = 4,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 35,
+                            FormId = 32,
+                            PermissionId = 1,
+                            RolId = 1,
                             Status = 1
                         });
                 });

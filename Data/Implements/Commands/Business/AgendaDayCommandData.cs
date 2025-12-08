@@ -29,5 +29,42 @@ namespace Data.Implements.Commands.Business
             await _context.SaveChangesAsync(ct);
         }
 
+        public async Task ReopenAgendaDayAsync(int agendaDayId, CancellationToken ct = default)
+        {
+            var agendaDay = await _context.AgendaDay
+                .Include(ad => ad.AgendaDayStudents)
+                .FirstOrDefaultAsync(ad => ad.Id == agendaDayId, ct);
+
+            if (agendaDay is null)
+            {
+                _logger.LogWarning("No se encontró AgendaDay con Id {AgendaDayId} para reabrir.", agendaDayId);
+                return;
+            }
+
+            // Solo tiene sentido reabrir si estaba cerrada
+            if (agendaDay.ClosedAt == null)
+            {
+                _logger.LogInformation("AgendaDay {AgendaDayId} ya se encuentra abierta.", agendaDayId);
+                return;
+            }
+
+            agendaDay.ClosedAt = null;
+            agendaDay.UpdatedAt = DateTime.UtcNow;
+
+            foreach (var ads in agendaDay.AgendaDayStudents)
+            {
+                ads.Status = 1; 
+                ads.UpdatedAt = DateTime.UtcNow;
+            }
+
+            await _context.SaveChangesAsync(ct);
+
+            _logger.LogInformation(
+                "AgendaDay {AgendaDayId} fue reabierta y se resetearon {Count} AgendaDayStudent.",
+                agendaDayId,
+                agendaDay.AgendaDayStudents.Count);
+        }
     }
+
+
 }

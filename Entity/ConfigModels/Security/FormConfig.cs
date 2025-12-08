@@ -75,7 +75,9 @@ namespace Entity.ConfigModels.Security
                  new Form { Id = 29, Name = "Registro de agenda", Description = "Gestion de agenda diaria", Path = "dashagenda", Order = 1 },
                  new Form { Id = 30, Name = "Observaciones", Description = "Gestion de observaciones diaria", Path = "observacion", Order = 2 },
 
-                 new Form { Id = 31, Name = "Agendas vinculadas", Description = "Agenda de los niños vinculados", Path = "confirmacionagenda", Order = 1 }
+                 new Form { Id = 31, Name = "Agendas vinculadas", Description = "Agenda de los niños vinculados", Path = "confirmacionagenda", Order = 1 },
+                 new Form { Id = 32, Name = "Visor", Description = "Administracion de agendas diarias", Path = "visor", Order = 3 }
+
 
              );
 

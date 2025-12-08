@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Entity.Migrations.Postgresl
+namespace Entity.Migrations.Postgres
 {
     /// <inheritdoc />
     public partial class schoolmedb : Migration
@@ -1158,7 +1158,8 @@ namespace Entity.Migrations.Postgresl
                     { 28, null, null, "Gestión de carga académica", "Carga Académica", 1, "mihorario", 1, null },
                     { 29, null, null, "Gestion de agenda diaria", "Registro de agenda", 1, "dashagenda", 1, null },
                     { 30, null, null, "Gestion de observaciones diaria", "Observaciones", 2, "observacion", 1, null },
-                    { 31, null, null, "Agenda de los niños vinculados", "Agendas vinculadas", 1, "confirmacionagenda", 1, null }
+                    { 31, null, null, "Agenda de los niños vinculados", "Agendas vinculadas", 1, "confirmacionagenda", 1, null },
+                    { 32, null, null, "Administracion de agendas diarias", "Visor", 3, "visor", 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1307,7 +1308,8 @@ namespace Entity.Migrations.Postgresl
                     { 28, null, null, 28, 3, 1, null },
                     { 29, null, null, 29, 4, 1, null },
                     { 30, null, null, 30, 4, 1, null },
-                    { 31, null, null, 31, 4, 1, null }
+                    { 31, null, null, 31, 4, 1, null },
+                    { 32, null, null, 32, 4, 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1554,7 +1556,8 @@ namespace Entity.Migrations.Postgresl
                     { 31, null, null, 30, 1, 5, 1, null },
                     { 32, null, null, 28, 1, 3, 1, null },
                     { 33, null, null, 30, 1, 3, 1, null },
-                    { 34, null, null, 31, 1, 4, 1, null }
+                    { 34, null, null, 31, 1, 4, 1, null },
+                    { 35, null, null, 32, 1, 1, 1, null }
                 });
 
             migrationBuilder.InsertData(

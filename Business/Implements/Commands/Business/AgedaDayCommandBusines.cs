@@ -53,6 +53,13 @@ namespace Business.Implements.Commands.Business
             _logger.LogInformation("AgendaDay {Id} cerrada correctamente", agendaDayId);
         }
 
+        public async Task ReopenAgendaDayAsync(int agendaDayId, CancellationToken ct = default)
+        {
+            _logger.LogInformation("Reabriendo AgendaDay {AgendaDayId}", agendaDayId);
+
+            await _data.ReopenAgendaDayAsync(agendaDayId, ct);
+        }
+
 
 
     }

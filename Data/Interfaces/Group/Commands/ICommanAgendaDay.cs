@@ -6,5 +6,7 @@ namespace Data.Interfaces.Group.Commands
     {
         Task<AgendaDay?> GetByIdAsync(int id, CancellationToken ct = default);
         Task SaveChangesAsync(CancellationToken ct = default);
+
+        Task ReopenAgendaDayAsync(int agendaDayId, CancellationToken ct = default);
     }
 }
