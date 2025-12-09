@@ -1,6 +1,7 @@
 ﻿using Data.Interfaces.Group.Querys;
 using Entity.Context.Main;
 using Entity.Model.Business;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Data.Implements.Querys.Business
@@ -16,11 +17,18 @@ namespace Data.Implements.Querys.Business
             _logger = logger;
         }
 
-     
-      
-        //public virtual async Task<AgendaDay> 
-
-
-
+        public async Task<List<AgendaDay>> GetByDateAsync(
+            DateOnly date,
+            CancellationToken ct = default)
+        {
+            return await _dbSet
+                .Where(a =>
+                    a.Date == date &&
+                    a.Status == 1)                  
+                .Include(a => a.Agenda)
+                .Include(a => a.Group)
+                .AsNoTracking()
+                .ToListAsync(ct);
+        }
     }
 }

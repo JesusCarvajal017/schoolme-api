@@ -8,5 +8,11 @@ namespace Data.Interfaces.Group.Querys
 
         Task<List<AgendaDayStudentListItem>> StudentsByAgendaDayAsync(int agendaDayId,
         CancellationToken ct = default);
+
+        // metodo de busqueda de agenda del estudiante con agenda lista para confirmar (confirmacion agenda)
+        Task<List<AgendaDayStudent>> GetPendingConfirmationsByStudentAsync(
+        int studentId,
+        DateOnly date,
+        CancellationToken ct = default);
     }
 }

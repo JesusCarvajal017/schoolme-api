@@ -17,16 +17,16 @@ namespace Data.Implements.Querys.Business
             _logger = logger;
         }
 
-        public async Task<TeacherObservation> QueryObservationStudent(int agendaStudentDayId)
+        public async Task<TeacherObservation?> QueryObservationStudent(int agendaStudentDayId, int academicLoadId, CancellationToken ct = default)
         {
             try
             {
-                var query = await _dbSet
-                  .AsNoTracking()
-                  .FirstOrDefaultAsync(e => e.AgendaDayStudentId == agendaStudentDayId); ;
-
-                return query;
-
+                return await _dbSet
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(e =>
+                        e.AgendaDayStudentId == agendaStudentDayId &&
+                        e.AcademicLoadId == academicLoadId, 
+                        ct);
             }
             catch (Exception ex)
             {
@@ -34,6 +34,22 @@ namespace Data.Implements.Querys.Business
                 return null;
             }
 
+        }
+
+        public async Task<List<TeacherObservation>> GetByAgendaDayStudentAsync(int agendaDayStudentId, CancellationToken ct = default)
+        {
+            return await _dbSet
+                .Where(o => o.AgendaDayStudentId == agendaDayStudentId)
+                .Include(o => o.Teacher)
+                    .ThenInclude(t => t.Person)
+                .Include(o => o.AgendaDayStudent)
+                    .ThenInclude(ads => ads.AgendaDay)
+                        .ThenInclude(ad => ad.Group)
+                            .ThenInclude(g => g.Grade)
+                .Include(o => o.AcademicLoad)              
+                    .ThenInclude(al => al.Subject)       
+                .AsNoTracking()
+                .ToListAsync(ct);
         }
     }
 }

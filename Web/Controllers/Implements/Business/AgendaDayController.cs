@@ -15,12 +15,14 @@ namespace Web.Controllers.Implements.Business
     {
 
         private readonly ICommandAgedaDayServices _command;
+        private readonly IQueryAgendaDayServices _query;
         public AgendaDayController(
-            IQueryServices<AgendaDay, AgendaDayDto> q,
+            IQueryAgendaDayServices q,
             ICommandAgedaDayServices c)
           : base(q, c) 
         {
             _command = c;
+            _query = q;
         }
 
         // POST api/AgendaDay/{agendaDayId}/close
@@ -30,6 +32,28 @@ namespace Web.Controllers.Implements.Business
             CancellationToken ct)
         {
             await _command.CloseAsync(agendaDayId, ct);
+            return NoContent();
+        }
+
+
+        // GET api/AgendaDay/Today
+        [HttpGet("Today")]
+        public async Task<IActionResult> GetTodayAgendaDays(CancellationToken ct)
+        {
+            var result = await _query.GetTodayAgendaDaysAsync(ct);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Reabre una AgendaDay: pone ClosedAt en null
+        /// y resetea AgendaDayStudentStatus = 1 para todos los estudiantes de esa agenda.
+        /// </summary>
+        [HttpPut("{agendaDayId:int}/Reopen")]
+        public async Task<IActionResult> ReopenAgendaDay(
+            int agendaDayId,
+            CancellationToken ct)
+        {
+            await _command.ReopenAgendaDayAsync(agendaDayId, ct);
             return NoContent();
         }
 

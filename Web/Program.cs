@@ -1,6 +1,7 @@
 ﻿using DotNetEnv;
 using Entity.Context.Main;
 using Entity.Dtos.Services;
+using Microsoft.AspNetCore.SignalR;
 using Utilities.AlmacenadorArchivos.implementes;
 using Utilities.AlmacenadorArchivos.Interface;
 using Utilities.Helpers;
@@ -25,7 +26,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMapperApp();
 
-builder.Services.AddApplicationInsightsTelemetry();
 
 // Configuracion de la base de datos
 builder.Services.AddDb("PgAdmin", builder.Configuration);
@@ -64,6 +64,9 @@ builder.Services.Configure<SmtpOptions>(
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddSingleton<IEmailTemplateRenderer, RazorLightEmailTemplateRenderer>(); // Template
 
+builder.Services.AddSingleton<IUserIdProvider, JwtUserIdProvider>();
+
+
 var app = builder.Build();
 
 await app.MigrateDatabaseAsync<AplicationDbContext>();
@@ -71,7 +74,7 @@ await app.MigrateDatabaseAsync<AplicationDbContext>();
 // descripcion de errores
 app.UseMiddleware<ProblemDetailsMiddleware>();
 
-app.MapHub<NotificationHub>("/hubs/notifications");
+
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
@@ -91,6 +94,9 @@ app.UseOutputCache();
 
 app.UseHttpsRedirection();
 app.UseCors();
+
+app.MapHub<NotificationHub>("/hubs/notifications");
+
 app.UseAuthorization();
 
 app.MapControllers();
