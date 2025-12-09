@@ -51,7 +51,13 @@ namespace Entity.ConfigModels.Business
 
             builder.HasData
             (
-               new Student { Id= 1,Status = 1, PersonId= 3 }
+               new Student { Id= 1,Status = 1, PersonId= 3 },
+               new Student { Id = 2, Status = 1, PersonId = 6 },
+               new Student { Id = 3, Status = 1, PersonId = 7 },
+               new Student { Id = 4, Status = 1, PersonId = 8 },
+               new Student { Id = 5, Status = 1, PersonId = 9 },
+               new Student { Id = 6, Status = 1, PersonId = 10 },
+               new Student { Id = 7, Status = 1, PersonId = 11 }
             );
         }
     }

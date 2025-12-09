@@ -60,7 +60,7 @@ namespace Entity.ConfigModels.Security
                 {
                     Id = 1,
                     Photo = "./icons/default.png",
-                    Email = "ejemplo1@gmail.com",
+                    Email = "administrador@gmail.com",
                     Password = "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.",
                     PersonId = 1
                 },
@@ -68,7 +68,7 @@ namespace Entity.ConfigModels.Security
                 {
                     Id = 2,
                     Photo = "./icons/default.png",
-                    Email = "ejemplo2@gmail.com",
+                    Email = "docente@gmail.com",
                     Password = "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.",
                     PersonId = 2
                 },
@@ -84,7 +84,7 @@ namespace Entity.ConfigModels.Security
                 {
                     Id = 4,
                     Photo = "./icons/default.png",
-                    Email = "ejemplo4@gmail.com",
+                    Email = "acudiente@gmail.com",
                     Password = "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.",
                     PersonId = 4
                 },
@@ -96,6 +96,7 @@ namespace Entity.ConfigModels.Security
                     Password = "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.",
                     PersonId = 5
                 }
+
             );
 
         }

@@ -321,9 +321,9 @@ namespace Entity.Migrations.Postgres
                     DocumentTypeId = table.Column<int>(type: "integer", nullable: false),
                     identification = table.Column<long>(type: "bigint", nullable: false),
                     fisrtName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    secondName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    secondName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     lastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    secondLastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    secondLastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     phone = table.Column<long>(type: "bigint", nullable: false),
                     gender = table.Column<int>(type: "integer", nullable: false),
                     age = table.Column<int>(type: "integer", nullable: false),
@@ -1518,11 +1518,17 @@ namespace Entity.Migrations.Postgres
                 columns: new[] { "id", "age", "created_at", "deleted_at", "DocumentTypeId", "fisrtName", "gender", "identification", "lastName", "phone", "secondLastName", "secondName", "status", "updated_at" },
                 values: new object[,]
                 {
-                    { 1, 32, null, null, 1, "Carlos", 0, 100200300L, "Pérez", 300123456L, "García", "Andrés", 1, null },
-                    { 2, 25, null, null, 2, "María", 1, 500600700L, "López", 310987654L, "Martínez", "Fernanda", 1, null },
-                    { 3, 18, null, null, 3, "Juan", 0, 800900100L, "Rodríguez", 320456789L, "Hernández", "Camilo", 1, null },
-                    { 4, 29, null, null, 1, "Laura", 1, 111222333L, "Moreno", 301654987L, "Castro", "Isabel", 3, null },
-                    { 5, 21, null, null, 2, "Santiago", 2, 444555666L, "Ramírez", 312789654L, "Torres", "Esteban", 1, null }
+                    { 1, 32, null, null, 1, "Carlos", 0, 100000001L, "Pérez", 300123456L, "García", "Andrés", 1, null },
+                    { 2, 25, null, null, 2, "María", 1, 10000002L, "López", 310987654L, "Martínez", "Fernanda", 1, null },
+                    { 3, 18, null, null, 3, "Juan", 0, 10000003L, "Rodríguez", 320456789L, "Hernández", "Camilo", 1, null },
+                    { 4, 29, null, null, 1, "Laura", 1, 10000004L, "Moreno", 301654987L, "Castro", "Isabel", 3, null },
+                    { 5, 21, null, null, 2, "Santiago", 2, 10000005L, "Ramírez", 312789654L, "Torres", "Esteban", 1, null },
+                    { 6, 29, null, null, 1, "Sebastian", 0, 10000006L, "Perdomo", 3000000001L, "Castro", "Jose", 1, null },
+                    { 7, 29, null, null, 1, "Ashley", 1, 10000007L, "Buitrago", 3000000002L, "Uran", "Sofia", 1, null },
+                    { 8, 29, null, null, 1, "Karol", 1, 10000008L, "Pastrana", 3000000003L, "Borrero", null, 1, null },
+                    { 9, 29, null, null, 1, "Lauriano", 1, 10000009L, "Robledo", 3000000004L, "Narvaez", "Jose", 1, null },
+                    { 10, 29, null, null, 1, "Misael", 0, 10000010L, "Borbon", 3000000005L, "Murcia", null, 1, null },
+                    { 11, 29, null, null, 1, "Wilson", 0, 10000011L, "Guevara", 3000000006L, "Perez", null, 1, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1577,7 +1583,16 @@ namespace Entity.Migrations.Postgres
                 schema: "business",
                 table: "student",
                 columns: new[] { "id", "created_at", "deleted_at", "group_id", "person_id", "status", "updated_at" },
-                values: new object[] { 1, null, null, null, 3, 1, null });
+                values: new object[,]
+                {
+                    { 1, null, null, null, 3, 1, null },
+                    { 2, null, null, null, 6, 1, null },
+                    { 3, null, null, null, 7, 1, null },
+                    { 4, null, null, null, 8, 1, null },
+                    { 5, null, null, null, 9, 1, null },
+                    { 6, null, null, null, 10, 1, null },
+                    { 7, null, null, null, 11, 1, null }
+                });
 
             migrationBuilder.InsertData(
                 schema: "business",
@@ -1591,10 +1606,10 @@ namespace Entity.Migrations.Postgres
                 columns: new[] { "id", "created_at", "deleted_at", "email", "password", "person_id", "photo", "status", "updated_at" },
                 values: new object[,]
                 {
-                    { 1, null, null, "ejemplo1@gmail.com", "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.", 1, "./icons/default.png", 1, null },
-                    { 2, null, null, "ejemplo2@gmail.com", "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.", 2, "./icons/default.png", 1, null },
+                    { 1, null, null, "administrador@gmail.com", "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.", 1, "./icons/default.png", 1, null },
+                    { 2, null, null, "docente@gmail.com", "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.", 2, "./icons/default.png", 1, null },
                     { 3, null, null, "ejemplo3@gmail.com", "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.", 3, "./icons/default.png", 1, null },
-                    { 4, null, null, "ejemplo4@gmail.com", "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.", 4, "./icons/default.png", 1, null },
+                    { 4, null, null, "acudiente@gmail.com", "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.", 4, "./icons/default.png", 1, null },
                     { 5, null, null, "ejemplo5@gmail.com", "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.", 5, "./icons/default.png", 1, null }
                 });
 

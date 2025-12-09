@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entity.Migrations.Postgres
 {
     [DbContext(typeof(AplicationDbContext))]
-    [Migration("20251208221534_schoolmedb")]
+    [Migration("20251209092906_schoolmedb")]
     partial class schoolmedb
     {
         /// <inheritdoc />
@@ -652,6 +652,42 @@ namespace Entity.Migrations.Postgres
                         {
                             Id = 1,
                             PersonId = 3,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PersonId = 6,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            PersonId = 7,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            PersonId = 8,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            PersonId = 9,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            PersonId = 10,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            PersonId = 11,
                             Status = 1
                         });
                 });
@@ -3889,13 +3925,11 @@ namespace Entity.Migrations.Postgres
                         .HasColumnName("phone");
 
                     b.Property<string>("SecondLastName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("secondLastName");
 
                     b.Property<string>("SecondName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("secondName");
@@ -3925,7 +3959,7 @@ namespace Entity.Migrations.Postgres
                             DocumentTypeId = 1,
                             FisrtName = "Carlos",
                             Gender = 0,
-                            Identification = 100200300L,
+                            Identification = 100000001L,
                             LastName = "Pérez",
                             Phone = 300123456L,
                             SecondLastName = "García",
@@ -3939,7 +3973,7 @@ namespace Entity.Migrations.Postgres
                             DocumentTypeId = 2,
                             FisrtName = "María",
                             Gender = 1,
-                            Identification = 500600700L,
+                            Identification = 10000002L,
                             LastName = "López",
                             Phone = 310987654L,
                             SecondLastName = "Martínez",
@@ -3953,7 +3987,7 @@ namespace Entity.Migrations.Postgres
                             DocumentTypeId = 3,
                             FisrtName = "Juan",
                             Gender = 0,
-                            Identification = 800900100L,
+                            Identification = 10000003L,
                             LastName = "Rodríguez",
                             Phone = 320456789L,
                             SecondLastName = "Hernández",
@@ -3967,7 +4001,7 @@ namespace Entity.Migrations.Postgres
                             DocumentTypeId = 1,
                             FisrtName = "Laura",
                             Gender = 1,
-                            Identification = 111222333L,
+                            Identification = 10000004L,
                             LastName = "Moreno",
                             Phone = 301654987L,
                             SecondLastName = "Castro",
@@ -3981,11 +4015,92 @@ namespace Entity.Migrations.Postgres
                             DocumentTypeId = 2,
                             FisrtName = "Santiago",
                             Gender = 2,
-                            Identification = 444555666L,
+                            Identification = 10000005L,
                             LastName = "Ramírez",
                             Phone = 312789654L,
                             SecondLastName = "Torres",
                             SecondName = "Esteban",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Age = 29,
+                            DocumentTypeId = 1,
+                            FisrtName = "Sebastian",
+                            Gender = 0,
+                            Identification = 10000006L,
+                            LastName = "Perdomo",
+                            Phone = 3000000001L,
+                            SecondLastName = "Castro",
+                            SecondName = "Jose",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Age = 29,
+                            DocumentTypeId = 1,
+                            FisrtName = "Ashley",
+                            Gender = 1,
+                            Identification = 10000007L,
+                            LastName = "Buitrago",
+                            Phone = 3000000002L,
+                            SecondLastName = "Uran",
+                            SecondName = "Sofia",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Age = 29,
+                            DocumentTypeId = 1,
+                            FisrtName = "Karol",
+                            Gender = 1,
+                            Identification = 10000008L,
+                            LastName = "Pastrana",
+                            Phone = 3000000003L,
+                            SecondLastName = "Borrero",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Age = 29,
+                            DocumentTypeId = 1,
+                            FisrtName = "Lauriano",
+                            Gender = 1,
+                            Identification = 10000009L,
+                            LastName = "Robledo",
+                            Phone = 3000000004L,
+                            SecondLastName = "Narvaez",
+                            SecondName = "Jose",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Age = 29,
+                            DocumentTypeId = 1,
+                            FisrtName = "Misael",
+                            Gender = 0,
+                            Identification = 10000010L,
+                            LastName = "Borbon",
+                            Phone = 3000000005L,
+                            SecondLastName = "Murcia",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Age = 29,
+                            DocumentTypeId = 1,
+                            FisrtName = "Wilson",
+                            Gender = 0,
+                            Identification = 10000011L,
+                            LastName = "Guevara",
+                            Phone = 3000000006L,
+                            SecondLastName = "Perez",
                             Status = 1
                         });
                 });
@@ -4402,7 +4517,7 @@ namespace Entity.Migrations.Postgres
                         new
                         {
                             Id = 1,
-                            Email = "ejemplo1@gmail.com",
+                            Email = "administrador@gmail.com",
                             Password = "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.",
                             PersonId = 1,
                             Photo = "./icons/default.png",
@@ -4412,7 +4527,7 @@ namespace Entity.Migrations.Postgres
                         new
                         {
                             Id = 2,
-                            Email = "ejemplo2@gmail.com",
+                            Email = "docente@gmail.com",
                             Password = "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.",
                             PersonId = 2,
                             Photo = "./icons/default.png",
@@ -4432,7 +4547,7 @@ namespace Entity.Migrations.Postgres
                         new
                         {
                             Id = 4,
-                            Email = "ejemplo4@gmail.com",
+                            Email = "acudiente@gmail.com",
                             Password = "$2a$11$6LpgqG3XuJ3xbpRp4gcJXeL/pQT79cDv6Vt063Tk5c2klWRpNgR0.",
                             PersonId = 4,
                             Photo = "./icons/default.png",

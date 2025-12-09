@@ -74,7 +74,7 @@ namespace Entity.ConfigModels.Security
                 {
                     Id = 1,
                     DocumentTypeId = 1,
-                    Identification = 100200300,
+                    Identification = 100000001,
                     FisrtName = "Carlos",
                     SecondName = "Andrés",
                     LastName = "Pérez",
@@ -88,7 +88,7 @@ namespace Entity.ConfigModels.Security
                 {
                     Id = 2,
                     DocumentTypeId = 2,
-                    Identification = 500600700,
+                    Identification = 10000002,
                     FisrtName = "María",
                     SecondName = "Fernanda",
                     LastName = "López",
@@ -102,7 +102,7 @@ namespace Entity.ConfigModels.Security
                 {
                     Id = 3,
                     DocumentTypeId = 3,
-                    Identification = 800900100,
+                    Identification = 10000003,
                     FisrtName = "Juan",
                     SecondName = "Camilo",
                     LastName = "Rodríguez",
@@ -116,7 +116,7 @@ namespace Entity.ConfigModels.Security
                 {
                     Id = 4,
                     DocumentTypeId = 1,
-                    Identification = 111222333,
+                    Identification = 10000004,
                     FisrtName = "Laura",
                     SecondName = "Isabel",
                     LastName = "Moreno",
@@ -131,7 +131,7 @@ namespace Entity.ConfigModels.Security
                 {
                     Id = 5,
                     DocumentTypeId = 2,
-                    Identification = 444555666,
+                    Identification = 10000005,
                     FisrtName = "Santiago",
                     SecondName = "Esteban",
                     LastName = "Ramírez",
@@ -140,6 +140,85 @@ namespace Entity.ConfigModels.Security
                     Phone = 312789654,
                     Gender = GenderEmun.NoBinario,
                     Age = 21
+                },
+
+                new Person
+                {
+                    Id = 6,
+                    DocumentTypeId = 1,
+                    Identification = 10000006,
+                    FisrtName = "Sebastian",
+                    SecondName = "Jose",
+                    LastName = "Perdomo",
+                    SecondLastName = "Castro",
+                    //Nation = "Colombia",
+                    Phone = 3000000001,
+                    Gender = GenderEmun.Masculino,
+                    Age = 29
+                },
+                new Person
+                {
+                    Id = 7,
+                    DocumentTypeId = 1,
+                    Identification = 10000007,
+                    FisrtName = "Ashley",
+                    SecondName = "Sofia",
+                    LastName = "Buitrago",
+                    SecondLastName = "Uran",
+                    //Nation = "Colombia",
+                    Phone = 3000000002,
+                    Gender = GenderEmun.Femenino,
+                    Age = 29
+                }, new Person
+                {
+                    Id = 8,
+                    DocumentTypeId = 1,
+                    Identification = 10000008,
+                    FisrtName = "Karol",
+                    LastName = "Pastrana",
+                    SecondLastName = "Borrero",
+                    //Nation = "Colombia",
+                    Phone = 3000000003,
+                    Gender = GenderEmun.Femenino,
+                    Age = 29,
+                 
+                }, new Person
+                {
+                    Id = 9,
+                    DocumentTypeId = 1,
+                    Identification = 10000009,
+                    FisrtName = "Lauriano",
+                    SecondName = "Jose",
+                    LastName = "Robledo",
+                    SecondLastName = "Narvaez",
+                    //Nation = "Colombia",
+                    Phone = 3000000004,
+                    Gender = GenderEmun.Femenino,
+                    Age = 29
+                }, new Person
+                {
+                    Id = 10,
+                    DocumentTypeId = 1,
+                    Identification = 10000010,
+                    FisrtName = "Misael",
+                    LastName = "Borbon",
+                    SecondLastName = "Murcia",
+                    //Nation = "Colombia",
+                    Phone = 3000000005,
+                    Gender = GenderEmun.Masculino,
+                    Age = 29
+                }, new Person
+                {
+                    Id = 11, 
+                    DocumentTypeId = 1,
+                    Identification = 10000011,
+                    FisrtName = "Wilson",
+                    LastName = "Guevara",
+                    SecondLastName = "Perez",
+                    //Nation = "Colombia",
+                    Phone = 3000000006,
+                    Gender = GenderEmun.Masculino,
+                    Age = 29
                 }
             );
         }
