@@ -8,7 +8,7 @@ namespace Entity.Dtos.Business.Attendants
         public int? AttendantId { get; set; }
         public string NameAttendant { get; set; }
         public int RelationShipType { get; set; }
-        public int Document {  get; set; }
+        public long Document {  get; set; }
 
 
         public int? StudentId { get; set; }

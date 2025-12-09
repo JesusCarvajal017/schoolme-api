@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 namespace Web.Extendes
@@ -24,6 +25,16 @@ namespace Web.Extendes
             );
             return services;
 
+        }
+    }
+
+
+    public class JwtUserIdProvider : IUserIdProvider
+    {
+        public string? GetUserId(HubConnectionContext connection)
+        {
+            // lee el claim "userId" del JWT
+            return connection.User?.FindFirst("userId")?.Value;
         }
     }
 }

@@ -23,11 +23,25 @@ namespace Web.Controllers.Implements.Business
         }
 
 
-        // Consulta de información completa de la persona
-        [HttpGet("ObservationStudent/{agendaDayStudentId}")]
-        public async Task<IActionResult> GetPersonBasic(int agendaDayStudentId)
+        [HttpGet("ObservationStudent/{agendaDayStudentId}/{academicLoadId}")]
+        public async Task<IActionResult> GetObservation(
+            int agendaDayStudentId,
+            int academicLoadId)
+                {
+                    var result = await _query.GetObservationStudent(
+                        agendaDayStudentId,
+                        academicLoadId);
+
+
+                    return Ok(result);
+        }
+
+        [HttpGet("ByAgendaDayStudent/{agendaDayStudentId:int}")]
+        public async Task<IActionResult> GetByAgendaDayStudent(
+        int agendaDayStudentId,
+        CancellationToken ct)
         {
-            var result = await _query.GetObservationStudent(agendaDayStudentId);
+            var result = await _query.GetByAgendaDayStudentService(agendaDayStudentId, ct);
             return Ok(result);
         }
     }

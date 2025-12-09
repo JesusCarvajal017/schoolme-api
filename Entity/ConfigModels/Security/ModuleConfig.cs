@@ -42,7 +42,7 @@ namespace Entity.ConfigModels.Security
                      Name = "Inicio",
                      Description = "Pantalla principal del sistema",
                      Path = "/dashboard",
-                     Icon = "home", // Usa el nombre del icono que maneje tu UI
+                     Icon = "home",
                      Order = 1,
                      Status = 1
                  },

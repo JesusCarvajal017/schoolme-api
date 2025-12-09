@@ -49,7 +49,7 @@ namespace Data.Implements.Auth
                 var uniqueRol = queryRol.FirstOrDefault();
 
 
-                var token = await _jwt.GeneradorToken(user.PersonId, uniqueRol.RolId);
+                var token = await _jwt.GeneradorToken(user.PersonId, uniqueRol.RolId, user.Id);
 
                 return token;
             }

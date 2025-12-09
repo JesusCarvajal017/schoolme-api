@@ -60,6 +60,9 @@ namespace Entity.Context.Main
         public DbSet<AgendaDayStudent> AgendaDayStudent { get; set; }
         public DbSet<StudentAnswer> StudentAnswer { get; set; }
 
+        public DbSet<AcademicLoad> AcademicLoad { get; set; }
+        public DbSet<AgendaDay> AgendaDay { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

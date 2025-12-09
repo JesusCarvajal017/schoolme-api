@@ -58,7 +58,7 @@ namespace Entity.ConfigModels.Business
                    .WithMany(s => s.StudentAnswers)
                    .HasForeignKey(e => e.AgendaDayStudentId)
                    .HasConstraintName("fk_student_answer_ads")
-                   .OnDelete(DeleteBehavior.Restrict); // Si se elimina el padre los registro hijo deparecen de igual forma
+                   .OnDelete(DeleteBehavior.Cascade); // Si se elimina el padre los registro hijo deparecen de igual forma
 
             builder.HasOne(e => e.Question)
                    .WithMany(e=> e.StudentAnswers) // o .WithMany(q => q.StudentAnswers) si tienes navegación

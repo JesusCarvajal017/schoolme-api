@@ -1,6 +1,7 @@
 ﻿using Entity.Context.Main;
 using Entity.Dtos.Especific;
 using Entity.Dtos.Services;
+using Entity.Dtos.View;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -128,6 +129,175 @@ namespace Data.Implements.View
                 Teachers = queryTeacher
             };
         }
+
+
+        private const int STATUS_ACTIVO = 1;
+        private const int STATUS_CONFIRMADO = 3;
+
+        // 1) PIE: Docentes / Estudiantes / Acudientes
+        public async Task<PieUsuariosDto> GetPieUsuariosAsync()
+        {
+            var docentes = await _context.Teacher
+                .CountAsync(t => t.Status == STATUS_ACTIVO);
+
+            var estudiantes = await _context.Students
+                .CountAsync(s => s.Status == STATUS_ACTIVO);
+
+            // Aquí puedes decidir si contar relaciones o personas únicas.
+            // Ejemplo: número de personas distintas que son acudientes:
+            var acudientes = await _context.Attendants
+                .Where(a => a.Status == STATUS_ACTIVO)
+                .Select(a => a.PersonId)
+                .Distinct()
+                .CountAsync();
+
+            return new PieUsuariosDto
+            {
+                Docentes = docentes,
+                Estudiantes = estudiantes,
+                Acudientes = acudientes
+            };
+        }
+
+        // 2) BARRAS: Agendas creadas vs confirmadas por mes (últimos N meses)
+        public async Task<List<MesAgendasDto>> GetAgendasMensualesAsync(int meses = 7)
+        {
+            // 1) Trabajamos todo con DateOnly, no con DateTime
+            var hoyDateTime = DateTime.UtcNow;                          
+            var hoy = DateOnly.FromDateTime(hoyDateTime);               
+
+            // Primer día del mes actual, menos (meses - 1)
+            var inicioMes = new DateOnly(hoy.Year, hoy.Month, 1)
+                .AddMonths(-(meses - 1));
+
+            // 2.1. Agendas creadas por mes (AgendaDay.Date es DateOnly)
+            var agendasCreadas = await _context.AgendaDay
+                .Where(ad =>
+                    ad.Status == STATUS_ACTIVO &&
+                    ad.Date >= inicioMes &&
+                    ad.Date <= hoy)
+                .GroupBy(ad => new { ad.Date.Year, ad.Date.Month })
+                .Select(g => new
+                {
+                    g.Key.Year,
+                    g.Key.Month,
+                    Count = g.Count()
+                })
+                .ToListAsync();
+
+            // 2.2. Agendas confirmadas por mes (a nivel de estudiante)
+            var agendasConfirmadas = await _context.AgendaDayStudent
+                .Where(ads =>
+                    ads.Status == STATUS_ACTIVO &&
+                    ads.AgendaDay != null &&
+                    ads.AgendaDay.Status == STATUS_ACTIVO &&
+                    ads.AgendaDay.Date >= inicioMes &&
+                    ads.AgendaDay.Date <= hoy &&
+                    ads.AgendaDayStudentStatus == STATUS_CONFIRMADO)
+                .GroupBy(ads => new { ads.AgendaDay!.Date.Year, ads.AgendaDay.Date.Month })
+                .Select(g => new
+                {
+                    g.Key.Year,
+                    g.Key.Month,
+                    Count = g.Count()
+                })
+                .ToListAsync();
+
+            // 2.3. Armar lista por cada mes del rango (aunque no haya datos)
+            var resultado = new List<MesAgendasDto>();
+
+            for (int i = 0; i < meses; i++)
+            {
+                var fechaMes = inicioMes.AddMonths(i); 
+                var y = fechaMes.Year;
+                var m = fechaMes.Month;
+
+                var creadas = agendasCreadas
+                    .FirstOrDefault(x => x.Year == y && x.Month == m)?.Count ?? 0;
+
+                var confirmadas = agendasConfirmadas
+                    .FirstOrDefault(x => x.Year == y && x.Month == m)?.Count ?? 0;
+
+                resultado.Add(new MesAgendasDto
+                {
+                    Label = new DateTime(y, m, 1)
+                        .ToString("MMM", new System.Globalization.CultureInfo("es-ES")),
+                    AgendasCreadas = creadas,
+                    AgendasConfirmadas = confirmadas
+                });
+            }
+
+            return resultado;
+        }
+
+
+        // 3) LÍNEA: Confirmaciones por semana (últimas N semanas)
+        public async Task<List<SemanaConfirmacionesDto>> GetConfirmacionesSemanalesAsync(int semanas = 6)
+        {
+            var hoy = DateTime.UtcNow.Date;
+
+            // Encontrar el lunes de la semana actual
+            int delta = DayOfWeek.Monday - hoy.DayOfWeek;
+            if (delta > 0) delta -= 7; // Ajuste si hoy es domingo, etc.
+            var lunesEstaSemana = hoy.AddDays(delta);
+
+            // Lunes de la primera semana que queremos
+            var lunesInicio = lunesEstaSemana.AddDays(-7 * (semanas - 1));
+
+            // Traer confirmaciones desde lunesInicio
+            var confirmados = await _context.AgendaDayStudent
+                .Where(ads =>
+                    ads.Status == STATUS_ACTIVO &&
+                    ads.AgendaDayStudentStatus == STATUS_CONFIRMADO &&
+                    ads.CompletedAt != null &&
+                    ads.CompletedAt.Value.Date >= lunesInicio &&
+                    ads.CompletedAt.Value.Date <= hoy)
+                .Select(ads => ads.CompletedAt!.Value.Date)
+                .ToListAsync();
+
+            // Agrupar en memoria por semana relativa
+            var resultado = new List<SemanaConfirmacionesDto>();
+
+            for (int i = 0; i < semanas; i++)
+            {
+                var inicioSemana = lunesInicio.AddDays(7 * i);
+                var finSemana = inicioSemana.AddDays(6);
+
+                var count = confirmados
+                    .Count(d => d >= inicioSemana && d <= finSemana);
+
+                var label = $"S{i + 1}"; // o $"Semana {ISOWeek.GetWeekOfYear(inicioSemana)}"
+
+                resultado.Add(new SemanaConfirmacionesDto
+                {
+                    Label = label,
+                    Confirmaciones = count
+                });
+            }
+
+            return resultado;
+        }
+
+        // 4) Método “todo en uno” para el dashboard
+        public async Task<DashboardDto> GetDashboardAsync()
+        {
+            var pie = await GetPieUsuariosAsync();
+            var barras = await GetAgendasMensualesAsync();
+            var linea = await GetConfirmacionesSemanalesAsync();
+
+            return new DashboardDto
+            {
+                PieUsuarios = pie,
+                AgendasMensuales = barras,
+                ConfirmacionesSemanales = linea
+            };
+        }
+
+
+
+
+
+
 
     }
 }
