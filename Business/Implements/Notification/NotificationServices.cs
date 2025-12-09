@@ -2,7 +2,6 @@
 using Entity.Model.Notification;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Text.Json;
 using Utilities.SignalR.Implements;
 using Utilities.SignalR.Interfaces;
@@ -38,7 +37,7 @@ namespace Business.Implements.Notification
             await _db.SaveChangesAsync(ct);
 
             // Empujar al cliente (canal individual por usuario)
-            await _hub.Clients.User(userId).SendAsync("notification", new
+            await _hub.Clients.All.SendAsync("notification", new
             {
                 userNotificationId = userNotif.Id,
                 notif.Id,

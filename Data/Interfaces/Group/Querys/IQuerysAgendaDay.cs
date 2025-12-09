@@ -9,7 +9,7 @@ namespace Data.Interfaces.Group.Querys
     /// <typeparam name="T"></typeparam>
     public interface IQuerysAgendaDay : IQuerys<AgendaDay>
     {
-
+        Task<List<AgendaDay>> GetByDateAsync(DateOnly date, CancellationToken ct = default);
 
     }
 }

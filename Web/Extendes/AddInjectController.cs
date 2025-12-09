@@ -7,6 +7,7 @@ using Business.Implements.Querys.Business;
 using Business.Implements.Querys.Security;
 using Business.Interfaces.Commands;
 using Business.Interfaces.Querys;
+using Business.Interfaces.SingalR;
 using Data.Implements.Auth;
 using Data.Implements.Commands;
 using Data.Implements.Commands.Business;
@@ -156,6 +157,9 @@ namespace Web.Extendes
             services.AddScoped<IQueryTeacherObservation, TeacherObservationQueryData>();
             services.AddScoped<IQueryTeacherObservationServices, TeacherObservationQueryBusiness>();
 
+            services.AddScoped<IQuerysAgendaDay, AgendaDayQueryData >();
+            services.AddScoped<IQueryAgendaDayServices, AgendaDayQueryBusiness>();
+
 
             // ================ COMMANDS ================
             services.AddScoped(
@@ -230,6 +234,10 @@ namespace Web.Extendes
 
             // servicio de notificacion
             services.AddScoped<INotificationsService, NotificationServices>();
+            services.AddScoped<IAgendaDayRealtimeService, AgendaDayRealtimeService>();
+            services.AddScoped<INotificationsService, NotificationServices>();
+
+
 
 
 

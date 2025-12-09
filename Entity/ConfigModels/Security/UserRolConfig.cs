@@ -47,7 +47,7 @@ namespace Entity.ConfigModels.Security
                 {
                     Id = 2,
                     UserId = 2,
-                    RolId = 2,
+                    RolId = 3,
                     Status = 1,
                 },
                 new UserRol
@@ -61,7 +61,7 @@ namespace Entity.ConfigModels.Security
                 {
                     Id = 4,
                     UserId = 4,
-                    RolId = 2,
+                    RolId = 4,
                     Status = 1,
                 },
                 new UserRol

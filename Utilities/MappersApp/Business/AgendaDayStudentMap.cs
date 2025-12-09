@@ -20,6 +20,21 @@ namespace Utilities.MappersApp.Business
 
             CreateMap<AgendaDayStudentListItem, AgendaDayStudentListDto>();
 
+            // mapeo del dto de consulta de si se puede hacer confirmacion de agenda
+            CreateMap<AgendaDayStudent, AgendaConfirmationQueryDto>()
+               .ForMember(d => d.AgendaDayStudentId,
+                   o => o.MapFrom(s => s.Id))
+               .ForMember(d => d.AgendaDayId,
+                   o => o.MapFrom(s => s.AgendaDayId))
+               .ForMember(d => d.AgendaId,
+                   o => o.MapFrom(s => s.AgendaDay.AgendaId))
+               .ForMember(d => d.AgendaName,
+                   o => o.MapFrom(s => s.AgendaDay.Agenda.Name))  
+               .ForMember(d => d.GroupName,
+                   o => o.MapFrom(s => s.AgendaDay.Group.Name))
+               .ForMember(d => d.Date,
+                   o => o.MapFrom(s => s.AgendaDay.Date));
+
         }
     }
 }
