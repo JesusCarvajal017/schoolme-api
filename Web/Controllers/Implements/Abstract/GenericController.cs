@@ -11,7 +11,7 @@ namespace Web.Controllers.Implements.Abstract
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public abstract class GenericController<
             TEntity,
             TReadDto,
