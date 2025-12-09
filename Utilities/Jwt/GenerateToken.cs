@@ -1,9 +1,10 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Entity.Dtos.Security.Auth;
+﻿using Entity.Dtos.Security.Auth;
+using Entity.Model.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Utilities.Jwt
 {
@@ -18,12 +19,13 @@ namespace Utilities.Jwt
         // <summary>
         // Metodo que genera el token JWT y que por el momento solo almacenara el Id de usuario
         // </summary>
-        public async Task<AuthDto> GeneradorToken(int id, int rol )
+        public async Task<AuthDto> GeneradorToken(int id, int rol, int user)
         {
             var claims = new List<Claim>
             {
                 new Claim("id", id.ToString()),
                 new Claim("rol", rol.ToString()),
+                new Claim("userId", user.ToString())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:key"]!));

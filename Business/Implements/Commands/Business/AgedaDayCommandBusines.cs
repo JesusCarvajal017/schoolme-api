@@ -50,8 +50,6 @@ namespace Business.Implements.Commands.Business
             }
         }
 
-
-
         public async Task CloseAsync(int agendaDayId, CancellationToken ct = default)
         {
             var entity = await _data.GetByIdAsync(agendaDayId, ct);

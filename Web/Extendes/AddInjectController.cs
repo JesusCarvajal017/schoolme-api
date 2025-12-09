@@ -235,6 +235,7 @@ namespace Web.Extendes
             // servicio de notificacion
             services.AddScoped<INotificationsService, NotificationServices>();
             services.AddScoped<IAgendaDayRealtimeService, AgendaDayRealtimeService>();
+            services.AddScoped<INotificationsService, NotificationServices>();
 
 
 

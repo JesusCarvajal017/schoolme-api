@@ -1,6 +1,7 @@
 ﻿using DotNetEnv;
 using Entity.Context.Main;
 using Entity.Dtos.Services;
+using Microsoft.AspNetCore.SignalR;
 using Utilities.AlmacenadorArchivos.implementes;
 using Utilities.AlmacenadorArchivos.Interface;
 using Utilities.Helpers;
@@ -62,6 +63,9 @@ builder.Services.Configure<SmtpOptions>(
 // Inyeccion de dependencias del servicio de email
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddSingleton<IEmailTemplateRenderer, RazorLightEmailTemplateRenderer>(); // Template
+
+builder.Services.AddSingleton<IUserIdProvider, JwtUserIdProvider>();
+
 
 var app = builder.Build();
 
